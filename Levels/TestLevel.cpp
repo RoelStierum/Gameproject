@@ -50,7 +50,7 @@ namespace engine{
 			_data(data)
 	{
 		_data->assets.LoadTexture("TestLevel Character", TESTLEVEL_CHARACTER_FILEPATH);
-		character.setPosition(sf::Vector2f {100,100});
+		character.setPosition(sf::Vector2f {400,0});
 		character.setTexture(_data->assets.GetTexture("TestLevel Character"));
 	}
 
@@ -61,7 +61,7 @@ namespace engine{
 
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
 		platform.setTexture(_data->assets.GetTexture("TestLevel Platform"));
-		platform.setPosition(0,620);
+		platform.setPosition(200,400);
 	}
 
 	void TestLevel::HandleInput() {
@@ -75,13 +75,6 @@ namespace engine{
 	}
 
 	void TestLevel::Update(float dt) {
-		/*if(not character.getSprite().getGlobalBounds().intersects(platform.getGlobalBounds()) && gravity){
-			character.move(sf::Vector2f{0,character.speed * dt});
-		}else if(character.getSprite().getGlobalBounds().intersects(platform.getGlobalBounds()) && gravity){
-			gravity = false;
-			character.setPosition(character.getPosition().x, platform.getPosition().y - character.getSprite().getGlobalBounds().height);
-		}*/
-
 			//A of left-arrow voor naar links gaan
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 			character.velocity.x = -character.speed;
@@ -107,7 +100,7 @@ namespace engine{
 			jump_done = false;
 		}
 
-		//Als de player het platform heeft geraakt, dan zal de player stoppen met vallen
+		/*//Als de player het platform heeft geraakt, dan zal de player stoppen met vallen
 		//Als de player boven het platform zit zal de y velocity versnellen
 		if((character.getPosition().y + character.height) < platform.getPosition().y){
 			character.velocity.y += gravity;
@@ -118,11 +111,42 @@ namespace engine{
 				character.velocity.y = 0;
 				character.jump = 0;
 			}
+		}*/
+
+		//Als de player in het platform zit
+		/*if(character.getSprite().getGlobalBounds().intersects(platform.getGlobalBounds())){
+			//Als de player het platform raakt zal de velocity 0 worden.
+			if(character.velocity.y > 0){
+				character.velocity.y = 0;
+				character.jump = 0;
+			}
+		}*/
+
+		if (		character.getPosition().x + character.width > platform.getPosition().x &&
+					character.getPosition().y + character.height > platform.getPosition().y &&
+					character.getPosition().x < platform.getPosition().x + platform.getGlobalBounds().width /2){
+			std::cout << "left wall \n";
+			character.velocity.x = 0;
+			//links
+		}else if( 	character.getPosition().x < platform.getPosition().x + platform.getGlobalBounds().width &&
+					character.getPosition().y + character.height > platform.getPosition().y &&
+					character.getPosition().x > platform.getPosition().x + platform.getGlobalBounds().width /2){
+			std::cout << "right wall \n";
+			character.velocity.x = 0;
+			//rechts
+		}
+		//Als de player niet het platform raakt
+		else{
+			character.velocity.y += gravity;
 		}
 
 
 		if(character.velocity != sf::Vector2f{0,0}){
 			character.move(character.velocity * dt);
+		}
+
+		if (character.getPosition().y > SCREEN_HEIGHT + 100){
+			character.setPosition(character.getPosition().x, 0);
 		}
 
 
