@@ -1,4 +1,5 @@
 #include "SplashState.hpp"
+#include "MainMenuState.hpp"
 #include "DEFINITIONS.hpp"
 
 #include <iostream>
@@ -12,6 +13,7 @@ namespace engine{
     void SplashState::Init() {
         _data->assets.LoadTexture("SplashState Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("SplashState Background"));
+        _background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
     }
 
     void SplashState::HandleInput() {
@@ -27,7 +29,7 @@ namespace engine{
     void SplashState::Update(float dt) {
         if(_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME){
             std::cout << "Go to main menu" << std::endl;
-            _data->renderWindow.close();
+            _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
         }
     }
 
