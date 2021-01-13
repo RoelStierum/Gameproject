@@ -17,4 +17,12 @@ namespace engine{
         return sf::Mouse::getPosition(renderWindow);
     }
 
+	void InputManager::keyboardToVelocityCharacter(Character &character) {
+
+	}
+
+	void InputManager::updateVelocityCharacter(Character &character, const float &dt) {
+
+	}
+
 }
