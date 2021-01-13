@@ -7,7 +7,7 @@
 #define FPS 60.0f
 
 //Splash state with background
-#define SPLASH_STATE_SHOW_TIME 0.0f
+#define SPLASH_STATE_SHOW_TIME 3.0f
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
 
 //Main Menu

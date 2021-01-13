@@ -17,12 +17,31 @@ namespace engine{
         return sf::Mouse::getPosition(renderWindow);
     }
 
-	void InputManager::keyboardToVelocityCharacter(Character &character) {
+	void InputManager::characterKeyboardInput(Character &character) {
+		//A of left-arrow voor naar links gaan
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+			character.velocity.x = -character.speed;
+		}
+			//D of right-arrow voor naar rechts gaan
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+			character.velocity.x = character.speed;
+		}
+			//Stoppen met bewegen als er geen knoppen worden ingedrukt
+		else{
+			character.velocity.x = 0;
+		}
 
-	}
+		//Space of up-arrow voor jumpen
+		if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && character.jump < character.max_jump && not character.jump_done){
+			character.velocity.y = -character.jump_speed;
+			character.jump++;
+			character.jump_done = true;
+		}
 
-	void InputManager::updateVelocityCharacter(Character &character, const float &dt) {
-
+		//Jump reset zodat de speler meerdere keer kan springen als het nodig is.
+		if(character.jump_done && not (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))){
+			character.jump_done = false;
+		}
 	}
 
 }

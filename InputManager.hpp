@@ -15,8 +15,6 @@ namespace engine{
 
         sf::Vector2i GetMousePosition(sf::RenderWindow& renderWindow);
 
-        void keyboardToVelocityCharacter(engine::Character& character);
-
-        void updateVelocityCharacter(engine::Character& character, const float& dt);
+        void characterKeyboardInput(engine::Character& character);
     };
 }

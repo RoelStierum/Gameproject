@@ -31,6 +31,8 @@ namespace engine{
 		sf::Sprite platform;
 
 		Character character;
+
+		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};
 
 }
