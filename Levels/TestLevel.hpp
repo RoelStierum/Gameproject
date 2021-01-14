@@ -13,7 +13,7 @@ namespace engine{
 
 	class TestLevel: public State{
 	public:
-		float gravity = 20.0f;
+		float gravity = 25.0f;
 
 		sf::Vector2f start = {100,-200};
 

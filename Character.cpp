@@ -125,4 +125,9 @@ namespace engine{
 		}
 	}
 
+	void Character::respawn(sf::Vector2f spawn) {
+		setPosition(spawn);
+		velocity.x = 0;
+	}
+
 }

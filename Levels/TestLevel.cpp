@@ -19,17 +19,9 @@ namespace engine{
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
 
-		/*platforms.addPlatform(
-				_data->assets.GetTexture("TestLevel Platform"),
-				sf::Vector2f{50,400}
-				);
-		platforms.addPlatform(
-				_data->assets.GetTexture("TestLevel Platform"),
-				sf::Vector2f{800,350}
-		);*/
-		for(float i = 50; i + 487 < 15875 ; i += 487 + 200){
+		for(float i = 50; i + 487 < 15875 ; i += 200 + 300){
 			platforms.addPlatform(
-					_data->assets.GetTexture("TestLevel Platform"),
+					_data->assets.GetTexture("TestLevel Platform 2"),
 					sf::Vector2f{i,400}
 			);
 		}
@@ -76,7 +68,7 @@ namespace engine{
 
 		//player under screen / respawn
 		if (character.getPosition().y > SCREEN_HEIGHT + 100){
-			character.setPosition(start);
+			character.respawn(start);
 		}
 
 		//View
