@@ -17,11 +17,13 @@ namespace engine{
 
         _data->assets.LoadTexture("MainMenuTitle", MAIN_MENU_TITLE_FILEPATH);
         _title.setTexture(_data->assets.GetTexture("MainMenuTitle"));
-        _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/2);
+        _title.setScale(2,2);
+        _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/4);
 
         _data->assets.LoadTexture("MainMenuButton", MAIN_MENU_BUTTON_FILEPATH);
         _button.setTexture(_data->assets.GetTexture("MainMenuButton"));
-        _button.setPosition(SCREEN_WIDTH/2 - _button.getGlobalBounds().width/2, _button.getGlobalBounds().height*1.5);
+        _button.setScale(2,2);
+        _button.setPosition(SCREEN_WIDTH/2 - _button.getGlobalBounds().width/2, _button.getGlobalBounds().height*2);
     }
 
     void MainMenuState::HandleInput() {

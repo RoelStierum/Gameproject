@@ -87,7 +87,7 @@ namespace engine{
 		return sprite;
 	}
 	
-	void Character::objectCollisionAndFalling(const sf::Sprite &object, const float& gravity, const float& dt) {
+	bool Character::objectCollisionAndFalling(const sf::Sprite &object, const float& dt) {
 		//Als de volgende move van de player in het object zit
 
 		sf::Sprite temp = nextSprite(velocity * dt);
@@ -95,7 +95,7 @@ namespace engine{
 		if(temp.getGlobalBounds().intersects(object.getGlobalBounds())){
 
 			//rechts
-			if(getPosition().x > object.getPosition().x + object.getGlobalBounds().width){
+			if(getPosition().x> object.getPosition().x + object.getGlobalBounds().width){
 				velocity.x = 0;
 			}
 				//links
@@ -109,10 +109,10 @@ namespace engine{
 				velocity.y = 0;
 				jump = 0;
 			}
-
+			return true;
 		}//Als de player niet het object raakt
 		else{
-			velocity.y += gravity;
+			return false;
 		}
 
 		//delete temp;

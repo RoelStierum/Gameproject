@@ -13,11 +13,26 @@ namespace engine{
 	void TestLevel::Init() {
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
-		_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
+		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
-		platform.setTexture(_data->assets.GetTexture("TestLevel Platform"));
-		platform.setPosition(50,400);
+		_data->assets.LoadTexture("TestLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
+
+		/*platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform"),
+				sf::Vector2f{50,400}
+				);
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform"),
+				sf::Vector2f{800,350}
+		);*/
+		for(float i = 50; i + 487 < 15875 ; i += 487 + 200){
+			platforms.addPlatform(
+					_data->assets.GetTexture("TestLevel Platform"),
+					sf::Vector2f{i,400}
+			);
+		}
+
 
 		_data->assets.LoadTexture("TestLevel Character", TESTLEVEL_CHARACTER_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Character Flip", TESTLEVEL_CHARACTER_FLIP_FILEPATH);
@@ -26,6 +41,8 @@ namespace engine{
 	}
 
 	void TestLevel::HandleInput() {
+		_data->input.characterKeyboardInput(character);
+
 		sf::Event event;
 
 		while(_data->renderWindow.pollEvent(event)){
@@ -36,9 +53,15 @@ namespace engine{
 	}
 
 	void TestLevel::Update(float dt) {
-		_data->input.characterKeyboardInput(character);
-
-		character.objectCollisionAndFalling(platform, gravity, dt);
+		bool collision = false;
+		for(sf::Sprite platform : platforms.getPlatforms()){
+			if(character.objectCollisionAndFalling(platform, dt)){
+				collision = true;
+			}
+		}
+		if(!collision){
+			character.velocity.y += gravity;
+		}
 
 		characterEndgeOfScreen(character, dt);
 
@@ -48,23 +71,39 @@ namespace engine{
 		if (character.getPosition().y > SCREEN_HEIGHT + 100){
 			character.setPosition(start);
 		}
+
+		//View
+		cameraX = -(SCREEN_WIDTH/2) + character.getPosition().x;
+
+		//links camera stoppen
+		if(cameraX < 0){
+			cameraX = 0;
+		}
+
+		//rechts camera stoppen
+		else if(cameraX > (_background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH))){
+			cameraX = _background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH);
+		}
+
+		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 	}
 
 	void TestLevel::Draw(float dt) {
+		_data->renderWindow.setView(CameraPosition);
 		_data->renderWindow.clear();
 		_data->renderWindow.draw(_background);
-		_data->renderWindow.draw(platform);
+		platforms.draw();
 		character.draw(_data->renderWindow);
 		_data->renderWindow.display();
 	}
 
 	void TestLevel::characterEndgeOfScreen(const Character &character_, const float& dt) {
 		//links
-		if(character.nextPosition(character.velocity * dt).x < 0){
+		if(character.nextPosition(character.velocity * dt).x < _background.getPosition().x){
 			character.velocity.x = 0;
 		}
 		//rechts
-		if(character.nextPosition(character.velocity * dt).x + character.width > SCREEN_WIDTH){
+		if(character.nextPosition(character.velocity * dt).x + character.width > _background.getPosition().x + _background.getGlobalBounds().width){
 			character.velocity.x = 0;
 		}
 	}

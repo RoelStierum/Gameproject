@@ -1,13 +1,15 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+
+#include "../DEFINITIONS.hpp"
 #include "../State.hpp"
 #include "../Game.hpp"
 #include "../Character.hpp"
+#include "../Platform.hpp"
 
 namespace engine{
-
-
 
 	class TestLevel: public State{
 	public:
@@ -27,8 +29,11 @@ namespace engine{
 		GameDataRef _data;
 
 		sf::Sprite _background;
+		sf::View CameraPosition;
+		float cameraX, cameraY = 0;
 
-		sf::Sprite platform;
+		//std::vector<sf::Sprite> platforms;
+		Platform platforms = {_data};
 
 		Character character;
 

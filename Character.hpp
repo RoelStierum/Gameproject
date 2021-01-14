@@ -19,7 +19,7 @@ namespace engine{
 		sf::Vector2f velocity = {0,0};
 		float speed = 300.0f;
 		float jump_speed = 500.0f;
-		int height, width, max_jump =1, jump = 0;
+		int height, width, max_jump =200, jump = 0;
 		bool jump_done = false;
 
 		Character(const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
@@ -46,7 +46,7 @@ namespace engine{
 
 		sf::Sprite& getSprite();
 
-		void objectCollisionAndFalling(const sf::Sprite &object, const float& gravity, const float& dt);
+		bool objectCollisionAndFalling(const sf::Sprite &object, const float& dt);
 
 		void updateVelocity(const float& dt);
 	};
