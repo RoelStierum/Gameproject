@@ -19,7 +19,7 @@ namespace engine{
 		sf::Vector2f velocity = {0,0};
 		float speed = 300.0f;
 		float jump_speed = 500.0f;
-		int height, width, max_jump =200, jump = 0;
+		int height, width, max_jump =1, jump = 0;
 		bool jump_done = false;
 
 		Character(const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
