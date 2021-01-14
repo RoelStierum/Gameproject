@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "SplashState.hpp"
+#include <SFML/Window.hpp>
 
 namespace engine{
 
@@ -7,6 +8,14 @@ namespace engine{
         _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
         _data->machine.AddState(StateRef(new SplashState(_data)));
 
+        //place in middle of screen
+        try {
+			_data->renderWindow.setPosition(sf::Vector2i{sf::Vector2u{
+					sf::VideoMode::getDesktopMode().width / 2 - SCREEN_WIDTH / 2,
+					sf::VideoMode::getDesktopMode().height / 2 - SCREEN_HEIGHT / 2}});
+		}catch (const std::exception& e){
+        	// nothing
+        }
         run();
     }
 

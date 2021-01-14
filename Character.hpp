@@ -19,6 +19,8 @@ namespace engine{
 		sf::Vector2f velocity = {0,0};
 		float speed = 300.0f;
 		float jump_speed = 500.0f;
+		float slow_down = 25.0f, slow_down_ground = 25.0f, slow_down_air = 5.0f;
+		float speed_up = 50.0f;
 		int height, width, max_jump =1, jump = 0;
 		bool jump_done = false;
 

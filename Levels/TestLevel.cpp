@@ -1,5 +1,6 @@
 #include "TestLevel.hpp"
 #include "../DEFINITIONS.hpp"
+#include "../TestState.hpp"
 
 #include <iostream>
 
@@ -61,6 +62,9 @@ namespace engine{
 		}
 		if(!collision){
 			character.velocity.y += gravity;
+			character.slow_down = character.slow_down_air;
+		}else{
+			character.slow_down = character.slow_down_ground;
 		}
 
 		characterEndgeOfScreen(character, dt);
@@ -86,6 +90,11 @@ namespace engine{
 		}
 
 		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
+
+		//End of game
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+			_data->machine.AddState( StateRef ( new TestState(_data)), false);
+		}
 	}
 
 	void TestLevel::Draw(float dt) {

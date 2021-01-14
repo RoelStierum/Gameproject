@@ -20,15 +20,30 @@ namespace engine{
 	void InputManager::characterKeyboardInput(Character &character) {
 		//A of left-arrow voor naar links gaan
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-			character.velocity.x = -character.speed;
+			if(character.velocity.x <= character.speed){
+				character.velocity.x = -character.speed;
+			}else{
+				character.velocity.x += -character.speed_up;
+			}
+
 		}
 			//D of right-arrow voor naar rechts gaan
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-			character.velocity.x = character.speed;
+			if(character.velocity.x >= character.speed){
+				character.velocity.x = character.speed;
+			}else{
+				character.velocity.x += character.speed_up;
+			}
 		}
 			//Stoppen met bewegen als er geen knoppen worden ingedrukt
 		else{
-			character.velocity.x = 0;
+			if (character.velocity.x > character.slow_down) {
+				character.velocity.x -= character.slow_down;
+			}else if (character.velocity.x < -character.slow_down) {
+				character.velocity.x += character.slow_down;
+			}else{
+				character.velocity.x = 0;
+			}
 		}
 
 		//Space of up-arrow voor jumpen
