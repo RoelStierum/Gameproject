@@ -43,6 +43,7 @@ namespace engine{
 
 	void TestLevel::HandleInput() {
 		_data->input.characterKeyboardInput(character);
+		std::cout << "Velocity:" << character.velocity.x << ", " << character.velocity.y << std::endl;
 
 		sf::Event event;
 
@@ -63,8 +64,10 @@ namespace engine{
 		if(!collision){
 			character.velocity.y += gravity;
 			character.slow_down = character.slow_down_air;
+			character.speed_up = character.speed_up_air;
 		}else{
 			character.slow_down = character.slow_down_ground;
+			character.speed_up = character.speed_up_ground;
 		}
 
 		characterEndgeOfScreen(character, dt);

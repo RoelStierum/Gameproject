@@ -20,7 +20,7 @@ namespace engine{
 	void InputManager::characterKeyboardInput(Character &character) {
 		//A of left-arrow voor naar links gaan
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-			if(character.velocity.x <= character.speed){
+			if(character.velocity.x <= -character.speed){
 				character.velocity.x = -character.speed;
 			}else{
 				character.velocity.x += -character.speed_up;

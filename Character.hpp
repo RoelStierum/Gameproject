@@ -20,7 +20,7 @@ namespace engine{
 		float speed = 300.0f;
 		float jump_speed = 500.0f;
 		float slow_down = 25.0f, slow_down_ground = 25.0f, slow_down_air = 5.0f;
-		float speed_up = 50.0f;
+		float speed_up = 40.0f, speed_up_ground = 40.0f, speed_up_air = 0.0f;
 		int height, width, max_jump =1, jump = 0;
 		bool jump_done = false;
 
