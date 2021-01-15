@@ -11,9 +11,10 @@
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
 
 //Main Menu
-#define MAIN_MENU_BACKGROUND_FILEPATH "Images/game_background.png"
+#define MAIN_MENU_BACKGROUND_FILEPATH "Images/game_background2.png"
 #define MAIN_MENU_TITLE_FILEPATH "Images/game_title_white.png"
 #define MAIN_MENU_BUTTON_FILEPATH "Images/game_play_button.png"
+#define MAIN_MENU_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 
 
 

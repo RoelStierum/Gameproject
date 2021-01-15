@@ -17,13 +17,18 @@ namespace engine{
 
         _data->assets.LoadTexture("MainMenuTitle", MAIN_MENU_TITLE_FILEPATH);
         _title.setTexture(_data->assets.GetTexture("MainMenuTitle"));
-        _title.setScale(2,2);
-        _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/4);
+        //_title.setScale(2,2);
+        _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/2);
 
         _data->assets.LoadTexture("MainMenuButton", MAIN_MENU_BUTTON_FILEPATH);
-        _button.setTexture(_data->assets.GetTexture("MainMenuButton"));
-        _button.setScale(2,2);
-        _button.setPosition(SCREEN_WIDTH/2 - _button.getGlobalBounds().width/2, _button.getGlobalBounds().height*2);
+        _play_button.setTexture(_data->assets.GetTexture("MainMenuButton"));
+        //_play_button.setScale(2,2);
+        _play_button.setPosition(SCREEN_WIDTH/2 - _play_button.getGlobalBounds().width/2, _play_button.getGlobalBounds().height*2.5);
+
+		_data->assets.LoadTexture("MainMenuQuitButton", MAIN_MENU_QUIT_BUTTON_FILEPATH);
+		_quit_button.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
+		//_play_button.setScale(2,2);
+		_quit_button.setPosition(0, _quit_button.getGlobalBounds().height*2.5);
     }
 
     void MainMenuState::HandleInput() {
@@ -33,9 +38,12 @@ namespace engine{
             if(sf::Event::Closed == event.type){
                 _data->renderWindow.close();
             }
-            if(_data->input.IsSpriteClicked(_button, sf::Mouse::Left, _data->renderWindow)){
+            if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow)){
 				_data->machine.AddState( StateRef( new TestLevel(_data)), true);
             }
+			if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow)){
+				_data->renderWindow.close();
+			}
         }
     }
 
@@ -47,7 +55,8 @@ namespace engine{
         _data->renderWindow.clear();
         _data->renderWindow.draw(_background);
         _data->renderWindow.draw(_title);
-        _data->renderWindow.draw(_button);
+        _data->renderWindow.draw(_play_button);
+		_data->renderWindow.draw(_quit_button);
         _data->renderWindow.display();
     }
 }

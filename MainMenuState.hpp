@@ -23,7 +23,8 @@ namespace engine{
         sf::Sprite _background;
 
         sf::Sprite _title;
-        sf::Sprite _button;
+        sf::Sprite _play_button;
+		sf::Sprite _quit_button;
     };
 
 }

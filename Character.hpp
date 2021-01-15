@@ -21,8 +21,8 @@ namespace engine{
 		float jump_speed = 600.0f;
 		float slow_down = 0.0f, slow_down_ground = 20.0f, slow_down_air = 5.0f;
 		float speed_up = 0.0f, speed_up_ground = 40.0f, speed_up_air = 30.0f;
-		int height, width, max_jump =1, jump = 0;
-		bool jump_done = false;
+		int height, width, max_jump =2, jump = 0;
+		bool jump_done = false, on_ground = false;
 
 		Character(const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
 

@@ -48,9 +48,16 @@ namespace engine{
 
 		//Space of up-arrow voor jumpen
 		if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && character.jump < character.max_jump && not character.jump_done){
-			character.velocity.y = -character.jump_speed;
-			character.jump++;
-			character.jump_done = true;
+			if(character.on_ground && character.jump == 0){
+				character.velocity.y = -character.jump_speed;
+				character.jump++;
+				character.jump_done = true;
+			}else if(!character.on_ground && character.jump > 0){
+				character.velocity.y = -character.jump_speed;
+				character.jump++;
+				character.jump_done = true;
+			}
+
 		}
 
 		//Jump reset zodat de speler meerdere keer kan springen als het nodig is.

@@ -12,6 +12,7 @@ namespace engine{
 	{}
 
 	void TestLevel::Init() {
+		_data->renderWindow.setVerticalSyncEnabled(true);
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
@@ -19,7 +20,12 @@ namespace engine{
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
 
-		for(float i = 50; i + 487 < 15875 ; i += 200 + 300){
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform"),
+				sf::Vector2f{50,400}
+		);
+
+		for(float i = 50 + 300*2; i + 487 < 15875 ; i += 200 + 300){
 			platforms.addPlatform(
 					_data->assets.GetTexture("TestLevel Platform 2"),
 					sf::Vector2f{i,400}
@@ -35,7 +41,8 @@ namespace engine{
 
 	void TestLevel::HandleInput() {
 		_data->input.characterKeyboardInput(character);
-		std::cout << "Velocity:" << character.velocity.x << ", " << character.velocity.y << std::endl;
+		//std::cout << "Velocity:" << character.velocity.x << ", " << character.velocity.y << std::endl;
+		//std::cout << "on_ground:" << character.on_ground << ", jump: " << character.jump << std::endl;
 
 		sf::Event event;
 
@@ -55,6 +62,7 @@ namespace engine{
 		}
 		if(!collision){
 			character.velocity.y += gravity;
+			character.on_ground = false;
 			character.slow_down = character.slow_down_air;
 			character.speed_up = character.speed_up_air;
 		}else{

@@ -102,12 +102,15 @@ namespace engine{
 			else if(getPosition().x + width < object.getPosition().x ){
 				velocity.x = 0;
 			}
+				//onderkant
 			else if(getPosition().y > object.getPosition().y + object.getGlobalBounds().height){
 				velocity.y = 0;
 			}
+				//bovenkant
 			else{
 				velocity.y = 0;
 				jump = 0;
+				on_ground = true;
 			}
 			return true;
 		}//Als de player niet het object raakt
