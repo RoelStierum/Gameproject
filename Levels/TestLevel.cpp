@@ -1,6 +1,6 @@
 #include "TestLevel.hpp"
 #include "../DEFINITIONS.hpp"
-#include "../TestState.hpp"
+#include "../PauseState.hpp"
 
 #include <iostream>
 
@@ -12,7 +12,6 @@ namespace engine{
 	{}
 
 	void TestLevel::Init() {
-		_data->renderWindow.setVerticalSyncEnabled(true);
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
@@ -54,7 +53,7 @@ namespace engine{
 
 		//End of game
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-			_data->machine.AddState( StateRef ( new TestState(_data)), false);
+			_data->machine.AddState( StateRef ( new PauseState(_data)), false);
 		}
 	}
 

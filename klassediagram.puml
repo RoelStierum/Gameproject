@@ -1,27 +1,91 @@
 @startuml
-'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Character{
+'Public member variables'
++sf::Vector2f velocity = {0,0};
++float speed = 400.0f;
++float jump_speed = 600.0f;
++float slow_down = 0.0f, slow_down_ground = 40.0f, slow_down_air = 5.0f;
++float speed_up = 0.0f, speed_up_ground = 40.0f, speed_up_air = 30.0f;
++int height, width, max_jump =2, jump = 0;
++bool jump_done = false, on_ground = false;
+'Public member funtions'
++Character(const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
++Character();
++void setTexture(sf::Texture& texture_, sf::Texture &texture_flip_);
++void setPosition(const sf::Vector2f& position_);
++void setPosition(const float& x, const float& y);
++sf::Vector2f getPosition();
++void draw(sf::RenderWindow& renderWindow);
++void move(sf::Vector2f movement);
++void move(const float& x, const float& y);
++sf::Vector2f nextPosition(sf::Vector2f movement);
++sf::Sprite nextSprite(sf::Vector2f movement);
++sf::Sprite& getSprite();
++bool objectCollisionAndFalling(const sf::Sprite &object, const float& dt);
++void updateVelocity(const float& dt);
++void respawn(sf::Vector2f spawn);
+'Private member variables'
+-sf::Sprite sprite;
+-sf::Vector2f position;
+-sf::Texture texture;
+-sf::Texture texture_flip;
+-bool flip = false;
+'Private member funtions'
+-void flipTexture();
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class TestLevel{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
 }
+
+class State{
+}
+
+class Game{
+}
+
+class Platform{
+}
+
+class StateMachine{
+}
+
+class InputManager{
+}
+
+class AssetManager{
+}
+
+TestLevel <|-- Character
+TestLevel <- State
+TestLevel <- Game
+TestLevel <- Character
+TestLevel <- Platform
+
+Game <- StateMachine
+Game <- InputManager
+Game <- AssetManager
+
+InputManager <- Character
+
+StateMachine <- State
+
+Platform <- Game
+
+
 
 @enduml

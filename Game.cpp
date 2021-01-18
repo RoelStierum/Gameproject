@@ -7,6 +7,7 @@ namespace engine{
     Game::Game(unsigned int width, unsigned int height, std::string title){
         _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
         _data->machine.AddState(StateRef(new SplashState(_data)));
+		_data->renderWindow.setVerticalSyncEnabled(true);
 
         //place in middle of screen
         try {

@@ -4,8 +4,9 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "StateMachine.hpp"
-#include "AssetManager.hpp"
 #include "InputManager.hpp"
+#include "AssetManager.hpp"
+//#include "SoundManager.hpp"
 #include "DEFINITIONS.hpp"
 
 namespace engine{
@@ -15,6 +16,7 @@ namespace engine{
         sf::RenderWindow renderWindow;
         AssetManager assets;
         InputManager input;
+        //SoundManager sound;
     };
 
     typedef std::shared_ptr<GameData> GameDataRef;
