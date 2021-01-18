@@ -29,11 +29,22 @@ namespace engine{
 				if(sf::Event::Closed == event.type){
 					_data->renderWindow.close();
 				}
+				if(sf::Event::LostFocus == event.type){
+					std::cout << "no focus\n";
+				}
+				if(sf::Event::GainedFocus == event.type){
+					std::cout << "got focus\n";
+				}
 			}
 		}
 
 		void Update(float dt) {
-			if(_clock.getElapsedTime().asSeconds() > 1){
+			/*if(_clock.getElapsedTime().asSeconds() > 10){
+				_data->machine.RemoveState();
+				_data->machine.ProcessStateChanges();
+			}*/
+
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
 				_data->machine.RemoveState();
 				_data->machine.ProcessStateChanges();
 			}
@@ -48,7 +59,7 @@ namespace engine{
 	private:
 		GameDataRef _data;
 
-		sf::Clock _clock;
+		//sf::Clock _clock;
 		sf::View InitView;
 
 		sf::Texture _backgroundTexture;

@@ -51,6 +51,11 @@ namespace engine{
 				_data->renderWindow.close();
 			}
 		}
+
+		//End of game
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+			_data->machine.AddState( StateRef ( new TestState(_data)), false);
+		}
 	}
 
 	void TestLevel::Update(float dt) {
@@ -94,10 +99,7 @@ namespace engine{
 
 		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 
-		//End of game
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
-			_data->machine.AddState( StateRef ( new TestState(_data)), false);
-		}
+
 	}
 
 	void TestLevel::Draw(float dt) {

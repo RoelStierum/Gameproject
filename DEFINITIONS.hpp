@@ -7,7 +7,7 @@
 #define FPS 60.0f
 
 //Splash state with background
-#define SPLASH_STATE_SHOW_TIME 0.1f
+#define SPLASH_STATE_SHOW_TIME 3.0f
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
 
 //Main Menu
@@ -18,7 +18,7 @@
 
 
 
-//Level
+//TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define TESTLEVEL_PLATFORM_FILEPATH "Images/game_platform.png"
 #define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
