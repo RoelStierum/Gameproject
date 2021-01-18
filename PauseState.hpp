@@ -7,15 +7,15 @@
 
 namespace engine{
 
-	class TestState: public State{
+	class PauseState: public State{
 	public:
-		TestState(GameDataRef data):
+		PauseState(GameDataRef data):
 				_data(data)
 		{}
 
 		void Init(){
-			_data->assets.LoadTexture("TestState Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
-			_background.setTexture(_data->assets.GetTexture("TestState Background"));
+			_data->assets.LoadTexture("PauseState Background", PAUSE_BACKGROUND_FILEPATH);
+			_background.setTexture(_data->assets.GetTexture("PauseState Background"));
 			_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
 			InitView.reset(sf::FloatRect{0, 0, SCREEN_WIDTH, SCREEN_HEIGHT});
@@ -29,20 +29,7 @@ namespace engine{
 				if(sf::Event::Closed == event.type){
 					_data->renderWindow.close();
 				}
-				if(sf::Event::LostFocus == event.type){
-					std::cout << "no focus\n";
-				}
-				if(sf::Event::GainedFocus == event.type){
-					std::cout << "got focus\n";
-				}
 			}
-		}
-
-		void Update(float dt) {
-			/*if(_clock.getElapsedTime().asSeconds() > 10){
-				_data->machine.RemoveState();
-				_data->machine.ProcessStateChanges();
-			}*/
 
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
 				_data->machine.RemoveState();
@@ -50,20 +37,24 @@ namespace engine{
 			}
 		}
 
+		void Update(float dt) {
+		}
+
 		void Draw(float dt) {
 			_data->renderWindow.clear();
 			_data->renderWindow.draw(_background);
+			_data->renderWindow.draw(_paused);
 			_data->renderWindow.display();
 		}
 
 	private:
 		GameDataRef _data;
 
-		//sf::Clock _clock;
 		sf::View InitView;
 
-		sf::Texture _backgroundTexture;
 		sf::Sprite _background;
+
+		sf::Sprite _paused;
 	};
 
 }
