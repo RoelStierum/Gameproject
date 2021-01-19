@@ -20,6 +20,7 @@
 #define HIT_SOUND_FILEPATH "Audio/Hit.wav"
 #define POINT_SOUND_FILEPATH "Audio/Point.wav"
 #define WING_SOUND_FILEPATH "Audio/Wing.wav"
+#define WING_DEATH_FILEPATH "Audio/death.wav"
 
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"

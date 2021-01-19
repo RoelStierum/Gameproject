@@ -8,7 +8,8 @@ namespace engine{
 
 	//Definitions for TestLevel
 	TestLevel::TestLevel(GameDataRef data):
-			_data(data)
+			_data(data),
+			character(data)
 	{}
 
 	void TestLevel::Init() {
@@ -39,7 +40,7 @@ namespace engine{
 	}
 
 	void TestLevel::HandleInput() {
-		_data->input.characterKeyboardInput(character);
+		character.characterKeyboardInput();
 		//std::cout << "Velocity:" << character.velocity.x << ", " << character.velocity.y << std::endl;
 		//std::cout << "on_ground:" << character.on_ground << ", jump: " << character.jump << std::endl;
 
@@ -49,15 +50,19 @@ namespace engine{
 			if(sf::Event::Closed == event.type){
 				_data->renderWindow.close();
 			}
+			if(sf::Event::LostFocus == event.type){
+                _data->machine.AddState( StateRef ( new PauseState(_data)), false);
+			}
 		}
 
-		//End of game
+		//Pause State
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
 			_data->machine.AddState( StateRef ( new PauseState(_data)), false);
 		}
 	}
 
 	void TestLevel::Update(float dt) {
+	    ///Collision
 		bool collision = false;
 		for(sf::Sprite platform : platforms.getPlatforms()){
 			if(character.objectCollisionAndFalling(platform, dt)){
@@ -80,6 +85,7 @@ namespace engine{
 
 		//player under screen / respawn
 		if (character.getPosition().y > SCREEN_HEIGHT + 100){
+		    _data->sound._deathSound.play();
 			character.respawn(start);
 			_data->sound._wingSound.play();
 		}

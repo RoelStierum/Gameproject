@@ -1,11 +1,14 @@
 #pragma once //Character.hpp
 
 #include <SFML/Graphics.hpp>
+#include "Game.hpp"
 
 namespace engine{
 
 	class Character{
 	private:
+	    GameDataRef _data;
+
 		sf::Sprite sprite;
 		sf::Vector2f position;
 		sf::Texture texture;
@@ -24,9 +27,9 @@ namespace engine{
 		int height, width, max_jump =2, jump = 0;
 		bool jump_done = false, on_ground = false;
 
-		Character(const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
+		Character(GameDataRef data, const sf::Vector2f &position, const sf::Texture &texture, const sf::Texture &texture_flip);
 
-		Character();
+		Character(GameDataRef data);
 
 		void setTexture(sf::Texture& texture_, sf::Texture &texture_flip_);
 
@@ -53,6 +56,8 @@ namespace engine{
 		void updateVelocity(const float& dt);
 
 		void respawn(sf::Vector2f spawn);
+
+        void characterKeyboardInput();
 	};
 
 }

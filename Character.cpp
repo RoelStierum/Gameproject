@@ -6,8 +6,9 @@
 namespace engine{
 
 	//Definitions for Character
-	Character::Character(const sf::Vector2f &position,  const sf::Texture &texture, const sf::Texture &texture_flip) :
-			position(position),
+	Character::Character(GameDataRef data, const sf::Vector2f &position,  const sf::Texture &texture, const sf::Texture &texture_flip) :
+            _data(data),
+	        position(position),
 			texture(texture),
 			texture_flip(texture_flip)
 	{
@@ -17,7 +18,8 @@ namespace engine{
 		height = sprite.getGlobalBounds().height;
 	}
 
-	Character::Character():
+	Character::Character(GameDataRef data):
+			_data(data),
 			position(0,0)
 	{}
 
@@ -134,5 +136,56 @@ namespace engine{
 		setPosition(spawn);
 		velocity.x = 0;
 	}
+
+    void Character::characterKeyboardInput() {
+        //A of left-arrow voor naar links gaan
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            if(velocity.x <= -speed){
+                velocity.x = -speed;
+            }else{
+                velocity.x += -speed_up;
+            }
+
+        }
+            //D of right-arrow voor naar rechts gaan
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            if(velocity.x >= speed){
+                velocity.x = speed;
+            }else{
+                velocity.x += speed_up;
+            }
+        }
+            //Stoppen met bewegen als er geen knoppen worden ingedrukt
+        else{
+            if (velocity.x > slow_down) {
+                velocity.x -= slow_down;
+            }else if (velocity.x < -slow_down) {
+                velocity.x += slow_down;
+            }else{
+                velocity.x = 0;
+            }
+        }
+
+        //Space of up-arrow voor jumpen
+        if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && jump < max_jump && not jump_done){
+            _data->sound._hitSound.play();
+            _data->sound._hitSound.setVolume(50);
+            if(on_ground && jump == 0){
+                velocity.y = -jump_speed;
+                jump++;
+                jump_done = true;
+            }else if(!on_ground && jump > 0){
+                velocity.y = -jump_speed;
+                jump++;
+                jump_done = true;
+            }
+
+        }
+
+        //Jump reset zodat de speler meerdere keer kan springen als het nodig is.
+        if(jump_done && not (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))){
+            jump_done = false;
+        }
+    }
 
 }

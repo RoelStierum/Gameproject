@@ -10,6 +10,7 @@ namespace engine {
         sf::Sound _hitSound;
         sf::Sound _pointSound;
         sf::Sound _wingSound;
+        sf::Sound _deathSound;
 
 		SoundManager();
 
@@ -25,6 +26,7 @@ namespace engine {
 		sf::SoundBuffer _hitSoundBuffer;
 		sf::SoundBuffer _pointSoundBuffer;
 		sf::SoundBuffer _wingSoundBuffer;
+		sf::SoundBuffer _deathSoundBuffer;
 
 
 	};
