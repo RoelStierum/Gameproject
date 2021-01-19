@@ -17,9 +17,9 @@
 #define MAIN_MENU_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 
 //Sound
-#define HIT_SOUND_FILEPATH "Resources/Audio/Hit.wav"
-#define POINT_SOUND_FILEPATH "Resources/Audio/Point.wav"
-#define WING_SOUND_FILEPATH "Resources/Audio/Wing.wav"
+#define HIT_SOUND_FILEPATH "Audio/Hit.wav"
+#define POINT_SOUND_FILEPATH "Audio/Point.wav"
+#define WING_SOUND_FILEPATH "Audio/Wing.wav"
 
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"

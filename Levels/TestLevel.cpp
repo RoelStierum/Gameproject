@@ -81,6 +81,7 @@ namespace engine{
 		//player under screen / respawn
 		if (character.getPosition().y > SCREEN_HEIGHT + 100){
 			character.respawn(start);
+			_data->sound._wingSound.play();
 		}
 
 		//View
