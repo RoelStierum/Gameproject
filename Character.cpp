@@ -1,6 +1,7 @@
 #include "Character.hpp" //Character.cpp
 
 #include "DEFINITIONS.hpp"
+#include "iostream"
 
 namespace engine{
 
@@ -93,13 +94,14 @@ namespace engine{
 		sf::Sprite temp = nextSprite(velocity * dt);
 
 		if(temp.getGlobalBounds().intersects(object.getGlobalBounds())){
-
 			//rechts
-			if(getPosition().x> object.getPosition().x + object.getGlobalBounds().width){
+			if(getPosition().x> object.getPosition().x + object.getGlobalBounds().width
+					&& getPosition().y + height  - 1 >= object.getPosition().y){
 				velocity.x = 0;
 			}
 				//links
-			else if(getPosition().x + width < object.getPosition().x ){
+			else if(getPosition().x + width < object.getPosition().x
+					&& getPosition().y + height - 1 >= object.getPosition().y){
 				velocity.x = 0;
 			}
 				//onderkant

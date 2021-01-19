@@ -11,6 +11,7 @@ namespace engine{
     {}
 
     void MainMenuState::Init() {
+
         _data->assets.LoadTexture("MainMenuState Background", MAIN_MENU_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("MainMenuState Background"));
         _background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
@@ -20,15 +21,15 @@ namespace engine{
         //_title.setScale(2,2);
         _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/2);
 
-        _data->assets.LoadTexture("MainMenuButton", MAIN_MENU_BUTTON_FILEPATH);
-        _play_button.setTexture(_data->assets.GetTexture("MainMenuButton"));
+        _data->assets.LoadTexture("MainMenuPlayButton", MAIN_MENU_BUTTON_FILEPATH);
+        _play_button.setTexture(_data->assets.GetTexture("MainMenuPlayButton"));
         //_play_button.setScale(2,2);
-        _play_button.setPosition(SCREEN_WIDTH/2 - _play_button.getGlobalBounds().width/2, _play_button.getGlobalBounds().height*2.5);
+        _play_button.setPosition(SCREEN_WIDTH/2 + 100, _play_button.getGlobalBounds().height*2.5);
 
 		_data->assets.LoadTexture("MainMenuQuitButton", MAIN_MENU_QUIT_BUTTON_FILEPATH);
 		_quit_button.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
 		//_play_button.setScale(2,2);
-		_quit_button.setPosition(0, _quit_button.getGlobalBounds().height*2.5);
+		_quit_button.setPosition(SCREEN_WIDTH/2 - 100 - _quit_button.getGlobalBounds().width, _quit_button.getGlobalBounds().height*2.5);
     }
 
     void MainMenuState::HandleInput() {
@@ -44,6 +45,10 @@ namespace engine{
 			if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow)){
 				_data->renderWindow.close();
 			}
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
         }
     }
 

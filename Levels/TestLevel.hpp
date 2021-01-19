@@ -32,7 +32,6 @@ namespace engine{
 		sf::View CameraPosition;
 		float cameraX, cameraY = 0;
 
-		//std::vector<sf::Sprite> platforms;
 		Platform platforms = {_data};
 
 		Character character;

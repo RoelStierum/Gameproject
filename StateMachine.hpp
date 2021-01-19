@@ -21,6 +21,18 @@ namespace engine{
 
         StateRef& GetActiveState();
 
+        int state_size(){
+        	return _states.size();
+        }
+
+        void clean_states(){
+        	if(!_states.empty()){
+				StateRef ns = std::move(_states.top());
+				_states = std::stack<StateRef>{};
+				_states.push(std::move(ns));
+        	}
+        }
+
     private:
         std::stack<StateRef> _states;
         StateRef _newState;
