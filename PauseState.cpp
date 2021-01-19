@@ -50,8 +50,9 @@ namespace engine{
 		}
 
 		//if E or sprite press resume
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)
-			|| _data->input.IsSpriteClicked(_resume, sf::Mouse::Left, _data->renderWindow)){
+		if((sf::Keyboard::isKeyPressed(sf::Keyboard::E) ||
+			_data->input.IsSpriteClicked(_resume, sf::Mouse::Left, _data->renderWindow)) &&
+            _data->renderWindow.hasFocus()){
 			_data->machine.RemoveState();
 			_data->machine.ProcessStateChanges();
 		}

@@ -19,11 +19,16 @@ namespace engine{
 
 		TestLevel(GameDataRef data);
 
-		void Init();
+		void Init() override;
 
-		void HandleInput();
-		void Update(float dt);
-		void Draw(float dt);
+		void HandleInput() override;
+		void Update(float dt) override;
+		void Draw(float dt) override;
+
+        void Pause() override;
+        void Resume() override;
+
+        void restart();
 
 	private:
 		GameDataRef _data;
@@ -35,6 +40,8 @@ namespace engine{
 		Platform platforms = {_data};
 
 		Character character;
+
+		sf::Sprite coin;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};

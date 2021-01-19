@@ -6,35 +6,75 @@
 
 namespace engine{
 
-	//Definitions for TestLevel
+	//Constructor for TestLevel
 	TestLevel::TestLevel(GameDataRef data):
 			_data(data),
 			character(data)
 	{}
 
 	void TestLevel::Init() {
+	    ///START MUSIC
+	    _data->sound.TestLevelMusic.play();
+
+        ///Background Initializer
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
+        ///Platforms Initializer
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
+        _data->assets.LoadTexture("TestLevel Platform Vertical", TESTLEVEL_PLATFORM_VERTICAL_FILEPATH);
 
-		platforms.addPlatform(
+		platforms.addPlatform( //starting
 				_data->assets.GetTexture("TestLevel Platform"),
 				sf::Vector2f{50,400}
 		);
 
-		for(float i = 50 + 300*2; i + 487 < 15875 ; i += 200 + 300){
+        platforms.addPlatform( //1st wall
+                _data->assets.GetTexture("TestLevel Platform Vertical"),
+                sf::Vector2f{700,300}
+        );
+
+        platforms.addPlatform( //left platform
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{300,200}
+        );
+
+        platforms.addPlatform( //top platform
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{700,100}
+        );
+
+        platforms.addPlatform( //long jump
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{1300,400}
+        );
+
+        platforms.addPlatform( //with coin
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{1800,600}
+        );
+
+        platforms.addPlatform( // dubble jump
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{2600,600}
+        );
+
+        _data->assets.LoadTexture("coin", COIN_FILEPATH);
+        coin.setTexture(_data->assets.GetTexture("coin"));
+        coin.setPosition(1900,590 - coin.getGlobalBounds().height);
+
+		/*for(float i = 50 + 300*4; i + 487 < 15875 ; i += 200 + 600){
 			platforms.addPlatform(
 					_data->assets.GetTexture("TestLevel Platform 2"),
 					sf::Vector2f{i,400}
 			);
-		}
+		}*/
 
-
-		_data->assets.LoadTexture("TestLevel Character", TESTLEVEL_CHARACTER_FILEPATH);
-		_data->assets.LoadTexture("TestLevel Character Flip", TESTLEVEL_CHARACTER_FLIP_FILEPATH);
+        ///Character Initializer
+		_data->assets.LoadTexture("TestLevel Character", CHARACTER_FILEPATH);
+		_data->assets.LoadTexture("TestLevel Character Flip", CHARACTER_FLIP_FILEPATH);
 		character.setPosition(sf::Vector2f {start});
 		character.setTexture(_data->assets.GetTexture("TestLevel Character"),_data->assets.GetTexture("TestLevel Character Flip"));
 	}
@@ -57,11 +97,18 @@ namespace engine{
 
 		//Pause State
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-			_data->machine.AddState( StateRef ( new PauseState(_data)), false);
+            _data->machine.AddState( StateRef ( new PauseState(_data)), false);
 		}
 	}
 
 	void TestLevel::Update(float dt) {
+	    ///COIN TEST
+	    if(character.getSprite().getGlobalBounds().intersects(coin.getGlobalBounds())){
+	        _data->sound._coinSound.play();
+	        character.max_jump = 2;
+	        coin.setPosition(coin.getPosition().x, 1000);
+	    }
+
 	    ///Collision
 		bool collision = false;
 		for(sf::Sprite platform : platforms.getPlatforms()){
@@ -86,8 +133,7 @@ namespace engine{
 		//player under screen / respawn
 		if (character.getPosition().y > SCREEN_HEIGHT + 100){
 		    _data->sound._deathSound.play();
-			character.respawn(start);
-			_data->sound._wingSound.play();
+			restart();
 		}
 
 		//View
@@ -111,10 +157,24 @@ namespace engine{
 	void TestLevel::Draw(float dt) {
 		_data->renderWindow.setView(CameraPosition);
 		_data->renderWindow.clear();
+
+		//background
 		_data->renderWindow.draw(_background);
+
+		//platforms
 		platforms.draw();
+
+		//character
 		character.draw(_data->renderWindow);
+
+		//coin
+		_data->renderWindow.draw(coin);
 		_data->renderWindow.display();
+	}
+
+	void TestLevel::restart(){
+        character.respawn(start);
+        coin.setPosition(1900,590 - coin.getGlobalBounds().height);
 	}
 
 	void TestLevel::characterEndgeOfScreen(const Character &character_, const float& dt) {
@@ -127,5 +187,13 @@ namespace engine{
 			character.velocity.x = 0;
 		}
 	}
+
+    void TestLevel::Resume() {
+        _data->sound.TestLevelMusic.play();
+    }
+
+    void TestLevel::Pause() {
+        _data->sound.TestLevelMusic.pause();
+    }
 
 }

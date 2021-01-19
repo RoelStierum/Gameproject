@@ -94,33 +94,34 @@ namespace engine{
 		//Als de volgende move van de player in het object zit
 
 		sf::Sprite temp = nextSprite(velocity * dt);
+		bool tmp = false;
 
-		if(temp.getGlobalBounds().intersects(object.getGlobalBounds())){
-			//rechts
-			if(getPosition().x> object.getPosition().x + object.getGlobalBounds().width
-					&& getPosition().y + height  - 1 >= object.getPosition().y){
-				velocity.x = 0;
-			}
-				//links
-			else if(getPosition().x + width < object.getPosition().x
-					&& getPosition().y + height - 1 >= object.getPosition().y){
-				velocity.x = 0;
-			}
-				//onderkant
-			else if(getPosition().y > object.getPosition().y + object.getGlobalBounds().height){
-				velocity.y = 0;
-			}
-				//bovenkant
-			else{
-				velocity.y = 0;
-				jump = 0;
-				on_ground = true;
-			}
-			return true;
-		}//Als de player niet het object raakt
-		else{
-			return false;
-		}
+		if(temp.getGlobalBounds().intersects(object.getGlobalBounds())) {
+            //rechts
+            if (getPosition().x > object.getPosition().x + object.getGlobalBounds().width
+                && getPosition().y + height - 1 >= object.getPosition().y) {
+                velocity.x = 0;
+            }
+                //links
+            else if (getPosition().x + width < object.getPosition().x
+                     && getPosition().y + height - 1 >= object.getPosition().y) {
+                velocity.x = 0;
+            }
+                //onderkant
+            else if (getPosition().y > object.getPosition().y + object.getGlobalBounds().height) {
+                velocity.y = 0;
+
+            }
+                //bovenkant
+            else {
+                velocity.y = 0;
+                jump = 0;
+                on_ground = true;
+                tmp = true;
+            }
+        }
+		return tmp;
+
 
 		//delete temp;
 	}
@@ -133,6 +134,7 @@ namespace engine{
 	}
 
 	void Character::respawn(sf::Vector2f spawn) {
+	    max_jump = 1;
 		setPosition(spawn);
 		velocity.x = 0;
 	}
@@ -169,12 +171,12 @@ namespace engine{
         //Space of up-arrow voor jumpen
         if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && jump < max_jump && not jump_done){
             if(on_ground && jump == 0){
-                _data->sound._wingSound.play();
+                _data->sound._jumpSound.play();
                 velocity.y = -jump_speed;
                 jump++;
                 jump_done = true;
             }else if(!on_ground && jump > 0){
-                _data->sound._wingSound.play();
+                _data->sound._jumpSound.play();
                 velocity.y = -jump_speed;
                 jump++;
                 jump_done = true;
