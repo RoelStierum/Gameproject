@@ -37,6 +37,7 @@
 #define CHARACTER_FLIP_FILEPATH "Images/Character_flip.png"
 
 //PauseState
+#define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PAUSE_BACKGROUND_FILEPATH "Images/Level_bg.png"
 #define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
 

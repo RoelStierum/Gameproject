@@ -41,6 +41,7 @@ namespace engine{
 
 		Character character;
 
+        sf::Sprite pauseButton;
 		sf::Sprite coin;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);

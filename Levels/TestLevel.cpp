@@ -16,24 +16,38 @@ namespace engine{
 	    ///START MUSIC
 	    _data->sound.TestLevelMusic.play();
 
+
         ///Background Initializer
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
-        ///Platforms Initializer
+
+		///Pause button
+		_data->assets.LoadTexture("Pause Button", PAUSE_BUTTON_FILEPATH);
+		pauseButton.setTexture(_data->assets.GetTexture("Pause Button"));
+		pauseButton.setPosition(SCREEN_WIDTH-16-pauseButton.getGlobalBounds().width,16);
+
+
+        ///Platforms Texture Initializer
 		_data->assets.LoadTexture("TestLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
         _data->assets.LoadTexture("TestLevel Platform Vertical", TESTLEVEL_PLATFORM_VERTICAL_FILEPATH);
 
+        ///Platforms Initializer
 		platforms.addPlatform( //starting
-				_data->assets.GetTexture("TestLevel Platform"),
+				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{50,400}
 		);
 
+        platforms.addPlatform( //starting 2
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{250,400}
+        );
+
         platforms.addPlatform( //1st wall
                 _data->assets.GetTexture("TestLevel Platform Vertical"),
-                sf::Vector2f{700,300}
+                sf::Vector2f{600,300}
         );
 
         platforms.addPlatform( //left platform
@@ -56,21 +70,20 @@ namespace engine{
                 sf::Vector2f{1800,600}
         );
 
+        platforms.addPlatform( //above coin
+                _data->assets.GetTexture("TestLevel Platform 2"),
+                sf::Vector2f{1800,200}
+        );
+
         platforms.addPlatform( // dubble jump
                 _data->assets.GetTexture("TestLevel Platform 2"),
-                sf::Vector2f{2600,600}
+                sf::Vector2f{2800,600}
         );
 
         _data->assets.LoadTexture("coin", COIN_FILEPATH);
         coin.setTexture(_data->assets.GetTexture("coin"));
         coin.setPosition(1900,590 - coin.getGlobalBounds().height);
 
-		/*for(float i = 50 + 300*4; i + 487 < 15875 ; i += 200 + 600){
-			platforms.addPlatform(
-					_data->assets.GetTexture("TestLevel Platform 2"),
-					sf::Vector2f{i,400}
-			);
-		}*/
 
         ///Character Initializer
 		_data->assets.LoadTexture("TestLevel Character", CHARACTER_FILEPATH);
@@ -96,7 +109,8 @@ namespace engine{
 		}
 
 		//Pause State
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
+		    _data->input.IsSpriteClicked(pauseButton, sf::Mouse::Left, _data->renderWindow)){
             _data->machine.AddState( StateRef ( new PauseState(_data)), false);
 		}
 	}
@@ -136,18 +150,19 @@ namespace engine{
 			restart();
 		}
 
-		//View
+		//Vie
 		cameraX = -(SCREEN_WIDTH/2) + character.getPosition().x;
 
 		//links camera stoppen
 		if(cameraX < 0){
 			cameraX = 0;
 		}
-
 		//rechts camera stoppen
 		else if(cameraX > (_background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH))){
 			cameraX = _background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH);
 		}
+
+        pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
 
 		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 
@@ -169,6 +184,10 @@ namespace engine{
 
 		//coin
 		_data->renderWindow.draw(coin);
+
+		//pause
+		_data->renderWindow.draw(pauseButton);
+
 		_data->renderWindow.display();
 	}
 
