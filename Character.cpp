@@ -168,13 +168,13 @@ namespace engine{
 
         //Space of up-arrow voor jumpen
         if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && jump < max_jump && not jump_done){
-            _data->sound._hitSound.play();
-            _data->sound._hitSound.setVolume(50);
             if(on_ground && jump == 0){
+                _data->sound._wingSound.play();
                 velocity.y = -jump_speed;
                 jump++;
                 jump_done = true;
             }else if(!on_ground && jump > 0){
+                _data->sound._wingSound.play();
                 velocity.y = -jump_speed;
                 jump++;
                 jump_done = true;
