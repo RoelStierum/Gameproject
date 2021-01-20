@@ -34,9 +34,10 @@ namespace engine{
 	}
 
 	void SoundManager::setVolume() {
-        _jumpSound.setVolume(20);
+		_coinSound.setVolume(20);
+        _jumpSound.setVolume(2);
         TestLevelMusic.setVolume(25);
-        _deathSound.setVolume(20);
+        _deathSound.setVolume(10);
         TestLevelMusic.setLoop(true);
 	}
 
