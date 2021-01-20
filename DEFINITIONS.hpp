@@ -46,6 +46,9 @@
 #define PAUSE_RESUME_BUTTON_FILEPATH "Images/resume_button.png"
 #define PAUSE_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
 
+//EndScreen
+#define END_NEXT_LEVEL_BUTTON_FILEPATH "Images/next_level_button.png"
+
 //Objects
 #define COIN_FILEPATH "Images/coin.png"
 #define COIN_SOUND_FILEPATH "Audio/coin.wav"

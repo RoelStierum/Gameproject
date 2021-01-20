@@ -22,7 +22,7 @@ namespace engine{
 		_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
 		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 200);
 
-		_data->assets.LoadTexture("FinishStatePlayAgainButton", MAIN_MENU_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("FinishStatePlayAgainButton", END_NEXT_LEVEL_BUTTON_FILEPATH);
 		_play_again.setTexture(_data->assets.GetTexture("FinishStatePlayAgainButton"));
 		_play_again.setPosition(SCREEN_WIDTH/2 - _play_again.getGlobalBounds().width/2, 350);
 
