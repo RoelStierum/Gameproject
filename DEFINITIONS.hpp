@@ -40,6 +40,8 @@
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PAUSE_BACKGROUND_FILEPATH "Images/game_background.png"
 #define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
+#define PAUSE_RESUME_BUTTON_FILEPATH "Images/resume_button.png"
+#define PAUSE_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
 
 //Objects
 #define COIN_FILEPATH "Images/coin.png"

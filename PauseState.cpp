@@ -18,17 +18,19 @@ namespace engine{
 
 		_data->assets.LoadTexture("PauseState Paused", PAUSE_PAUSED_BUTTON_FILEPATH);
 		_paused.setTexture(_data->assets.GetTexture("PauseState Paused"));
-		_paused.setPosition(SCREEN_WIDTH/2 - _paused.getGlobalBounds().width/2, _paused.getGlobalBounds().height/2);
+		_paused.setPosition(SCREEN_WIDTH/2 - _paused.getGlobalBounds().width/2, 0);
 
 		//kan fout gaan als het niet geladen is. moet een bool zijn om te checken of de texture geladen is
 		_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
-		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, _paused.getGlobalBounds().height*2);
+		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 200);
 
-		_resume.setTexture(_data->assets.GetTexture("MainMenuPlayButton"));
-		_resume.setPosition(SCREEN_WIDTH/2 - _resume.getGlobalBounds().width/2, _resume.getGlobalBounds().height*3);
+        _data->assets.LoadTexture("PauseStateResumeButton", PAUSE_RESUME_BUTTON_FILEPATH);
+		_resume.setTexture(_data->assets.GetTexture("PauseStateResumeButton"));
+		_resume.setPosition(SCREEN_WIDTH/2 - _resume.getGlobalBounds().width/2, 350);
 
-		_menu.setTexture(_data->assets.GetTexture("MainMenuPlayButton"));
-		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, _menu.getGlobalBounds().height*4);
+        _data->assets.LoadTexture("PauseStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
+		_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButton"));
+		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
 	}
 
 	void PauseState::HandleInput() {
