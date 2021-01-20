@@ -38,12 +38,17 @@
 
 //PauseState
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
-#define PAUSE_BACKGROUND_FILEPATH "Images/Level_bg.png"
+#define PAUSE_BACKGROUND_FILEPATH "Images/game_background.png"
 #define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
 
 //Objects
 #define COIN_FILEPATH "Images/coin.png"
 #define COIN_SOUND_FILEPATH "Audio/coin.wav"
 
+//Font
+#define FONT_FILEPATH "Audio/RussoOne-Regular.ttf"
+
+//Flag
+#define TESTLEVEL_FLAG_FILEPATH "Images/vlag.png"
 
 

@@ -1,5 +1,4 @@
 #include "TestLevel.hpp"
-#include "../DEFINITIONS.hpp"
 #include "../PauseState.hpp"
 
 #include <iostream>
@@ -15,6 +14,18 @@ namespace engine{
 	void TestLevel::Init() {
 	    ///START MUSIC
 	    _data->sound.TestLevelMusic.play();
+
+	    ///DoubleJump text
+	    _data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
+	    doubleJump.setFont(_data->assets.GetFont("RussoOneFont"));
+	    doubleJump.setString("Double jump enabled");
+	    doubleJump.setFillColor(sf::Color::Black);
+	    doubleJump.setPosition(1900 -doubleJump.getGlobalBounds().width/2, 400);
+
+	    ///flap
+	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
+        flag.setTexture(_data->assets.GetTexture("flag"));
+        flag.setPosition(2900,600-flag.getGlobalBounds().height);
 
 
         ///Background Initializer
@@ -80,6 +91,8 @@ namespace engine{
                 sf::Vector2f{2800,600}
         );
 
+
+        ///Coin Initializer
         _data->assets.LoadTexture("coin", COIN_FILEPATH);
         coin.setTexture(_data->assets.GetTexture("coin"));
         coin.setPosition(1900,590 - coin.getGlobalBounds().height);
@@ -93,10 +106,10 @@ namespace engine{
 	}
 
 	void TestLevel::HandleInput() {
+	    ///Character keyboard input
 		character.characterKeyboardInput();
-		//std::cout << "Velocity:" << character.velocity.x << ", " << character.velocity.y << std::endl;
-		//std::cout << "on_ground:" << character.on_ground << ", jump: " << character.jump << std::endl;
 
+		///Window events
 		sf::Event event;
 
 		while(_data->renderWindow.pollEvent(event)){
@@ -108,10 +121,20 @@ namespace engine{
 			}
 		}
 
+		///Keypress for pause
 		//Pause State
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) ||
-		    _data->input.IsSpriteClicked(pauseButton, sf::Mouse::Left, _data->renderWindow)){
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
             _data->machine.AddState( StateRef ( new PauseState(_data)), false);
+		}
+
+		///Button press for pause
+		//Check mouse click on position button
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+		    sf::Vector2i m = sf::Mouse::getPosition(_data->renderWindow);
+		    sf::IntRect intRect = {SCREEN_WIDTH - 16 - 64,16,64,64};
+		    if (m.x >= SCREEN_WIDTH - 16 - 64 && m.x <= SCREEN_WIDTH - 16 && m.y >= 16 && m.y <= 16+64){
+                _data->machine.AddState( StateRef ( new PauseState(_data)), false);
+		    }
 		}
 	}
 
@@ -121,6 +144,7 @@ namespace engine{
 	        _data->sound._coinSound.play();
 	        character.max_jump = 2;
 	        coin.setPosition(coin.getPosition().x, 1000);
+            doubleJumpEnable = true;
 	    }
 
 	    ///Collision
@@ -144,13 +168,9 @@ namespace engine{
 
 		character.updateVelocity(dt);
 
-		//player under screen / respawn
-		if (character.getPosition().y > SCREEN_HEIGHT + 100){
-		    _data->sound._deathSound.play();
-			restart();
-		}
 
-		//Vie
+        ///CAMERA VIEW
+		//View
 		cameraX = -(SCREEN_WIDTH/2) + character.getPosition().x;
 
 		//links camera stoppen
@@ -162,11 +182,16 @@ namespace engine{
 			cameraX = _background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH);
 		}
 
-        pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
-
 		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 
+		///Pause button update
+        pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
 
+        ///player under screen / respawn
+        if (character.getPosition().y > SCREEN_HEIGHT + 100){
+            _data->sound._deathSound.play();
+            restart();
+        }
 	}
 
 	void TestLevel::Draw(float dt) {
@@ -179,19 +204,28 @@ namespace engine{
 		//platforms
 		platforms.draw();
 
-		//character
-		character.draw(_data->renderWindow);
-
 		//coin
 		_data->renderWindow.draw(coin);
 
 		//pause
 		_data->renderWindow.draw(pauseButton);
 
+		//doubleJump text
+		if(doubleJumpEnable){
+            _data->renderWindow.draw(doubleJump);
+		}
+
+		//flag
+		_data->renderWindow.draw(flag);
+
+        //character
+        character.draw(_data->renderWindow);
+
 		_data->renderWindow.display();
 	}
 
 	void TestLevel::restart(){
+	    doubleJumpEnable = false;
         character.respawn(start);
         coin.setPosition(1900,590 - coin.getGlobalBounds().height);
 	}

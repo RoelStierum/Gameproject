@@ -43,6 +43,9 @@ namespace engine{
 
         sf::Sprite pauseButton;
 		sf::Sprite coin;
+		sf::Text doubleJump;
+		bool doubleJumpEnable = false;
+		sf::Sprite flag;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};

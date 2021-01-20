@@ -47,7 +47,8 @@ namespace engine{
 			}
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
+                _data->renderWindow.hasFocus()){
 			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
         }
     }
