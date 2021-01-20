@@ -108,7 +108,12 @@ namespace engine{
 
 	void TestLevel::HandleInput() {
 	    ///Character keyboard input
-		character.characterKeyboardInput();
+		if(!finished){
+		    character.characterKeyboardInput();
+		}
+		else{
+		    character.velocity = sf::Vector2f(0,0);
+		}
 
 		///Window events
 		sf::Event event;
@@ -160,6 +165,7 @@ namespace engine{
 		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
 
             _data->machine.AddState( StateRef ( new FinishState(_data)), true);
+
 		}
 
 	    ///Collision
