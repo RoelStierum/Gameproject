@@ -25,7 +25,7 @@
 #define WIN_SOUND_FILEPATH "Audio/win1.wav"
 
 //Music
-#define MUSIC_FILEPATH "Audio/music.flac"
+#define MUSIC_FILEPATH "Audio/music.ogg"
 
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
