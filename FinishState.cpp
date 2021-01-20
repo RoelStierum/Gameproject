@@ -41,14 +41,17 @@ namespace engine{
 		}
 
 		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow)){
+            _data->sound._clickSound.play();
 			_data->renderWindow.close();
 		}
 
 		if(_data->input.IsSpriteClicked(_play_again, sf::Mouse::Left, _data->renderWindow)) {
+            _data->sound._clickSound.play();
 			_data->machine.AddState(StateRef(new TestLevel(_data)), true);
 		}
 
 		if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow)){
+            _data->sound._clickSound.play();
 			_data->machine.AddState( StateRef( new MainMenuState(_data)), true);
 			_data->machine.clean_states();
 		}

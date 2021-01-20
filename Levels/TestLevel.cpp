@@ -149,8 +149,17 @@ namespace engine{
 	    }
 
 	    ///Finish
-		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds())){
-			_data->machine.AddState( StateRef ( new FinishState(_data)), true);
+		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
+            _data->sound.TestLevelMusic.stop();
+		    _data->sound._winSound.play();
+		    clockFinish.restart();
+		    finished=true;
+
+		}
+
+		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
+
+            _data->machine.AddState( StateRef ( new FinishState(_data)), true);
 		}
 
 	    ///Collision
@@ -253,6 +262,7 @@ namespace engine{
 
     void TestLevel::Pause() {
         _data->sound.TestLevelMusic.pause();
+        _data->sound._clickSound.play();
     }
 
 }

@@ -21,6 +21,8 @@
 #define POINT_SOUND_FILEPATH "Audio/Point.wav"
 #define JUMP_SOUND_FILEPATH "Audio/jump.wav"
 #define WING_DEATH_FILEPATH "Audio/death.wav"
+#define CLICK_SOUND_FILEPATH "Audio/click.wav"
+#define WIN_SOUND_FILEPATH "Audio/win1.wav"
 
 //Music
 #define MUSIC_FILEPATH "Audio/music.flac"
@@ -30,6 +32,7 @@
 #define TESTLEVEL_PLATFORM_FILEPATH "Images/game_platform.png"
 #define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
 #define TESTLEVEL_PLATFORM_VERTICAL_FILEPATH "Images/platform_vertical.png"
+#define FINISH_TIME 1.5f
 
 
 //Character
