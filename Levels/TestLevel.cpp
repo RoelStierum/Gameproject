@@ -1,5 +1,6 @@
 #include "TestLevel.hpp"
 #include "../PauseState.hpp"
+#include "../FinishState.hpp"
 
 #include <iostream>
 
@@ -146,6 +147,11 @@ namespace engine{
 	        coin.setPosition(coin.getPosition().x, 1000);
             doubleJumpEnable = true;
 	    }
+
+	    ///Finish
+		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds())){
+			_data->machine.AddState( StateRef ( new FinishState(_data)), true);
+		}
 
 	    ///Collision
 		bool collision = false;

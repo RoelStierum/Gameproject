@@ -18,7 +18,7 @@ file(GLOB SOURCES
         Levels/*.hpp
         Levels/*.cpp)
 
-add_executable(sfml_0 ${SOURCES})
+add_executable(sfml_0 ${SOURCES} FinishState.cpp FinishState.hpp)
 
 find_package(SFML COMPONENTS graphics audio window REQUIRED)
 #find_library(SFML ,${SFML_DIR})
