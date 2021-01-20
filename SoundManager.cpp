@@ -20,7 +20,16 @@ namespace engine{
             std::cout << "Error loading death sound effect\n";
         }if ( !_coinSoundBuffer.loadFromFile(COIN_SOUND_FILEPATH) ){
             std::cout << "Error loading coin sound effect\n";
-        }if(!TestLevelMusic.openFromFile(MUSIC_FILEPATH)){
+        }
+
+        if ( !_clickSoundBuffer.loadFromFile(CLICK_SOUND_FILEPATH) ){
+            std::cout << "Error loading click sound effect\n";
+        }
+        if ( !_winSoundBuffer.loadFromFile(WIN_SOUND_FILEPATH) ){
+            std::cout << "Error loading click sound effect\n";
+        }
+
+		if(!TestLevelMusic.openFromFile(MUSIC_FILEPATH)){
             std::cout << "Error loading music\n";
 		}
 	}
@@ -31,13 +40,15 @@ namespace engine{
 		_jumpSound.setBuffer( _jumpSoundBuffer );
 		_deathSound.setBuffer(_deathSoundBuffer);
 		_coinSound.setBuffer(_coinSoundBuffer);
+		_clickSound.setBuffer(_clickSoundBuffer);
+		_winSound.setBuffer(_winSoundBuffer);
 	}
 
 	void SoundManager::setVolume() {
 		_coinSound.setVolume(20);
-        _jumpSound.setVolume(2);
+        _jumpSound.setVolume(20);
         TestLevelMusic.setVolume(25);
-        _deathSound.setVolume(10);
+        _deathSound.setVolume(20);
         TestLevelMusic.setLoop(true);
 	}
 

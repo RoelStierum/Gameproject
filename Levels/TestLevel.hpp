@@ -46,6 +46,8 @@ namespace engine{
 		sf::Text doubleJump;
 		bool doubleJumpEnable = false;
 		sf::Sprite flag;
+		sf::Clock clockFinish;
+		bool finished = false;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};

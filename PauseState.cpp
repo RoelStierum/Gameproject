@@ -43,10 +43,12 @@ namespace engine{
 		}
 
 		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow)){
+            _data->sound._clickSound.play();
 			_data->renderWindow.close();
 		}
 
 		if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow)){
+            _data->sound._clickSound.play();
 			_data->machine.AddState( StateRef( new MainMenuState(_data)), true);
 			_data->machine.clean_states();
 		}
@@ -55,6 +57,7 @@ namespace engine{
 		if((sf::Keyboard::isKeyPressed(sf::Keyboard::E) ||
 			_data->input.IsSpriteClicked(_resume, sf::Mouse::Left, _data->renderWindow)) &&
             _data->renderWindow.hasFocus()){
+            _data->sound._clickSound.play();
 			_data->machine.RemoveState();
 			_data->machine.ProcessStateChanges();
 		}

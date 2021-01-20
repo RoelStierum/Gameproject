@@ -12,6 +12,8 @@ namespace engine {
         sf::Sound _jumpSound;
         sf::Sound _deathSound;
         sf::Sound _coinSound;
+        sf::Sound _clickSound;
+        sf::Sound _winSound;
 
         sf::Music TestLevelMusic;
 
@@ -29,6 +31,8 @@ namespace engine {
 		sf::SoundBuffer _jumpSoundBuffer;
 		sf::SoundBuffer _deathSoundBuffer;
         sf::SoundBuffer _coinSoundBuffer;
+        sf::SoundBuffer _clickSoundBuffer;
+        sf::SoundBuffer _winSoundBuffer;
 
         void CheckSoundLoading();
 
