@@ -19,14 +19,14 @@ namespace engine{
 	    ///DoubleJump text
 	    _data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
 	    doubleJump.setFont(_data->assets.GetFont("RussoOneFont"));
-	    doubleJump.setString("Double jump enabled");
+	    doubleJump.setString("Double jump enabled for 10 seconds!");
 	    doubleJump.setFillColor(sf::Color::Black);
 	    doubleJump.setPosition(1900 -doubleJump.getGlobalBounds().width/2, 400);
 
-	    ///flap
+	    ///flag
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(2900,600-flag.getGlobalBounds().height);
+        flag.setPosition(8060,290);
 
 
         ///Background Initializer
@@ -92,6 +92,87 @@ namespace engine{
                 sf::Vector2f{2800,600}
         );
 
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{3500,500}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{4200,400}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{4400,300}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{4600,200}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{5000,600}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{5400,530}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{5600,530}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{5530,410}
+		);
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{5800,500}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{5930,320}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{6350,400}
+		);
+
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{6650,400}
+		);
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{6850,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{7050,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{7250,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{7450,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{7650,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{7850,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{8050,400}
+		);
+
 
         ///Coin Initializer
         _data->assets.LoadTexture("coin", COIN_FILEPATH);
@@ -151,6 +232,7 @@ namespace engine{
 	        character.max_jump = 2;
 	        coin.setPosition(coin.getPosition().x, 1000);
             doubleJumpEnable = true;
+			doubleJumpTime.restart();
 	    }
 
 	    ///Finish
@@ -165,6 +247,9 @@ namespace engine{
 		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
 
             _data->machine.AddState( StateRef ( new FinishState(_data)), true);
+
+		}if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME){
+			character.max_jump = 1;
 
 		}
 

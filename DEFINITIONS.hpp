@@ -33,6 +33,8 @@
 #define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
 #define TESTLEVEL_PLATFORM_VERTICAL_FILEPATH "Images/platform_vertical.png"
 #define FINISH_TIME 1.5f
+#define DOUBLE_JUMP_TIME 10.0f
+
 
 
 //Character
