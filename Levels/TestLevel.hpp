@@ -44,11 +44,16 @@ namespace engine{
         sf::Sprite pauseButton;
 		sf::Sprite coin;
 		sf::Text doubleJump;
-		bool doubleJumpEnable = false;
+		bool doubleJumpEnableText = false;
+        sf::Text doubleJumpTimeText;
+        bool doubleJumpTimeTextEnable = false;
 		sf::Sprite flag;
 		sf::Clock clockFinish;
 		sf::Clock doubleJumpTime;
 		bool finished = false;
+
+		sf::Clock levelTime;
+        sf::Text levelTimeText;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};

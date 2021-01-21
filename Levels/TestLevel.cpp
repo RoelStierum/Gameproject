@@ -23,6 +23,16 @@ namespace engine{
 	    doubleJump.setFillColor(sf::Color::Black);
 	    doubleJump.setPosition(1900 -doubleJump.getGlobalBounds().width/2, 400);
 
+        ///DoubleJumpTimerText
+        doubleJumpTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
+        doubleJumpTimeText.setString("Blank");
+        doubleJumpTimeText.setFillColor(sf::Color::Black);
+
+        ///levelTimeTextEnable
+        levelTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
+        levelTimeText.setString("Blank");
+        levelTimeText.setFillColor(sf::Color::Black);
+
 	    ///flag
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
@@ -50,107 +60,67 @@ namespace engine{
 		platforms.addPlatform( //starting
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{50,400}
-		);
-
-        platforms.addPlatform( //starting 2
+		);platforms.addPlatform( //starting 2
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{250,400}
-        );
-
-        platforms.addPlatform( //1st wall
+        );platforms.addPlatform( //1st wall
                 _data->assets.GetTexture("TestLevel Platform Vertical"),
                 sf::Vector2f{600,300}
-        );
-
-        platforms.addPlatform( //left platform
+        );platforms.addPlatform( //left platform
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{300,200}
-        );
-
-        platforms.addPlatform( //top platform
+        );platforms.addPlatform( //top platform
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{700,100}
-        );
-
-        platforms.addPlatform( //long jump
+        );platforms.addPlatform( //long jump
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1300,400}
-        );
-
-        platforms.addPlatform( //with coin
+        );platforms.addPlatform( //with coin
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1800,600}
-        );
-
-        platforms.addPlatform( //above coin
+        );platforms.addPlatform( //above coin
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1800,200}
-        );
-
-        platforms.addPlatform( // dubble jump
+        );platforms.addPlatform( // dubble jump
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{2800,600}
-        );
-
-		platforms.addPlatform(
+        );platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{3500,500}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{4200,400}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{4400,300}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{4600,200}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{5000,600}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{5400,530}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{5600,530}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{5530,410}
-		);
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{5800,500}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform 2"),
 				sf::Vector2f{5930,320}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{6350,400}
-		);
-
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{6650,400}
-		);
-		platforms.addPlatform(
+		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{6850,400}
 		);platforms.addPlatform(
@@ -231,7 +201,8 @@ namespace engine{
 	        _data->sound._coinSound.play();
 	        character.max_jump = 2;
 	        coin.setPosition(coin.getPosition().x, 1000);
-            doubleJumpEnable = true;
+            doubleJumpEnableText = true;
+            doubleJumpTimeTextEnable = true;
 			doubleJumpTime.restart();
 	    }
 
@@ -241,19 +212,40 @@ namespace engine{
 		    _data->sound._winSound.play();
 		    clockFinish.restart();
 		    finished=true;
-
 		}
 
 		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
 
             _data->machine.AddState( StateRef ( new FinishState(_data)), true);
 
-		}if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME){
-			character.max_jump = 1;
-
 		}
 
-	    ///Collision
+        ///DubbleJumpTimer
+		if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME){
+			character.max_jump = 1;
+            doubleJumpTimeTextEnable = false;
+            doubleJumpEnableText = false;
+		}
+		if(doubleJumpTimeTextEnable){
+            doubleJumpTimeText.setString(std::to_string(DOUBLE_JUMP_TIME-int(doubleJumpTime.getElapsedTime().asSeconds())));
+            doubleJumpTimeText.setPosition(cameraX + SCREEN_WIDTH/2 - doubleJumpTimeText.getGlobalBounds().width/2,10);
+        }
+
+		///levelTimeText
+		if(!finished){
+		    std::string s = std::to_string(levelTime.getElapsedTime().asSeconds());
+		    s = s.substr(0,s.size()-4);
+		    levelTimeText.setString(s);
+            levelTimeText.setPosition(cameraX + 10,10);
+		}
+
+
+
+
+
+
+
+        ///Collision
 		bool collision = false;
 		for(sf::Sprite platform : platforms.getPlatforms()){
 			if(character.objectCollisionAndFalling(platform, dt)){
@@ -317,9 +309,15 @@ namespace engine{
 		_data->renderWindow.draw(pauseButton);
 
 		//doubleJump text
-		if(doubleJumpEnable){
+		if(doubleJumpEnableText){
             _data->renderWindow.draw(doubleJump);
 		}
+		if(doubleJumpTimeTextEnable){
+            _data->renderWindow.draw(doubleJumpTimeText);
+		}
+		_data->renderWindow.draw(levelTimeText);
+
+
 
 		//flag
 		_data->renderWindow.draw(flag);
@@ -331,9 +329,11 @@ namespace engine{
 	}
 
 	void TestLevel::restart(){
-	    doubleJumpEnable = false;
+	    doubleJumpEnableText = false;
+        doubleJumpTimeTextEnable = false;
         character.respawn(start);
         coin.setPosition(1900,590 - coin.getGlobalBounds().height);
+        levelTime.restart();
 	}
 
 	void TestLevel::characterEndgeOfScreen(const Character &character_, const float& dt) {
