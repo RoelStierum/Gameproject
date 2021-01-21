@@ -54,6 +54,7 @@ namespace engine{
 
 		sf::Clock levelTime;
         sf::Text levelTimeText;
+        float tijd = 0;
 
 		void characterEndgeOfScreen(const Character& character_, const float& dt);
 	};

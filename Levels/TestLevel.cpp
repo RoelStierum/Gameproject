@@ -38,6 +38,7 @@ namespace engine{
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(8060,290);
+        //flag.setPosition(400,400); //Debug flag placement
 
 
         ///Background Initializer
@@ -213,11 +214,17 @@ namespace engine{
 		    _data->sound._winSound.play();
 		    clockFinish.restart();
 		    finished=true;
+            tijd += levelTime.getElapsedTime().asSeconds();
+            std::string s = std::to_string(tijd);
+            s = s.substr(0,s.size()-4);
+            levelTimeText.setString(s);
+            std::cout << tijd << std::endl;
 		}
+
 
 		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
 
-            _data->machine.AddState( StateRef ( new FinishState(_data)), true);
+            _data->machine.AddState( StateRef ( new FinishState(_data, tijd)), true);
 
 		}
 
@@ -234,7 +241,7 @@ namespace engine{
 
 		///levelTimeText
 		if(!finished){
-		    std::string s = std::to_string(levelTime.getElapsedTime().asSeconds());
+		    std::string s = std::to_string(levelTime.getElapsedTime().asSeconds() + tijd);
 		    s = s.substr(0,s.size()-4);
 		    levelTimeText.setString(s);
             levelTimeText.setPosition(SCREEN_WIDTH-100-levelTimeText.getGlobalBounds().width,20);
@@ -337,6 +344,7 @@ namespace engine{
         character.respawn(start);
         coin.setPosition(1900,590 - coin.getGlobalBounds().height);
         levelTime.restart();
+        tijd = 0;
 	}
 
 	void TestLevel::characterEndgeOfScreen(const Character &character_, const float& dt) {
@@ -352,9 +360,11 @@ namespace engine{
 
     void TestLevel::Resume() {
         _data->sound.TestLevelMusic.play();
+        levelTime.restart();
     }
 
     void TestLevel::Pause() {
+	    tijd += levelTime.getElapsedTime().asSeconds();
         _data->sound.TestLevelMusic.pause();
         _data->sound._clickSound.play();
     }

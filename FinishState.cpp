@@ -6,12 +6,13 @@
 
 namespace engine{
 
-	FinishState::FinishState(GameDataRef data):
-			_data(data)
+	FinishState::FinishState(GameDataRef data,const float& tijd):
+			_data(data),
+			tijd(tijd)
 	{}
 
 	void FinishState::Init() {
-		_data->assets.LoadTexture("FinishState Background", MAIN_MENU_BACKGROUND_FILEPATH);
+		_data->assets.LoadTexture("FinishState Background", BACKGROUND_FINISH_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("FinishState Background"));
 		_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
@@ -29,6 +30,15 @@ namespace engine{
 		_data->assets.LoadTexture("FinishStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("FinishStateMainMenuButton"));
 		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
+
+        ///levelTimeTextEnable
+        tijdText.setFont(_data->assets.GetFont("RussoOneFont"));
+        tijdText.setFillColor(sf::Color::Black);
+        tijdText.setCharacterSize(100);
+        std::string s = std::to_string(tijd);
+        s = s.substr(0,s.size()-4);
+        tijdText.setString(s);
+        tijdText.setPosition(SCREEN_WIDTH/2 - tijdText.getGlobalBounds().width/2 - 10, 50);
 	}
 
 	void FinishState::HandleInput() {
@@ -63,6 +73,7 @@ namespace engine{
 		_data->renderWindow.draw(_quit);
 		_data->renderWindow.draw(_play_again);
 		_data->renderWindow.draw(_menu);
+		_data->renderWindow.draw(tijdText);
 		_data->renderWindow.display();
 	}
 }

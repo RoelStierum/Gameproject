@@ -9,7 +9,7 @@ namespace engine{
 
 	class FinishState: public State{
 	public:
-		FinishState(GameDataRef data);
+		FinishState(GameDataRef data,const float& tijd);
 
 		void Init();
 
@@ -22,6 +22,8 @@ namespace engine{
 
 	private:
 		GameDataRef _data;
+        float tijd;
+        sf::Text tijdText;
 
 		sf::View InitView;
 

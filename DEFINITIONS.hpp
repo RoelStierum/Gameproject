@@ -7,7 +7,7 @@
 #define FPS 60.0f
 
 //Splash state with background
-#define SPLASH_STATE_SHOW_TIME 0.0f
+#define SPLASH_STATE_SHOW_TIME 2.0f
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
 
 //Main Menu
@@ -35,8 +35,6 @@
 #define FINISH_TIME 1.5f
 #define DOUBLE_JUMP_TIME 10
 
-
-
 //Character
 #define CHARACTER_FILEPATH "Images/Character.png"
 #define CHARACTER_FLIP_FILEPATH "Images/Character_flip.png"
@@ -50,6 +48,7 @@
 
 //EndScreen
 #define END_NEXT_LEVEL_BUTTON_FILEPATH "Images/next_level_button.png"
+#define BACKGROUND_FINISH_FILEPATH "Images/wallpaperfinish.jpg"
 
 //Objects
 #define COIN_FILEPATH "Images/coin.png"
