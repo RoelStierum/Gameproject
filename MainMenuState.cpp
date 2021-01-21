@@ -30,6 +30,19 @@ namespace engine{
 		_quit_button.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
 		//_play_button.setScale(2,2);
 		_quit_button.setPosition(SCREEN_WIDTH/2 - 100 - _quit_button.getGlobalBounds().width, _quit_button.getGlobalBounds().height*2.5);
+
+
+		_data->assets.LoadTexture("Unmute", UNMUTE_FILEPATH);
+		_data->assets.LoadTexture("Mute", MUTE_FILEPATH);
+
+        if(_data->sound.BackGroundMusic.getVolume() == 0){
+            mute = true;
+            muteSprite.setTexture(_data->assets.GetTexture("Mute"));
+        }else{
+            mute = false;
+            muteSprite.setTexture(_data->assets.GetTexture("Unmute"));
+        }
+        muteSprite.setPosition(10,SCREEN_HEIGHT - muteSprite.getGlobalBounds().height - 10);
     }
 
     void MainMenuState::HandleInput() {
@@ -54,6 +67,23 @@ namespace engine{
             _data->sound._clickSound.play();
 			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
         }
+
+        if(not mouse && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            if(muteSprite.getGlobalBounds().contains(sf::Vector2f{sf::Mouse::getPosition(_data->renderWindow)})){
+                mouse = true;
+                if(mute){
+                    muteSprite.setTexture(_data->assets.GetTexture("Unmute"));
+                    _data->sound.setVolume();
+                    mute = false;
+                }else{
+                    muteSprite.setTexture(_data->assets.GetTexture("Mute"));
+                    _data->sound.mute();
+                    mute = true;
+                }
+            }
+        }if(mouse && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            mouse = false;
+        }
     }
 
     void MainMenuState::Update(float dt) {
@@ -66,6 +96,7 @@ namespace engine{
         _data->renderWindow.draw(_title);
         _data->renderWindow.draw(_play_button);
 		_data->renderWindow.draw(_quit_button);
+		_data->renderWindow.draw(muteSprite);
         _data->renderWindow.display();
     }
 }

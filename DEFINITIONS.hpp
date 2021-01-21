@@ -15,17 +15,24 @@
 #define MAIN_MENU_TITLE_FILEPATH "Images/game_title_white.png"
 #define MAIN_MENU_BUTTON_FILEPATH "Images/game_play_button.png"
 #define MAIN_MENU_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
+#define MUTE_FILEPATH "Images/soundMute.png"
+#define UNMUTE_FILEPATH "Images/soundUnMute.png"
 
 //Sound
-#define HIT_SOUND_FILEPATH "Audio/Hit.wav"
-#define POINT_SOUND_FILEPATH "Audio/Point.wav"
 #define JUMP_SOUND_FILEPATH "Audio/jump.wav"
-#define WING_DEATH_FILEPATH "Audio/death.wav"
+#define JUMP_SOUND_VOLUME 10
 #define CLICK_SOUND_FILEPATH "Audio/click.wav"
+#define CLICK_SOUND_VOLUME 100
+#define DEATH_SOUND_FILEPATH "Audio/Death.wav"
+#define DEATH_SOUND_VOLUME 15
 #define WIN_SOUND_FILEPATH "Audio/win1.wav"
+#define WIN_SOUND_VOLUME 100
+#define COIN_SOUND_FILEPATH "Audio/coin.wav"
+#define COIN_SOUND_VOLUME 20
 
 //Music
 #define MUSIC_FILEPATH "Audio/music.ogg"
+#define MUSIC_VOLUME 20
 
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
@@ -51,8 +58,7 @@
 #define BACKGROUND_FINISH_FILEPATH "Images/wallpaperfinish.jpg"
 
 //Objects
-#define COIN_FILEPATH "Images/coin.png"
-#define COIN_SOUND_FILEPATH "Audio/coin.wav"
+#define DOUBLEJUMP_FILEPATH "Images/doublejump.png"
 
 //Font
 #define FONT_FILEPATH "Audio/RussoOne-Regular.ttf"

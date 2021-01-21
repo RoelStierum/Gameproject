@@ -14,7 +14,7 @@ namespace engine{
 
 	void TestLevel::Init() {
 	    ///START MUSIC
-	    _data->sound.TestLevelMusic.play();
+	    _data->sound.BackGroundMusic.play();
 
 	    ///DoubleJump text
 	    _data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
@@ -77,10 +77,10 @@ namespace engine{
         );platforms.addPlatform( //long jump
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1300,400}
-        );platforms.addPlatform( //with coin
+        );platforms.addPlatform( //with powerUp
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1800,600}
-        );platforms.addPlatform( //above coin
+        );platforms.addPlatform( //above powerUp
                 _data->assets.GetTexture("TestLevel Platform 2"),
                 sf::Vector2f{1800,200}
         );platforms.addPlatform( // dubble jump
@@ -146,10 +146,10 @@ namespace engine{
 		);
 
 
-        ///Coin Initializer
-        _data->assets.LoadTexture("coin", COIN_FILEPATH);
-        coin.setTexture(_data->assets.GetTexture("coin"));
-        coin.setPosition(1900,590 - coin.getGlobalBounds().height);
+        ///powerUp Initializer
+        _data->assets.LoadTexture("powerUp", DOUBLEJUMP_FILEPATH);
+        powerUp.setTexture(_data->assets.GetTexture("powerUp"));
+        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
 
 
         ///Character Initializer
@@ -157,6 +157,7 @@ namespace engine{
 		_data->assets.LoadTexture("TestLevel Character Flip", CHARACTER_FLIP_FILEPATH);
 		character.setPosition(sf::Vector2f {start});
 		character.setTexture(_data->assets.GetTexture("TestLevel Character"),_data->assets.GetTexture("TestLevel Character Flip"));
+	    character.velocity.y = 600;
 	}
 
 	void TestLevel::HandleInput() {
@@ -198,11 +199,11 @@ namespace engine{
 	}
 
 	void TestLevel::Update(float dt) {
-	    ///COIN TEST
-	    if(character.getSprite().getGlobalBounds().intersects(coin.getGlobalBounds())){
+	    ///powerUp TEST
+	    if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
 	        _data->sound._coinSound.play();
 	        character.max_jump = 2;
-	        coin.setPosition(coin.getPosition().x, 1000);
+	        powerUp.setPosition(powerUp.getPosition().x, 1000);
             doubleJumpEnableText = true;
             doubleJumpTimeTextEnable = true;
 			doubleJumpTime.restart();
@@ -210,7 +211,7 @@ namespace engine{
 
 	    ///Finish
 		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
-            _data->sound.TestLevelMusic.stop();
+            _data->sound.BackGroundMusic.stop();
 		    _data->sound._winSound.play();
 		    clockFinish.restart();
 		    finished=true;
@@ -312,8 +313,8 @@ namespace engine{
 		//platforms
 		platforms.draw();
 
-		//coin
-		_data->renderWindow.draw(coin);
+		//powerUp
+		_data->renderWindow.draw(powerUp);
 
 		//pause
 		_data->renderWindow.draw(pauseButton);
@@ -342,7 +343,7 @@ namespace engine{
 	    doubleJumpEnableText = false;
         doubleJumpTimeTextEnable = false;
         character.respawn(start);
-        coin.setPosition(1900,590 - coin.getGlobalBounds().height);
+        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
         levelTime.restart();
         tijd = 0;
 	}
@@ -359,13 +360,13 @@ namespace engine{
 	}
 
     void TestLevel::Resume() {
-        _data->sound.TestLevelMusic.play();
+        _data->sound.BackGroundMusic.play();
         levelTime.restart();
     }
 
     void TestLevel::Pause() {
 	    tijd += levelTime.getElapsedTime().asSeconds();
-        _data->sound.TestLevelMusic.pause();
+        _data->sound.BackGroundMusic.pause();
         _data->sound._clickSound.play();
     }
 

@@ -7,16 +7,13 @@ namespace engine{
 		CheckSoundLoading();
 		SetSoundBuffers();
 		setVolume();
+        BackGroundMusic.setLoop(true);
 	}
 
 	void SoundManager::CheckSoundLoading(){
-		if ( !_hitSoundBuffer.loadFromFile(HIT_SOUND_FILEPATH) ){
-			std::cout << "Error loading hit sound effect\n";
-		}if ( !_pointSoundBuffer.loadFromFile(POINT_SOUND_FILEPATH) ){
-			std::cout << "Error loading point sound effect\n";
-		}if ( !_jumpSoundBuffer.loadFromFile(JUMP_SOUND_FILEPATH) ){
+		if ( !_jumpSoundBuffer.loadFromFile(JUMP_SOUND_FILEPATH) ){
 			std::cout << "Error loading wing sound effect\n";
-		}if ( !_deathSoundBuffer.loadFromFile(WING_DEATH_FILEPATH) ){
+		}if ( !_deathSoundBuffer.loadFromFile(DEATH_SOUND_FILEPATH) ){
             std::cout << "Error loading death sound effect\n";
         }if ( !_coinSoundBuffer.loadFromFile(COIN_SOUND_FILEPATH) ){
             std::cout << "Error loading coin sound effect\n";
@@ -29,14 +26,12 @@ namespace engine{
             std::cout << "Error loading click sound effect\n";
         }
 
-		if(!TestLevelMusic.openFromFile(MUSIC_FILEPATH)){
+		if(!BackGroundMusic.openFromFile(MUSIC_FILEPATH)){
             std::cout << "Error loading music\n";
 		}
 	}
 
 	void SoundManager::SetSoundBuffers(){
-		_hitSound.setBuffer( _hitSoundBuffer );
-		_pointSound.setBuffer( _pointSoundBuffer );
 		_jumpSound.setBuffer( _jumpSoundBuffer );
 		_deathSound.setBuffer(_deathSoundBuffer);
 		_coinSound.setBuffer(_coinSoundBuffer);
@@ -45,11 +40,21 @@ namespace engine{
 	}
 
 	void SoundManager::setVolume() {
-		_coinSound.setVolume(20);
-        _jumpSound.setVolume(10);
-        TestLevelMusic.setVolume(20);
-        _deathSound.setVolume(15);
-        TestLevelMusic.setLoop(true);
+        _jumpSound.setVolume(JUMP_SOUND_VOLUME);
+        _clickSound.setVolume(CLICK_SOUND_VOLUME);
+        _deathSound.setVolume(DEATH_SOUND_VOLUME);
+        _winSound.setVolume(WIN_SOUND_VOLUME);
+        _coinSound.setVolume(COIN_SOUND_VOLUME);
+        BackGroundMusic.setVolume(MUSIC_VOLUME);
 	}
+
+    void SoundManager::mute() {
+        _jumpSound.setVolume(0);
+        _clickSound.setVolume(0);
+        _deathSound.setVolume(0);
+        _winSound.setVolume(0);
+        _coinSound.setVolume(0);
+        BackGroundMusic.setVolume(0);
+    }
 
 }
