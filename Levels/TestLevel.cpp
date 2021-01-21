@@ -33,6 +33,7 @@ namespace engine{
         levelTimeText.setString("Blank");
         levelTimeText.setFillColor(sf::Color::Black);
 
+
 	    ///flag
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
@@ -236,7 +237,7 @@ namespace engine{
 		    std::string s = std::to_string(levelTime.getElapsedTime().asSeconds());
 		    s = s.substr(0,s.size()-4);
 		    levelTimeText.setString(s);
-            levelTimeText.setPosition(cameraX + 10,10);
+            levelTimeText.setPosition(SCREEN_WIDTH-100-levelTimeText.getGlobalBounds().width,20);
 		}
 
 
@@ -282,8 +283,10 @@ namespace engine{
 
 		CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 
-		///Pause button update
+		///Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
+        ///Text set position
+        levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
 
         ///player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){
