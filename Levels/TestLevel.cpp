@@ -212,6 +212,7 @@ namespace engine{
 	void TestLevel::Update(float dt) {
 	    ///powerUp TEST
 	    if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
+            doubleJumpTimeEnable = true;
 	        _data->sound._coinSound.play();
 	        character.max_jump = 2;
 	        powerUp.setPosition(powerUp.getPosition().x, 1000);
@@ -241,10 +242,11 @@ namespace engine{
 		}
 
         ///DoubleJumpTimer
-		if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME){
+		if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME && doubleJumpTimeEnable){
 			character.max_jump = 1;
             doubleJumpTimeTextEnable = false;
             doubleJumpEnableText = false;
+            doubleJumpTimeEnable= false;
 		}
 		if(doubleJumpTimeTextEnable){
             doubleJumpTimeText.setString(std::to_string(DOUBLE_JUMP_TIME-int(doubleJumpTime.getElapsedTime().asSeconds())));
@@ -270,7 +272,7 @@ namespace engine{
 			}
 		}
 		if(!collision){
-			character.velocity.y += gravity;
+			character.velocity.y += gravity * dt;
 			character.on_ground = false;
 			character.slow_down = character.slow_down_air;
 			character.speed_up = character.speed_up_air;

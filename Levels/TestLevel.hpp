@@ -13,7 +13,7 @@ namespace engine{
 
 	class TestLevel: public State{
 	public:
-		float gravity = 25.0f;
+		float gravity = 1500; //25.0f;
 
 		sf::Vector2f start = {100,-200};
 
@@ -50,6 +50,7 @@ namespace engine{
 		sf::Sprite flag;
 		sf::Clock clockFinish;
 		sf::Clock doubleJumpTime;
+		bool doubleJumpTimeEnable = false;
 		bool finished = false;
 
 		sf::Clock levelTime;
