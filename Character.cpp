@@ -6,7 +6,7 @@
 namespace engine{
 
 	//Definitions for Character
-	Character::Character(GameDataRef data, const sf::Vector2f &position,  const sf::Texture &texture, const sf::Texture &texture_flip) :
+	/*Character::Character(GameDataRef data, const sf::Vector2f &position,  const sf::Texture &texture, const sf::Texture &texture_flip) :
             _data(data),
 	        position(position),
 			texture(texture),
@@ -16,7 +16,7 @@ namespace engine{
 		sprite.setPosition(position);
 		width = sprite.getGlobalBounds().width;
 		height = sprite.getGlobalBounds().height;
-	}
+	}*/
 
 	Character::Character(GameDataRef data):
 			_data(data),
@@ -33,28 +33,67 @@ namespace engine{
 	}
 
 	void Character::update() {
-	    if(testClock.getElapsedTime().asSeconds() > 0.2){
+	    if(testClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
+
 	        if(testRun == 0){
-	            sprite.setTexture(run_right1);
+
+	            if(velocity.x > 0){
+                    sprite.setTexture(run_right1);
+	            }else if (velocity.x < 0){
+                    sprite.setTexture(run_left1);
+	            }
                 testRun = 1;
+
 	        }else if(testRun == 1){
-                sprite.setTexture(run_right2);
+
+                if(velocity.x > 0){
+                    sprite.setTexture(run_right2);
+                }else if (velocity.x < 0){
+                    sprite.setTexture(run_left2);
+                }
                 testRun = 2;
+
             }else if(testRun == 2){
-	            sprite.setTexture(texture);
+
+                if(velocity.x > 0){
+                    sprite.setTexture(texture);
+                }else if (velocity.x < 0){
+                    sprite.setTexture(texture_flip);
+                }
                 testRun = 0;
+
             }else{
 	            testRun = 0;
 	        }
+
             testClock.restart();
+	    }
+
+	    if(!on_ground){
+            testRun = 2;
+            if(flip){
+                sprite.setTexture(run_left1);
+            }else {
+                sprite.setTexture(run_right1);
+            }
+
 	    }
 	}
 
-	void Character::setTexture(sf::Texture &texture_, sf::Texture &texture_flip_, sf::Texture &texture_run_right1, sf::Texture &texture_run_right2) {
+	void Character::setTexture(
+	        sf::Texture &texture_,
+	        sf::Texture &texture_flip_,
+	        sf::Texture &texture_run_right1,
+	        sf::Texture &texture_run_right2,
+	        sf::Texture &texture_run_left1,
+	        sf::Texture &texture_run_left2
+	        ) {
 		texture = texture_;
 		texture_flip = texture_flip_;
         run_right1 = texture_run_right1;
         run_right2 = texture_run_right2;
+        run_left1 = texture_run_left1;
+        run_left2 = texture_run_left2;
 		sprite.setTexture(texture);
 		width = sprite.getGlobalBounds().width;
 		height = sprite.getGlobalBounds().height;

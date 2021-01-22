@@ -47,6 +47,8 @@
 #define CHARACTER_FLIP_FILEPATH "Images/Character_flip.png"
 #define CHARACTER_RUN_RIGHT_FILEPATH "Images/run_right.png"
 #define CHARACTER_RUN_RIGHT2_FILEPATH "Images/run_right2.png"
+#define CHARACTER_RUN_LEFT_FILEPATH "Images/run_left.png"
+#define CHARACTER_RUN_LEFT2_FILEPATH "Images/run_left2.png"
 
 //PauseState
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"

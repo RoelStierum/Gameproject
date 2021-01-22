@@ -157,8 +157,17 @@ namespace engine{
 		_data->assets.LoadTexture("TestLevel Character Flip", CHARACTER_FLIP_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Character right1", CHARACTER_RUN_RIGHT_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Character right2", CHARACTER_RUN_RIGHT2_FILEPATH);
+		_data->assets.LoadTexture("TestLevel Character left1", CHARACTER_RUN_LEFT_FILEPATH);
+		_data->assets.LoadTexture("TestLevel Character left2", CHARACTER_RUN_LEFT2_FILEPATH);
 		character.setPosition(sf::Vector2f {start});
-		character.setTexture(_data->assets.GetTexture("TestLevel Character"),_data->assets.GetTexture("TestLevel Character Flip"),_data->assets.GetTexture("TestLevel Character right1"),_data->assets.GetTexture("TestLevel Character right2"));
+		character.setTexture(
+		        _data->assets.GetTexture("TestLevel Character"),
+		        _data->assets.GetTexture("TestLevel Character Flip"),
+		        _data->assets.GetTexture("TestLevel Character right1"),
+		        _data->assets.GetTexture("TestLevel Character right2"),
+		        _data->assets.GetTexture("TestLevel Character left1"),
+		        _data->assets.GetTexture("TestLevel Character left2")
+		        );
 	    character.velocity.y = 600;
 	}
 
@@ -251,7 +260,7 @@ namespace engine{
 		}
 
 		///Character
-		//character.update();
+		character.update();
 
         ///Collision
 		bool collision = false;
