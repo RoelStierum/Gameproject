@@ -22,6 +22,7 @@ namespace engine{
 
 		sf::Clock testClock;
         int testRun = 0;
+        bool air_texture = false;
 
 		void flipTexture();
 

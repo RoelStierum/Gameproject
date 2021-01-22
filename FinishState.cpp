@@ -19,17 +19,17 @@ namespace engine{
 		InitView.reset(sf::FloatRect{0, 0, SCREEN_WIDTH, SCREEN_HEIGHT});
 		_data->renderWindow.setView(InitView);
 
-		//kan fout gaan als het niet geladen is. moet een bool zijn om te checken of de texture geladen is
-		_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
-		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 200);
-
 		_data->assets.LoadTexture("FinishStatePlayAgainButton", END_NEXT_LEVEL_BUTTON_FILEPATH);
 		_play_again.setTexture(_data->assets.GetTexture("FinishStatePlayAgainButton"));
-		_play_again.setPosition(SCREEN_WIDTH/2 - _play_again.getGlobalBounds().width/2, 350);
+		_play_again.setPosition(SCREEN_WIDTH/2 - _play_again.getGlobalBounds().width/2, 200);
 
 		_data->assets.LoadTexture("FinishStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("FinishStateMainMenuButton"));
-		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
+		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 350);
+
+        //kan fout gaan als het niet geladen is. moet een bool zijn om te checken of de texture geladen is
+        _quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
+        _quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 500);
 
         ///levelTimeTextEnable
         tijdText.setFont(_data->assets.GetFont("RussoOneFont"));
@@ -50,20 +50,20 @@ namespace engine{
 			}
 		}
 
-		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow)){
+        if(_data->input.IsSpriteClicked(_play_again, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
+            _data->sound._clickSound.play();
+            _data->machine.AddState(StateRef(new TestLevel(_data)), true);
+        }
+
+        if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
+            _data->sound._clickSound.play();
+            _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
+            _data->machine.clean_states();
+        }
+
+		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
 			_data->renderWindow.close();
-		}
-
-		if(_data->input.IsSpriteClicked(_play_again, sf::Mouse::Left, _data->renderWindow)) {
-            _data->sound._clickSound.play();
-			_data->machine.AddState(StateRef(new TestLevel(_data)), true);
-		}
-
-		if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow)){
-            _data->sound._clickSound.play();
-			_data->machine.AddState( StateRef( new MainMenuState(_data)), true);
-			_data->machine.clean_states();
 		}
 	}
 

@@ -35,6 +35,14 @@ namespace engine{
 	void Character::update() {
 	    if(testClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
 
+            if(velocity.x == 0){
+                if(flip){
+                    sprite.setTexture(texture_flip);
+                }else {
+                    sprite.setTexture(texture);
+                }
+            }
+
 	        if(testRun == 0){
 
 	            if(velocity.x > 0){
@@ -69,14 +77,20 @@ namespace engine{
             testClock.restart();
 	    }
 
-	    if(!on_ground){
+	    if(on_ground) {
+            if (air_texture) {
+                air_texture = false;
+            }
+        }
+
+	    if(!on_ground && !air_texture){
             testRun = 2;
             if(flip){
                 sprite.setTexture(run_left1);
             }else {
                 sprite.setTexture(run_right1);
             }
-
+            air_texture = true;
 	    }
 	}
 

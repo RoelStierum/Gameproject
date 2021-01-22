@@ -52,11 +52,11 @@ namespace engine{
             if(sf::Event::Closed == event.type){
                 _data->renderWindow.close();
             }
-            if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow)){
+            if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
                 _data->sound._clickSound.play();
 				_data->machine.AddState( StateRef( new TestLevel(_data)), true);
             }
-			if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow)){
+			if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
                 _data->sound._clickSound.play();
 				_data->renderWindow.close();
 			}

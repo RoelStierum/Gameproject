@@ -4,4 +4,5 @@
 
 int main(){
     engine::Game(SCREEN_WIDTH,SCREEN_HEIGHT,"Jump Master");
+    return EXIT_SUCCESS;
 }
