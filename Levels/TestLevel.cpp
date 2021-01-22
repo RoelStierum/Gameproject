@@ -240,7 +240,7 @@ namespace engine{
 
 		}
 
-        ///DubbleJumpTimer
+        ///DoubleJumpTimer
 		if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME){
 			character.max_jump = 1;
             doubleJumpTimeTextEnable = false;
@@ -301,8 +301,10 @@ namespace engine{
 
 		///Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
-        ///Text set position
+        ///leveltime text set position
         levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        ///Double jump timer set position
+        doubleJumpTimeText.setPosition(cameraX + SCREEN_WIDTH-640-doubleJumpTimeText.getGlobalBounds().width,16);
 
         ///player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){
