@@ -13,10 +13,15 @@ namespace engine{
 		sf::Vector2f position;
 		sf::Texture texture;
 		sf::Texture texture_flip;
+        sf::Texture run_right1;
+        sf::Texture run_right2;
 
 		bool flip = false;
 
+		sf::Clock testClock;
+
 		void flipTexture();
+		int testRun = 0;
 
 	public:
 		sf::Vector2f velocity = {0,0};
@@ -31,7 +36,9 @@ namespace engine{
 
 		Character(GameDataRef data);
 
-		void setTexture(sf::Texture& texture_, sf::Texture &texture_flip_);
+		void update();
+
+		void setTexture(sf::Texture &texture_, sf::Texture &texture_flip_, sf::Texture &texture_run_right1, sf::Texture &texture_run_right2);
 
 		void setPosition(const sf::Vector2f& position_);
 

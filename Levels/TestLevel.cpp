@@ -155,8 +155,10 @@ namespace engine{
         ///Character Initializer
 		_data->assets.LoadTexture("TestLevel Character", CHARACTER_FILEPATH);
 		_data->assets.LoadTexture("TestLevel Character Flip", CHARACTER_FLIP_FILEPATH);
+		_data->assets.LoadTexture("TestLevel Character right1", CHARACTER_RUN_RIGHT_FILEPATH);
+		_data->assets.LoadTexture("TestLevel Character right2", CHARACTER_RUN_RIGHT2_FILEPATH);
 		character.setPosition(sf::Vector2f {start});
-		character.setTexture(_data->assets.GetTexture("TestLevel Character"),_data->assets.GetTexture("TestLevel Character Flip"));
+		character.setTexture(_data->assets.GetTexture("TestLevel Character"),_data->assets.GetTexture("TestLevel Character Flip"),_data->assets.GetTexture("TestLevel Character right1"),_data->assets.GetTexture("TestLevel Character right2"));
 	    character.velocity.y = 600;
 	}
 
@@ -248,11 +250,8 @@ namespace engine{
             levelTimeText.setPosition(SCREEN_WIDTH-100-levelTimeText.getGlobalBounds().width,20);
 		}
 
-
-
-
-
-
+		///Character
+		//character.update();
 
         ///Collision
 		bool collision = false;

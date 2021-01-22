@@ -32,9 +32,29 @@ namespace engine{
 		flip = !flip;
 	}
 
-	void Character::setTexture(sf::Texture &texture_, sf::Texture &texture_flip_) {
+	void Character::update() {
+	    if(testClock.getElapsedTime().asSeconds() > 0.2){
+	        if(testRun == 0){
+	            sprite.setTexture(run_right1);
+                testRun = 1;
+	        }else if(testRun == 1){
+                sprite.setTexture(run_right2);
+                testRun = 2;
+            }else if(testRun == 2){
+	            sprite.setTexture(texture);
+                testRun = 0;
+            }else{
+	            testRun = 0;
+	        }
+            testClock.restart();
+	    }
+	}
+
+	void Character::setTexture(sf::Texture &texture_, sf::Texture &texture_flip_, sf::Texture &texture_run_right1, sf::Texture &texture_run_right2) {
 		texture = texture_;
 		texture_flip = texture_flip_;
+        run_right1 = texture_run_right1;
+        run_right2 = texture_run_right2;
 		sprite.setTexture(texture);
 		width = sprite.getGlobalBounds().width;
 		height = sprite.getGlobalBounds().height;
