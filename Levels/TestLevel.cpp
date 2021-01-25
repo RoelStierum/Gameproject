@@ -37,7 +37,7 @@ namespace engine{
 	    ///flag
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(8060,290);
+        flag.setPosition(10060,270);
         //flag.setPosition(400,400); //Debug flag placement
 
 
@@ -143,6 +143,28 @@ namespace engine{
 		);platforms.addPlatform(
 				_data->assets.GetTexture("TestLevel Platform Vertical"),
 				sf::Vector2f{8050,400}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{8250,292}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{8250,180}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{8650,600}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{9080,550}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform 2"),
+				sf::Vector2f{9350,450}
+		);platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{9700,380}
+		);
+		platforms.addPlatform(
+				_data->assets.GetTexture("TestLevel Platform Vertical"),
+				sf::Vector2f{10050,380}
 		);
 
 
