@@ -27,6 +27,7 @@ namespace engine{
 
     private:
         const float dt = 1.0f / FPS; //60 fps
+        const float dt60 = 1.0f / 60; //60 fps
         sf::Clock _clock;
 
         GameDataRef _data = std::make_shared<GameData>();

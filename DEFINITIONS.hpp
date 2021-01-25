@@ -5,6 +5,7 @@
 #define SCREEN_HEIGHT 720
 
 #define FPS 144.0f
+//The game's update and handle input refresh rate are locked at 60 fps
 
 //Splash state with background
 #define SPLASH_STATE_SHOW_TIME 2.0f

@@ -41,11 +41,11 @@ namespace engine{
             currentTime = newTime;
             accumulator += frameTime;
 
-            while(accumulator >= dt){
+            while(accumulator >= dt60){
                 _data->machine.GetActiveState()->HandleInput();
-                _data->machine.GetActiveState()->Update(dt);
+                _data->machine.GetActiveState()->Update(dt60);
 
-                accumulator -= dt;
+                accumulator -= dt60;
             }
 
             interpolation = accumulator / dt;

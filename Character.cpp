@@ -175,7 +175,7 @@ namespace engine{
             }
                 //links
             else if (getPosition().x + sprite.getGlobalBounds().width < object.getPosition().x
-                     && getPosition().y + sprite.getGlobalBounds().width - 1 >= object.getPosition().y) {
+                     && getPosition().y + sprite.getGlobalBounds().height - 1 >= object.getPosition().y) {
                 velocity.x = 0;
             }
                 //onderkant
