@@ -9,7 +9,7 @@ namespace engine{
 
 	class FinishState: public State{
 	public:
-		FinishState(GameDataRef data,const float& tijd);
+		FinishState(GameDataRef data, const float& tijd, const int& levelNumber);
 
 		void Init();
 
@@ -29,9 +29,11 @@ namespace engine{
 
 		sf::Sprite _background;
 
-		sf::Sprite _play_again;
+		sf::Sprite _play_next_level;
 		sf::Sprite _quit;
 		sf::Sprite _menu;
+
+		int lastLevel = 0;
 	};
 
 }

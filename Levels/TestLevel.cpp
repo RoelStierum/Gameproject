@@ -38,7 +38,7 @@ namespace engine{
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(10060,270);
-        //flag.setPosition(400,400); //Debug flag placement
+        flag.setPosition(400,400); //Debug flag placement
 
 
         ///Background Initializer
@@ -224,7 +224,7 @@ namespace engine{
 		//Check mouse click on position button
 		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		    sf::Vector2i m = sf::Mouse::getPosition(_data->renderWindow);
-		    sf::IntRect intRect = {SCREEN_WIDTH - 16 - 64,16,64,64};
+		    //sf::IntRect intRect = {SCREEN_WIDTH - 16 - 64,16,64,64};
 		    if (m.x >= SCREEN_WIDTH - 16 - 64 && m.x <= SCREEN_WIDTH - 16 && m.y >= 16 && m.y <= 16+64){
                 _data->machine.AddState( StateRef ( new PauseState(_data)), false);
 		    }
@@ -259,7 +259,7 @@ namespace engine{
 
 		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
 
-            _data->machine.AddState( StateRef ( new FinishState(_data, tijd)), true);
+            _data->machine.AddState( StateRef ( new FinishState(_data, tijd, levelNumber)), true);
 
 		}
 
