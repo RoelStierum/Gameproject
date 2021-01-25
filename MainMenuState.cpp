@@ -1,5 +1,6 @@
 #include "MainMenuState.hpp"
 #include "Levels/TestLevel.hpp"
+#include "Levels/Level2.hpp"
 #include "DEFINITIONS.hpp"
 
 #include <iostream>
@@ -65,7 +66,8 @@ namespace engine{
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
                 _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
-			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
+            std::cout << "TemplateLevel" << std::endl;
+			_data->machine.AddState( StateRef( new Level2(_data)), true);
         }
 
         if(not mouse && sf::Mouse::isButtonPressed(sf::Mouse::Left)){

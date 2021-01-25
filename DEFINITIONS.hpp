@@ -70,4 +70,6 @@
 //Flag
 #define TESTLEVEL_FLAG_FILEPATH "Images/vlag.png"
 
+#define LEVEL_AMOUNT 2
+
 

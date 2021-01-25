@@ -2,13 +2,15 @@
 #include "DEFINITIONS.hpp"
 #include "MainMenuState.hpp"
 #include "Levels/TestLevel.hpp"
+#include "Levels/Level2.hpp"
 
 
 namespace engine{
 
-	FinishState::FinishState(GameDataRef data,const float& tijd):
+	FinishState::FinishState(GameDataRef data, const float& tijd, const int& levelNumber):
 			_data(data),
-			tijd(tijd)
+			tijd(tijd),
+            lastLevel(levelNumber)
 	{}
 
 	void FinishState::Init() {
@@ -20,8 +22,8 @@ namespace engine{
 		_data->renderWindow.setView(InitView);
 
 		_data->assets.LoadTexture("FinishStatePlayAgainButton", END_NEXT_LEVEL_BUTTON_FILEPATH);
-		_play_again.setTexture(_data->assets.GetTexture("FinishStatePlayAgainButton"));
-		_play_again.setPosition(SCREEN_WIDTH/2 - _play_again.getGlobalBounds().width/2, 200);
+		_play_next_level.setTexture(_data->assets.GetTexture("FinishStatePlayAgainButton"));
+		_play_next_level.setPosition(SCREEN_WIDTH/2 - _play_next_level.getGlobalBounds().width/2, 200);
 
 		_data->assets.LoadTexture("FinishStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("FinishStateMainMenuButton"));
@@ -50,9 +52,11 @@ namespace engine{
 			}
 		}
 
-        if(_data->input.IsSpriteClicked(_play_again, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
-            _data->sound._clickSound.play();
-            _data->machine.AddState(StateRef(new TestLevel(_data)), true);
+        if(_data->input.IsSpriteClicked(_play_next_level, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
+            if(lastLevel == 1){
+                _data->sound._clickSound.play();
+                _data->machine.AddState(StateRef(new Level2(_data)), true);
+            }
         }
 
         if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
@@ -71,7 +75,9 @@ namespace engine{
 		_data->renderWindow.clear();
 		_data->renderWindow.draw(_background);
 		_data->renderWindow.draw(_quit);
-		_data->renderWindow.draw(_play_again);
+		if(lastLevel < LEVEL_AMOUNT){
+            _data->renderWindow.draw(_play_next_level);
+		}
 		_data->renderWindow.draw(_menu);
 		_data->renderWindow.draw(tijdText);
 		_data->renderWindow.display();
