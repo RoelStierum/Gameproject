@@ -28,8 +28,8 @@
 #define DEATH_SOUND_VOLUME 15
 #define WIN_SOUND_FILEPATH "Audio/win1.wav"
 #define WIN_SOUND_VOLUME 100
-#define COIN_SOUND_FILEPATH "Audio/coin.wav"
-#define COIN_SOUND_VOLUME 20
+#define POWERUP_SOUND_FILEPATH "Audio/powerup.wav"
+#define POWERUP_SOUND_VOLUME 20
 
 //Music
 #define MUSIC_FILEPATH "Audio/music.ogg"

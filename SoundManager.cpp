@@ -15,7 +15,7 @@ namespace engine{
 			std::cout << "Error loading wing sound effect\n";
 		}if ( !_deathSoundBuffer.loadFromFile(DEATH_SOUND_FILEPATH) ){
             std::cout << "Error loading death sound effect\n";
-        }if ( !_coinSoundBuffer.loadFromFile(COIN_SOUND_FILEPATH) ){
+        }if ( !_coinSoundBuffer.loadFromFile(POWERUP_SOUND_FILEPATH) ){
             std::cout << "Error loading coin sound effect\n";
         }
 
@@ -44,7 +44,7 @@ namespace engine{
         _clickSound.setVolume(CLICK_SOUND_VOLUME);
         _deathSound.setVolume(DEATH_SOUND_VOLUME);
         _winSound.setVolume(WIN_SOUND_VOLUME);
-        _coinSound.setVolume(COIN_SOUND_VOLUME);
+        _coinSound.setVolume(POWERUP_SOUND_VOLUME);
         BackGroundMusic.setVolume(MUSIC_VOLUME);
 	}
 
