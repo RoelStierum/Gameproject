@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(sfml_0)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-O2")
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR "SFML-2.5.1/lib/cmake/SFML")

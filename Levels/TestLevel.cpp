@@ -45,6 +45,7 @@ namespace engine{
 		_data->assets.LoadTexture("TestLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
+        //_background.setPosition(0,2);
 
 
 		///Pause button
@@ -388,7 +389,7 @@ namespace engine{
 			character.velocity.x = 0;
 		}
 		//rechts
-		if(character.nextPosition(character.velocity * dt).x + character.width > _background.getPosition().x + _background.getGlobalBounds().width){
+		if(character.nextPosition(character.velocity * dt).x + character.getSprite().getGlobalBounds().width > _background.getPosition().x + _background.getGlobalBounds().width){
 			character.velocity.x = 0;
 		}
 	}

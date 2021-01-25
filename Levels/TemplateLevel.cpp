@@ -231,7 +231,7 @@ namespace engine{
             character.velocity.x = 0;
         }
         //rechts
-        if(character.nextPosition(character.velocity * dt).x + character.width > _background.getPosition().x + _background.getGlobalBounds().width){
+        if(character.nextPosition(character.velocity * dt).x + character.getSprite().getGlobalBounds().width > _background.getPosition().x + _background.getGlobalBounds().width){
             character.velocity.x = 0;
         }
     }

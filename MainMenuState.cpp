@@ -63,11 +63,15 @@ namespace engine{
 			}
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) &&
                 _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
-            std::cout << "TemplateLevel" << std::endl;
-			_data->machine.AddState( StateRef( new Level2(_data)), true);
+			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) &&
+           _data->renderWindow.hasFocus()){
+            _data->sound._clickSound.play();
+            _data->machine.AddState( StateRef( new Level2(_data)), true);
         }
 
         if(not mouse && sf::Mouse::isButtonPressed(sf::Mouse::Left)){

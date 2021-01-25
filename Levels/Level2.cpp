@@ -125,7 +125,7 @@ namespace engine{
 
     void Level2::Update(float dt) {
         ///Start moving platform
-        if(move == 0 && character.getPosition().x + character.width/2 > 350){
+        if(move == 0 && character.getPosition().x + character.getSprite().getGlobalBounds().width/2 > 350){
             move = 200;
         }
 
@@ -258,7 +258,7 @@ namespace engine{
             character.velocity.x = 0;
         }
         //rechts
-        if(character.nextPosition(character.velocity * dt).x + character.width > _background.getPosition().x + _background.getGlobalBounds().width){
+        if(character.nextPosition(character.velocity * dt).x + character.getSprite().getGlobalBounds().width > _background.getPosition().x + _background.getGlobalBounds().width){
             character.velocity.x = 0;
         }
     }

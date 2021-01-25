@@ -33,7 +33,7 @@ namespace engine{
 	}
 
 	void Character::update() {
-	    if(testClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
+	    if(animationClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
 
             if(velocity.x == 0){
                 if(flip){
@@ -43,38 +43,38 @@ namespace engine{
                 }
             }
 
-	        if(testRun == 0){
+	        if(animationRun == 0){
 
 	            if(velocity.x > 0){
                     sprite.setTexture(run_right1);
 	            }else if (velocity.x < 0){
                     sprite.setTexture(run_left1);
 	            }
-                testRun = 1;
+                animationRun = 1;
 
-	        }else if(testRun == 1){
+	        }else if(animationRun == 1){
 
                 if(velocity.x > 0){
                     sprite.setTexture(run_right2);
                 }else if (velocity.x < 0){
                     sprite.setTexture(run_left2);
                 }
-                testRun = 2;
+                animationRun = 2;
 
-            }else if(testRun == 2){
+            }else if(animationRun == 2){
 
                 if(velocity.x > 0){
                     sprite.setTexture(texture);
                 }else if (velocity.x < 0){
                     sprite.setTexture(texture_flip);
                 }
-                testRun = 0;
+                animationRun = 0;
 
             }else{
-	            testRun = 0;
+	            animationRun = 0;
 	        }
 
-            testClock.restart();
+            animationClock.restart();
 	    }
 
 	    if(on_ground) {
@@ -84,7 +84,7 @@ namespace engine{
         }
 
 	    if(!on_ground && !air_texture){
-            testRun = 2;
+            animationRun = 2;
             if(flip){
                 sprite.setTexture(run_left1);
             }else {

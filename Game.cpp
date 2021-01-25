@@ -8,7 +8,7 @@ namespace engine{
         _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
         _data->machine.AddState(StateRef(new SplashState(_data)));
 
-        _data->renderWindow.setFramerateLimit(60);
+        _data->renderWindow.setFramerateLimit(FPS);
         _data->renderWindow.setVerticalSyncEnabled(true);
 
         //place in middle of screen

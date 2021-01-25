@@ -4,7 +4,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-#define FPS 60.0f
+#define FPS 144.0f
 
 //Splash state with background
 #define SPLASH_STATE_SHOW_TIME 2.0f
