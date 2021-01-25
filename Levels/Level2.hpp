@@ -38,6 +38,8 @@ namespace engine{
         float cameraX, cameraY = 0;
 
         Platform platforms = {_data};
+        sf::Vector2f moving_platform_start = {251,400};
+        int move = 0;
 
         //flag and clock
         sf::Sprite flag;
