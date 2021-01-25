@@ -185,6 +185,9 @@ namespace engine{
             }
                 //bovenkant
             else {
+                if(velocity.y > 50){
+                    setPosition(position.x,object.getPosition().y - sprite.getGlobalBounds().height);
+                }
                 velocity.y = 0;
                 jump = 0;
                 on_ground = true;

@@ -27,7 +27,7 @@ namespace engine{
         ///flag
         _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(4100,400-flag.getGlobalBounds().height); //Debug flag placement
+        flag.setPosition(3800,400-flag.getGlobalBounds().height); //Debug flag placement
 
         ///Background Initializer
         _data->assets.LoadTexture("Level2 Background", TESTLEVEL_BACKGROUND_FILEPATH);
@@ -112,12 +112,9 @@ namespace engine{
 
 
 
-
-
-
         platforms.addPlatform( //end
                 _data->assets.GetTexture("Level2 Platform 2"),
-                sf::Vector2f{4000,400}
+                sf::Vector2f{3700,400}
         );
 
         ///Character Initializer
@@ -185,7 +182,7 @@ namespace engine{
 
         ///TEST
         sf::Vector2f pos = platforms.getPlatforms()[1].getPosition();
-        if((pos.x + platforms.getPlatforms()[1].getGlobalBounds().width >= 4000 && move > 0) || (pos.x < 250 && move < 0)){
+        if((pos.x + platforms.getPlatforms()[1].getGlobalBounds().width >= 3800 && move > 0) || (pos.x < 250 && move < 0)){
             move = move * -1;
         }
         platforms.getPlatforms()[1].setPosition(pos.x+(move*dt),pos.y);
