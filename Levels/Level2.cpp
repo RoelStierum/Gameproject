@@ -13,7 +13,7 @@ namespace engine{
     {}
 
     void Level2::Init() {
-        character.max_jump = 1000;
+        //character.jump_speed = 800;
 
         ///START MUSIC
         _data->sound.BackGroundMusic.play();
@@ -43,6 +43,7 @@ namespace engine{
         _data->assets.LoadTexture("Level2 Platform", TESTLEVEL_PLATFORM_FILEPATH);
         _data->assets.LoadTexture("Level2 Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
         _data->assets.LoadTexture("Level2 Platform Vertical", TESTLEVEL_PLATFORM_VERTICAL_FILEPATH);
+        _data->assets.LoadTexture("Level2 Force Field", LEVEL2_FORCEFIELD_FILEPATH);
 
         ///Platforms Initializer
         platforms.addPlatform( //starting
@@ -53,14 +54,67 @@ namespace engine{
                 _data->assets.GetTexture("Level2 Platform"),
                 moving_platform_start
         );
-        platforms.addPlatform( //wall
-                _data->assets.GetTexture("Level2 Platform Vertical"),
-                sf::Vector2f{3000,200}
+
+
+
+        platforms.addPlatform( //wall pre jump
+                _data->assets.GetTexture("Level2 Platform 2"),
+                sf::Vector2f{900,360}
         );
         platforms.addPlatform( //wall pre jump
                 _data->assets.GetTexture("Level2 Platform 2"),
-                sf::Vector2f{2700,300}
+                sf::Vector2f{1100,300}
         );
+        platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Force Field"),
+                sf::Vector2f{1500,0}
+        );platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Force Field"),
+                sf::Vector2f{1500,200}
+        );platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Force Field"),
+                sf::Vector2f{1500,440}
+        );platforms.addPlatform( //wall pre jump
+                _data->assets.GetTexture("Level2 Platform"),
+                sf::Vector2f{1300,710}
+        );platforms.addPlatform( //wall pre jump
+                _data->assets.GetTexture("Level2 Platform"),
+                sf::Vector2f{1500,710}
+        );platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{1800,605}
+        );platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{2050,520}
+        );platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{2300,440}
+        );
+
+
+        platforms.addPlatform( //wall before
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{2660,120}
+        );
+        platforms.addPlatform( //wall pre jump
+                _data->assets.GetTexture("Level2 Platform 2"),
+                sf::Vector2f{2700,280}
+        );
+
+        platforms.addPlatform( //wall pre jump
+                _data->assets.GetTexture("Level2 Platform 2"),
+                sf::Vector2f{3000,360}
+        );
+        platforms.addPlatform( //wall
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{3100,200}
+        );
+
+
+
+
+
+
         platforms.addPlatform( //end
                 _data->assets.GetTexture("Level2 Platform 2"),
                 sf::Vector2f{4000,400}
@@ -126,7 +180,7 @@ namespace engine{
     void Level2::Update(float dt) {
         ///Start moving platform
         if(move == 0 && character.getPosition().x + character.getSprite().getGlobalBounds().width/2 > 350){
-            move = 200;
+            move = 250;
         }
 
         ///TEST
@@ -135,6 +189,21 @@ namespace engine{
             move = move * -1;
         }
         platforms.getPlatforms()[1].setPosition(pos.x+(move*dt),pos.y);
+
+        if(platforms.getPlatforms()[1].getGlobalBounds().intersects(character.getSprite().getGlobalBounds())){
+            if(platforms.getPlatforms()[1].getPosition().x < character.getPosition().x + character.getSprite().getGlobalBounds().width - 1 &&
+                platforms.getPlatforms()[1].getPosition().y < character.getPosition().y + character.getSprite().getGlobalBounds().height - 1 &&
+                platforms.getPlatforms()[1].getPosition().y + platforms.getPlatforms()[1].getGlobalBounds().height > character.getPosition().y + 1){
+                    character.velocity.x = move;
+                    character.updateVelocity(dt);
+            }
+            if(platforms.getPlatforms()[1].getPosition().x + platforms.getPlatforms()[1].getGlobalBounds().width > character.getPosition().x + 1 &&
+               platforms.getPlatforms()[1].getPosition().y < character.getPosition().y + character.getSprite().getGlobalBounds().height - 1 &&
+               platforms.getPlatforms()[1].getPosition().y + platforms.getPlatforms()[1].getGlobalBounds().height > character.getPosition().y + 1){
+                character.velocity.x = move;
+                character.updateVelocity(dt);
+            }
+        }
 
 
 

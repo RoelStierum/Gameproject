@@ -40,6 +40,7 @@
 #define TESTLEVEL_PLATFORM_FILEPATH "Images/game_platform.png"
 #define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
 #define TESTLEVEL_PLATFORM_VERTICAL_FILEPATH "Images/platform_vertical.png"
+#define LEVEL2_FORCEFIELD_FILEPATH "Images/forcefield.png"
 #define FINISH_TIME 1.5f
 #define DOUBLE_JUMP_TIME 10
 
