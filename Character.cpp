@@ -109,8 +109,6 @@ namespace engine{
         run_left1 = texture_run_left1;
         run_left2 = texture_run_left2;
 		sprite.setTexture(texture);
-		width = sprite.getGlobalBounds().width;
-		height = sprite.getGlobalBounds().height;
 	}
 
 	void Character::setPosition(const sf::Vector2f &position_) {
@@ -172,12 +170,12 @@ namespace engine{
 		if(temp.getGlobalBounds().intersects(object.getGlobalBounds())) {
             //rechts
             if (getPosition().x > object.getPosition().x + object.getGlobalBounds().width
-                && getPosition().y + height - 1 >= object.getPosition().y) {
+                && getPosition().y + sprite.getGlobalBounds().height - 1 >= object.getPosition().y) {
                 velocity.x = 0;
             }
                 //links
-            else if (getPosition().x + width < object.getPosition().x
-                     && getPosition().y + height - 1 >= object.getPosition().y) {
+            else if (getPosition().x + sprite.getGlobalBounds().width < object.getPosition().x
+                     && getPosition().y + sprite.getGlobalBounds().width - 1 >= object.getPosition().y) {
                 velocity.x = 0;
             }
                 //onderkant
