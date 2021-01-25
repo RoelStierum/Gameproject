@@ -25,6 +25,9 @@ namespace engine{
         float tijd;
         sf::Text tijdText;
 
+		float _bestTime;
+		sf::Text bestTimeText;
+
 		sf::View InitView;
 
 		sf::Sprite _background;

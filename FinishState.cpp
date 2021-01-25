@@ -4,6 +4,8 @@
 #include "Levels/TestLevel.hpp"
 #include "Levels/Level2.hpp"
 
+#include <fstream>
+
 
 namespace engine{
 
@@ -14,6 +16,48 @@ namespace engine{
 	{}
 
 	void FinishState::Init() {
+		if (lastLevel == 1){
+			std::ifstream readFile1;
+			readFile1.open("Audio/Highscore1.txt");
+			if (readFile1.is_open()){
+				while (!readFile1.eof()){
+					readFile1 >> _bestTime;
+				}
+			}
+			readFile1.close();
+
+			std::ofstream writeFile1;
+			writeFile1.open("Audio/Highscore1.txt");
+			if (writeFile1.is_open()){
+				if (tijd < _bestTime){
+					_bestTime = tijd;
+				}
+				writeFile1 << _bestTime;
+			}
+			writeFile1.close();
+		}
+
+		else if (lastLevel == 2){
+			std::ifstream readFile2;
+			readFile2.open("Audio/Highscore2.txt");
+			if (readFile2.is_open()){
+				while (!readFile2.eof()){
+					readFile2 >> _bestTime;
+				}
+			}
+			readFile2.close();
+
+			std::ofstream writeFile2;
+			writeFile2.open("Audio/Highscore2.txt");
+			if (writeFile2.is_open()){
+				if (tijd < _bestTime){
+					_bestTime = tijd;
+				}
+				writeFile2 << _bestTime;
+			}
+			writeFile2.close();
+		}
+
 		_data->assets.LoadTexture("FinishState Background", BACKGROUND_FINISH_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("FinishState Background"));
 		_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
@@ -36,11 +80,20 @@ namespace engine{
         ///levelTimeTextEnable
         tijdText.setFont(_data->assets.GetFont("RussoOneFont"));
         tijdText.setFillColor(sf::Color::Black);
-        tijdText.setCharacterSize(100);
-        std::string s = std::to_string(tijd);
-        s = s.substr(0,s.size()-4);
-        tijdText.setString(s);
-        tijdText.setPosition(SCREEN_WIDTH/2 - tijdText.getGlobalBounds().width/2 - 10, 50);
+        tijdText.setCharacterSize(90);
+        std::string time = std::to_string(tijd);
+		time = time.substr(0,time.size()-4);
+        tijdText.setString("Your time: " +time);
+        tijdText.setPosition(SCREEN_WIDTH/2 - tijdText.getGlobalBounds().width/2 - 10, 10);
+
+		///levelBestTime
+		bestTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
+		bestTimeText.setFillColor(sf::Color::Black);
+		bestTimeText.setCharacterSize(90);
+		std::string bestTime = std::to_string(_bestTime);
+		bestTime = bestTime.substr(0,bestTime.size()-4);
+		bestTimeText.setString("Best time: " +bestTime);
+		bestTimeText.setPosition(SCREEN_WIDTH/2 - tijdText.getGlobalBounds().width/2 - 10, 100);
 	}
 
 	void FinishState::HandleInput() {
@@ -80,6 +133,7 @@ namespace engine{
 		}
 		_data->renderWindow.draw(_menu);
 		_data->renderWindow.draw(tijdText);
+		_data->renderWindow.draw(bestTimeText);
 		_data->renderWindow.display();
 	}
 }
