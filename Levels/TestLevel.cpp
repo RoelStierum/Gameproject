@@ -38,7 +38,7 @@ namespace engine{
 	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(10060,270);
-        flag.setPosition(400,400); //Debug flag placement
+        //flag.setPosition(400,400); //Debug flag placement
 
 
         ///Background Initializer

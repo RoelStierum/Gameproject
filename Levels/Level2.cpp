@@ -27,8 +27,7 @@ namespace engine{
         ///flag
         _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(8060,290);
-        flag.setPosition(400,400); //Debug flag placement
+        flag.setPosition(4100,400-flag.getGlobalBounds().height); //Debug flag placement
 
         ///Background Initializer
         _data->assets.LoadTexture("Level2 Background", TESTLEVEL_BACKGROUND_FILEPATH);
@@ -50,9 +49,21 @@ namespace engine{
                 _data->assets.GetTexture("Level2 Platform 2"),
                 sf::Vector2f{50,400}
         );
-        platforms.addPlatform( //starting
+        platforms.addPlatform( //moving
+                _data->assets.GetTexture("Level2 Platform"),
+                moving_platform_start
+        );
+        platforms.addPlatform( //wall
+                _data->assets.GetTexture("Level2 Platform Vertical"),
+                sf::Vector2f{3000,200}
+        );
+        platforms.addPlatform( //wall pre jump
                 _data->assets.GetTexture("Level2 Platform 2"),
-                sf::Vector2f{250,400}
+                sf::Vector2f{2700,300}
+        );
+        platforms.addPlatform( //end
+                _data->assets.GetTexture("Level2 Platform 2"),
+                sf::Vector2f{4000,400}
         );
 
         ///Character Initializer
@@ -113,9 +124,18 @@ namespace engine{
     }
 
     void Level2::Update(float dt) {
+        ///Start moving platform
+        if(move == 0 && character.getPosition().x + character.width/2 > 350){
+            move = 200;
+        }
+
         ///TEST
         sf::Vector2f pos = platforms.getPlatforms()[1].getPosition();
-        platforms.getPlatforms()[1].setPosition(pos.x+(100*dt),pos.y);
+        if((pos.x + platforms.getPlatforms()[1].getGlobalBounds().width >= 4000 && move > 0) || (pos.x < 250 && move < 0)){
+            move = move * -1;
+        }
+        platforms.getPlatforms()[1].setPosition(pos.x+(move*dt),pos.y);
+
 
 
         ///Finish
@@ -227,6 +247,8 @@ namespace engine{
     void Level2::restart(){
         character.respawn(start);
         levelTime.restart();
+        move = 0;
+        platforms.getPlatforms()[1].setPosition(moving_platform_start);
         tijd = 0;
     }
 

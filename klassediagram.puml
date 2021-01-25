@@ -53,21 +53,111 @@ class TestLevel{
 }
 
 class State{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 class Game{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 class Platform{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 class StateMachine{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 class InputManager{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 class AssetManager{
++float gravity = 25.0f;
++sf::Vector2f start = {100,-200};
++TestLevel(GameDataRef data);
++void Init();
++void HandleInput();
++void Update(float dt);
++void Draw(float dt);
+-GameDataRef _data;
+-sf::Sprite _background;
+-sf::View CameraPosition;
+-float cameraX, cameraY = 0;
+-Platform platforms = {_data};
+-Character character;
+-void characterEndgeOfScreen(const Character& character_, const float& dt);
+
 }
 
 TestLevel <|-- Character
