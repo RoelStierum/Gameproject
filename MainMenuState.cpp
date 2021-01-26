@@ -1,4 +1,5 @@
 #include "MainMenuState.hpp"
+#include "controlState.hpp"
 #include "Levels/TestLevel.hpp"
 #include "Levels/Level2.hpp"
 #include "DEFINITIONS.hpp"
@@ -32,6 +33,10 @@ namespace engine{
 		//_play_button.setScale(2,2);
 		_quit_button.setPosition(SCREEN_WIDTH/2 - 100 - _quit_button.getGlobalBounds().width, _quit_button.getGlobalBounds().height*2.5);
 
+        _data->assets.LoadTexture("InstructionsButton", INSTRUCTIONS_BUTTON);
+        _instructions_button.setTexture(_data->assets.GetTexture("InstructionsButton"));
+        _instructions_button.setPosition(SCREEN_WIDTH/2 - 220, _instructions_button.getGlobalBounds().height*5.5);
+
 
 		_data->assets.LoadTexture("Unmute", UNMUTE_FILEPATH);
 		_data->assets.LoadTexture("Mute", MUTE_FILEPATH);
@@ -61,6 +66,11 @@ namespace engine{
                 _data->sound._clickSound.play();
 				_data->renderWindow.close();
 			}
+            if(_data->input.IsSpriteClicked(_instructions_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
+                _data->sound._clickSound.play();
+                _data->machine.AddState(StateRef(new ControlState(_data)), true);
+
+            }
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) &&
@@ -102,6 +112,7 @@ namespace engine{
         _data->renderWindow.draw(_title);
         _data->renderWindow.draw(_play_button);
 		_data->renderWindow.draw(_quit_button);
+        _data->renderWindow.draw(_instructions_button);
 		_data->renderWindow.draw(muteSprite);
         _data->renderWindow.display();
     }
