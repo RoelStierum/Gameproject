@@ -35,6 +35,10 @@ namespace engine{
 		sf::Sprite _quit;
 		sf::Sprite _menu;
 
+		bool _hoverNextLevel = false;
+		bool _hoverQuit = false;
+		bool _hoverMainMenu = false;
+
 		int lastLevel = 0;
 	};
 

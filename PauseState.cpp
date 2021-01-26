@@ -25,10 +25,12 @@ namespace engine{
 		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 200);
 
         _data->assets.LoadTexture("PauseStateResumeButton", PAUSE_RESUME_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("PauseStateResumeButtonHover", PAUSE_RESUME_BUTTON_HOVER_FILEPATH);
 		_resume.setTexture(_data->assets.GetTexture("PauseStateResumeButton"));
 		_resume.setPosition(SCREEN_WIDTH/2 - _resume.getGlobalBounds().width/2, 350);
 
         _data->assets.LoadTexture("PauseStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("PauseStateMainMenuButtonHover", PAUSE_MAIN_MENU_BUTTON_HOVER_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButton"));
 		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
 	}
@@ -40,6 +42,34 @@ namespace engine{
 			if(sf::Event::Closed == event.type){
 				_data->renderWindow.close();
 			}
+		}
+
+
+		if(_data->input.HoverOverButton(_quit, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverQuit){
+			_hoverQuit = true;
+			_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButtonHover"));
+		}
+		else if(!_data->input.HoverOverButton(_quit, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverQuit){
+			_hoverQuit = false;
+			_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
+		}
+
+		if(_data->input.HoverOverButton(_resume, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverResume){
+			_hoverResume = true;
+			_resume.setTexture(_data->assets.GetTexture("PauseStateResumeButtonHover"));
+		}
+		else if(!_data->input.HoverOverButton(_resume, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverResume){
+			_hoverResume = false;
+			_resume.setTexture(_data->assets.GetTexture("PauseStateResumeButton"));
+		}
+
+		if(_data->input.HoverOverButton(_menu, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverMainMenu){
+			_hoverMainMenu = true;
+			_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButtonHover"));
+		}
+		else if(!_data->input.HoverOverButton(_menu, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverMainMenu){
+			_hoverMainMenu = false;
+			_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButton"));
 		}
 
 		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
