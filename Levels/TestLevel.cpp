@@ -382,6 +382,7 @@ namespace engine{
         powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
         levelTime.restart();
         tijd = 0;
+        doubleJumpTijd = 0;
 	}
 
 	void TestLevel::characterEdgeOfScreen(const Character &character_, const float& dt) {
