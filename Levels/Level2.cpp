@@ -182,7 +182,7 @@ namespace engine{
 
         ///TEST
         sf::Vector2f pos = platforms.getPlatforms()[1].getPosition();
-        if((pos.x + platforms.getPlatforms()[1].getGlobalBounds().width >= 3800 && move > 0) || (pos.x < 250 && move < 0)){
+        if((pos.x + platforms.getPlatforms()[1].getGlobalBounds().width >= 3700 && move > 0) || (pos.x < 250 && move < 0)){
             move = move * -1;
         }
         platforms.getPlatforms()[1].setPosition(pos.x+(move*dt),pos.y);

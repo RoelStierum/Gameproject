@@ -16,47 +16,31 @@ namespace engine{
 	{}
 
 	void FinishState::Init() {
-		if (lastLevel == 1){
-			std::ifstream readFile1;
-			readFile1.open("Audio/Highscore1.txt");
-			if (readFile1.is_open()){
-				while (!readFile1.eof()){
-					readFile1 >> _bestTime;
-				}
-			}
-			readFile1.close();
+	    //Make file name
+	    std::string file = "Audio/Highscore";
+        file += std::to_string(lastLevel);
+        file += ".txt";
 
-			std::ofstream writeFile1;
-			writeFile1.open("Audio/Highscore1.txt");
-			if (writeFile1.is_open()){
-				if (tijd < _bestTime){
-					_bestTime = tijd;
-				}
-				writeFile1 << _bestTime;
-			}
-			writeFile1.close();
-		}
+        //Read File
+        std::ifstream readFile;
+        readFile.open(file);
+        if (readFile.is_open()){
+            while (!readFile.eof()){
+                readFile >> _bestTime;
+            }
+        }
+        readFile.close();
 
-		else if (lastLevel == 2){
-			std::ifstream readFile2;
-			readFile2.open("Audio/Highscore2.txt");
-			if (readFile2.is_open()){
-				while (!readFile2.eof()){
-					readFile2 >> _bestTime;
-				}
-			}
-			readFile2.close();
-
-			std::ofstream writeFile2;
-			writeFile2.open("Audio/Highscore2.txt");
-			if (writeFile2.is_open()){
-				if (tijd < _bestTime){
-					_bestTime = tijd;
-				}
-				writeFile2 << _bestTime;
-			}
-			writeFile2.close();
-		}
+        //Write file
+        if (tijd < _bestTime){
+            _bestTime = tijd;
+            std::ofstream writeFile;
+            writeFile.open(file);
+            if (writeFile.is_open()){
+                writeFile << _bestTime;
+            }
+            writeFile.close();
+        }
 
 		_data->assets.LoadTexture("FinishState Background", BACKGROUND_FINISH_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("FinishState Background"));

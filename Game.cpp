@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "SplashState.hpp"
 #include <SFML/Window.hpp>
+#include <fstream>
 
 namespace engine{
 
@@ -19,6 +20,20 @@ namespace engine{
 		}catch (const std::exception& e){
         	// nothing
         }
+
+        //game highscore files
+        for(int i = 1; i <= LEVEL_AMOUNT; i++){
+            std::string file = "Audio/Highscore";
+            file += std::to_string(i);
+            file += ".txt";
+            std::ifstream readFile(file);
+            if(!readFile.good()){
+                std::ofstream writeFile(file);
+                writeFile << std::to_string(10000000000.0);
+                writeFile.close();
+            }readFile.close();
+        }
+
         run();
     }
 
