@@ -15,8 +15,7 @@ namespace engine{
 
 		void HandleInput();
 
-		void Update(float dt) {
-		}
+		void Update(float dt) {}
 
 		void Draw(float dt);
 

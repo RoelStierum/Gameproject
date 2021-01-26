@@ -44,4 +44,16 @@ namespace engine{
         return _states.top();
     }
 
+    int StateMachine::state_size() {
+        return _states.size();
+    }
+
+    void StateMachine::clean_states() {
+        if(!_states.empty()){
+            StateRef ns = std::move(_states.top());
+            _states = std::stack<StateRef>{};
+            _states.push(std::move(ns));
+        }
+    }
+
 }
