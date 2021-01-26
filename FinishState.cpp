@@ -72,7 +72,7 @@ namespace engine{
 			std::string bestTime = std::to_string(_bestTime);
 			bestTime = bestTime.substr(0, bestTime.size() - 4);
 			bestTimeText.setString("Previous best time: " + bestTime);
-			bestTimeText.setPosition(SCREEN_WIDTH / 2 - tijdText.getGlobalBounds().width / 2 - 70, 100);
+			bestTimeText.setPosition(SCREEN_WIDTH / 2 - tijdText.getGlobalBounds().width / 2 - 90, 100);
 			_bestTime = tijd;
 			std::ofstream writeFile;
 			writeFile.open(file);
