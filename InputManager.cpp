@@ -13,6 +13,14 @@ namespace engine{
         return false;
     }
 
+	bool InputManager::HoverOverButton(sf::Sprite object, sf::RenderWindow &renderWindow){
+			sf::IntRect temp_rect(object.getPosition().x, object.getPosition().y, object.getGlobalBounds().width, object.getGlobalBounds().height);
+			if(temp_rect.contains(sf::Mouse::getPosition(renderWindow))){
+				return true;
+			}
+		return false;
+	}
+
     sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow& renderWindow){
         return sf::Mouse::getPosition(renderWindow);
     }

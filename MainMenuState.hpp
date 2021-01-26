@@ -25,10 +25,16 @@ namespace engine{
         sf::Sprite _title;
         sf::Sprite _play_button;
 		sf::Sprite _quit_button;
+		sf::Sprite _instructions_button;
+
 
 		sf::Sprite muteSprite;
 		bool mute = false;
         bool mouse = false;
+
+		bool _hoverPlay = false;
+		bool _hoverQuit = false;
+		bool _hoverInstructions = false;
     };
 
 }
