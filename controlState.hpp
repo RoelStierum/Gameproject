@@ -24,6 +24,9 @@ namespace engine{
         sf::Sprite _background;
         sf::Sprite _instructions;
         sf::Sprite _menu;
+
+        bool _hoverBack = false;
+
     };
 
 }

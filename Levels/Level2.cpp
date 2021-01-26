@@ -27,9 +27,11 @@ namespace engine{
         ///flag
         _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(3800,400-flag.getGlobalBounds().height); //Debug flag placement
+        flag.setPosition(3800,400-flag.getGlobalBounds().height);
+		//flag.setPosition(400,400); //Debug flag placement
 
-        ///Background Initializer
+
+		///Background Initializer
         _data->assets.LoadTexture("Level2 Background", TESTLEVEL_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("Level2 Background"));
         //_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);

@@ -19,16 +19,16 @@
 #define MAIN_MENU_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 #define MAIN_MENU_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
 
-#define MAIN_MENU_INSTRUCTIONS_BUTTON_FILEPATH "Images/game_instructions_button.png"
-#define MAIN_MENU_INSTRUCTIONS_BUTTON_HOVER_FILEPATH "Images/game_instructions_button_hover.png"
 
 #define MUTE_FILEPATH "Images/soundMute.png"
 #define UNMUTE_FILEPATH "Images/soundUnMute.png"
 
 //instructions
 #define INSTRUCTIONS_BUTTON "Images/instructions_title.png"
+#define INSTRUCTIONS_BUTTON_HOVER "Images/instructions_title_hover.png"
 #define INSTRUCTIONS "Images/instructions.png"
 #define BACK_BUTTON "Images/back_button.png"
+#define BACK_BUTTON_HOVER "Images/back_button_hover.png"
 
 //Sound
 #define JUMP_SOUND_FILEPATH "Audio/jump.wav"
@@ -48,6 +48,7 @@
 
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
+#define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define TESTLEVEL_PLATFORM_FILEPATH "Images/game_platform.png"
 #define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
 #define TESTLEVEL_PLATFORM_VERTICAL_FILEPATH "Images/platform_vertical.png"
@@ -64,20 +65,24 @@
 #define CHARACTER_RUN_LEFT2_FILEPATH "Images/run_left2.png"
 
 //PauseState
-#define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PAUSE_BACKGROUND_FILEPATH "Images/game_background.png"
 #define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
 #define PAUSE_RESUME_BUTTON_FILEPATH "Images/resume_button.png"
 #define PAUSE_RESUME_BUTTON_HOVER_FILEPATH "Images/resume_button_hover.png"
 #define PAUSE_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
 #define PAUSE_MAIN_MENU_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
+#define PAUSE_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
+#define PAUSE_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
 
-
-//EndScreen
+//FinishState
+#define BACKGROUND_FINISH_FILEPATH "Images/wallpaperfinish.jpg"
 #define END_NEXT_LEVEL_BUTTON_FILEPATH "Images/next_level_button.png"
 #define END_NEXT_LEVEL_BUTTON_HOVER_FILEPATH "Images/next_level_button_hover.png"
+#define FINISH_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
+#define FINISH_MAIN_MENU_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
+#define FINISH_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
+#define FINISH_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
 
-#define BACKGROUND_FINISH_FILEPATH "Images/wallpaperfinish.jpg"
 
 //Objects
 #define DOUBLEJUMP_FILEPATH "Images/doublejump.png"

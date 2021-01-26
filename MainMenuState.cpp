@@ -35,9 +35,9 @@ namespace engine{
 		_quit_button.setPosition(SCREEN_WIDTH/2 - 100 - _quit_button.getGlobalBounds().width, _quit_button.getGlobalBounds().height*2.5);
 
 
-        _data->assets.LoadTexture("InstructionsButton", INSTRUCTIONS_BUTTON);
-        _data->assets.LoadTexture("InstructionsButtonHover", INSTRUCTIONS_BUTTON);
-        _instructions_button.setTexture(_data->assets.GetTexture("InstructionsButton"));
+        _data->assets.LoadTexture("MainMenuInstructionsButton", INSTRUCTIONS_BUTTON);
+        _data->assets.LoadTexture("MainMenuInstructionsButtonHover", INSTRUCTIONS_BUTTON_HOVER);
+        _instructions_button.setTexture(_data->assets.GetTexture("MainMenuInstructionsButton"));
         _instructions_button.setPosition(SCREEN_WIDTH/2 - 220, _instructions_button.getGlobalBounds().height*5.5);
       
 
@@ -80,16 +80,16 @@ namespace engine{
 				_hoverQuit = false;
 				_quit_button.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
 			}
-			/*
+
 			if(_data->input.HoverOverButton(_instructions_button, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverInstructions){
 				_hoverInstructions = true;
-				_instructions_button.setTexture(_data->assets.GetTexture("MainMenuInstructionsButton"));
+				_instructions_button.setTexture(_data->assets.GetTexture("MainMenuInstructionsButtonHover"));
 			}
 			else if(!_data->input.HoverOverButton(_instructions_button, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverInstructions){
 				_hoverInstructions = false;
-				_instructions_button.setTexture(_data->assets.GetTexture("MainMenuInstructionsButtonHover"));
+				_instructions_button.setTexture(_data->assets.GetTexture("MainMenuInstructionsButton"));
 			}
-			*/
+
             if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
                 _data->sound._clickSound.play();
 				_data->machine.AddState( StateRef( new TestLevel(_data)), true);

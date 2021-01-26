@@ -20,8 +20,9 @@ namespace engine{
 		_paused.setTexture(_data->assets.GetTexture("PauseState Paused"));
 		_paused.setPosition(SCREEN_WIDTH/2 - _paused.getGlobalBounds().width/2, 0);
 
-		//kan fout gaan als het niet geladen is. moet een bool zijn om te checken of de texture geladen is
-		_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
+		_data->assets.LoadTexture("PauseQuitButton", PAUSE_QUIT_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("PauseQuitButtonHover", PAUSE_QUIT_BUTTON_HOVER_FILEPATH);
+		_quit.setTexture(_data->assets.GetTexture("PauseQuitButton"));
 		_quit.setPosition(SCREEN_WIDTH/2 - _quit.getGlobalBounds().width/2, 200);
 
         _data->assets.LoadTexture("PauseStateResumeButton", PAUSE_RESUME_BUTTON_FILEPATH);
@@ -47,11 +48,11 @@ namespace engine{
 
 		if(_data->input.HoverOverButton(_quit, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverQuit){
 			_hoverQuit = true;
-			_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButtonHover"));
+			_quit.setTexture(_data->assets.GetTexture("PauseQuitButtonHover"));
 		}
 		else if(!_data->input.HoverOverButton(_quit, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverQuit){
 			_hoverQuit = false;
-			_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButton"));
+			_quit.setTexture(_data->assets.GetTexture("PauseQuitButton"));
 		}
 
 		if(_data->input.HoverOverButton(_resume, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverResume){
