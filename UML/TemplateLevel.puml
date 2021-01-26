@@ -1,0 +1,40 @@
+@startuml
+
+skinparam class{
+    BorderColor black
+    BackgroundColor #a3a3a3
+}
+
+class TemplateLevel{
+    +float gravity = 1500; //25.0f;
+    +sf::Vector2f start = {100,-200};
+
+    -GameDataRef _data;
+    -sf::Sprite _background;
+    -sf::View CameraPosition;
+    -float cameraX, cameraY = 0;
+    -Platform platforms = {_data};
+    -sf::Sprite flag;
+    -sf::Clock clockFinish;
+    -bool finished = false;
+    -Character character;
+    -sf::Sprite pauseButton;
+    -sf::Clock levelTime;
+    -sf::Text levelTimeText;
+    -float tijd = 0;
+    -int levelNumber = 0;
+
+
+    +TemplateLevel(GameDataRef data);
+    +void Init() override;
+    +void HandleInput() override;
+    +void Update(float dt) override;
+    +void Draw(float dt) override;
+    +void Pause() override;
+    +void Resume() override;
+    +void restart();
+
+    -void characterEdgeOfScreen(const Character& character_, const float& dt);
+}
+
+@enduml

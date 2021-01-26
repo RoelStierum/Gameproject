@@ -17,8 +17,6 @@ namespace engine {
 
 		SoundManager();
 
-		~SoundManager() {}
-
         void setVolume();
 
         void mute();

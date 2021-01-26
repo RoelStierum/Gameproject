@@ -50,6 +50,7 @@ namespace engine{
 		sf::Sprite flag;
 		sf::Clock clockFinish;
 		sf::Clock doubleJumpTime;
+        float doubleJumpTijd = 0;
 		bool doubleJumpTimeEnable = false;
 		bool finished = false;
 

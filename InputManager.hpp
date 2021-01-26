@@ -6,10 +6,6 @@ namespace engine{
 
     class InputManager {
     public:
-        InputManager() {}
-
-        ~InputManager() {}
-
         bool IsSpriteClicked(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow &renderWindow);
 		bool HoverOverButton(sf::Sprite object, sf::RenderWindow &renderWindow);
 

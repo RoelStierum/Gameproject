@@ -254,7 +254,6 @@ namespace engine{
             std::string s = std::to_string(tijd);
             s = s.substr(0,s.size()-4);
             levelTimeText.setString(s);
-            std::cout << tijd << std::endl;
 		}
 
 
@@ -265,14 +264,16 @@ namespace engine{
 		}
 
         ///DoubleJumpTimer
-		if(doubleJumpTime.getElapsedTime().asSeconds() >= DOUBLE_JUMP_TIME && doubleJumpTimeEnable){
+		if(doubleJumpTime.getElapsedTime().asSeconds() + doubleJumpTijd >= DOUBLE_JUMP_TIME && doubleJumpTimeEnable){
 			character.max_jump = 1;
             doubleJumpTimeTextEnable = false;
             doubleJumpEnableText = false;
             doubleJumpTimeEnable= false;
 		}
 		if(doubleJumpTimeTextEnable){
-            doubleJumpTimeText.setString(std::to_string(DOUBLE_JUMP_TIME-int(doubleJumpTime.getElapsedTime().asSeconds())));
+            std::string s = std::to_string(DOUBLE_JUMP_TIME - (doubleJumpTime.getElapsedTime().asSeconds() + doubleJumpTijd));
+            s = s.substr(0,s.size()-5);
+            doubleJumpTimeText.setString(s);
             doubleJumpTimeText.setPosition(cameraX + SCREEN_WIDTH/2 - doubleJumpTimeText.getGlobalBounds().width/2,10);
         }
 
@@ -381,6 +382,7 @@ namespace engine{
         powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
         levelTime.restart();
         tijd = 0;
+        doubleJumpTijd = 0;
 	}
 
 	void TestLevel::characterEdgeOfScreen(const Character &character_, const float& dt) {
@@ -397,10 +399,12 @@ namespace engine{
     void TestLevel::Resume() {
         _data->sound.BackGroundMusic.play();
         levelTime.restart();
+        doubleJumpTime.restart();
     }
 
     void TestLevel::Pause() {
 	    tijd += levelTime.getElapsedTime().asSeconds();
+	    doubleJumpTijd += doubleJumpTime.getElapsedTime().asSeconds();
         _data->sound.BackGroundMusic.pause();
         _data->sound._clickSound.play();
     }

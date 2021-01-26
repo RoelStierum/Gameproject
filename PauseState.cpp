@@ -44,6 +44,7 @@ namespace engine{
 			}
 		}
 
+
 		if(_data->input.HoverOverButton(_quit, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverQuit){
 			_hoverQuit = true;
 			_quit.setTexture(_data->assets.GetTexture("MainMenuQuitButtonHover"));
@@ -71,12 +72,12 @@ namespace engine{
 			_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButton"));
 		}
 
-		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow)){
+		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
 			_data->renderWindow.close();
 		}
 
-		if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow)){
+		if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
 			_data->machine.AddState( StateRef( new MainMenuState(_data)), true);
 			_data->machine.clean_states();
@@ -84,7 +85,7 @@ namespace engine{
 
 		//if E or sprite press resume
 		if((sf::Keyboard::isKeyPressed(sf::Keyboard::E) ||
-			_data->input.IsSpriteClicked(_resume, sf::Mouse::Left, _data->renderWindow)) &&
+			_data->input.IsSpriteClicked(_resume, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) &&
             _data->renderWindow.hasFocus()){
             _data->sound._clickSound.play();
 			_data->machine.RemoveState();

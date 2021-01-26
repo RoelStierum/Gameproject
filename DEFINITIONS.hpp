@@ -25,6 +25,11 @@
 #define MUTE_FILEPATH "Images/soundMute.png"
 #define UNMUTE_FILEPATH "Images/soundUnMute.png"
 
+//instructions
+#define INSTRUCTIONS_BUTTON "Images/instructions_title.png"
+#define INSTRUCTIONS "Images/instructions.png"
+#define BACK_BUTTON "Images/back_button.png"
+
 //Sound
 #define JUMP_SOUND_FILEPATH "Audio/jump.wav"
 #define JUMP_SOUND_VOLUME 10
@@ -35,7 +40,7 @@
 #define WIN_SOUND_FILEPATH "Audio/win1.wav"
 #define WIN_SOUND_VOLUME 100
 #define POWERUP_SOUND_FILEPATH "Audio/powerup.wav"
-#define POWERUP_SOUND_VOLUME 20
+#define POWERUP_SOUND_VOLUME 40
 
 //Music
 #define MUSIC_FILEPATH "Audio/music.ogg"

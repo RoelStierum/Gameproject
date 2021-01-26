@@ -11,9 +11,6 @@ namespace engine{
 
     class StateMachine{
     public:
-        StateMachine(){}
-        ~StateMachine(){}
-
         void AddState(StateRef newState, bool IsReplacing = true);
         void RemoveState();
 
@@ -21,17 +18,9 @@ namespace engine{
 
         StateRef& GetActiveState();
 
-        int state_size(){
-        	return _states.size();
-        }
+        int state_size();
 
-        void clean_states(){
-        	if(!_states.empty()){
-				StateRef ns = std::move(_states.top());
-				_states = std::stack<StateRef>{};
-				_states.push(std::move(ns));
-        	}
-        }
+        void clean_states();
 
     private:
         std::stack<StateRef> _states;

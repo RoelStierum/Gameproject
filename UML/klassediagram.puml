@@ -1,0 +1,259 @@
+@startuml
+skinparam dpi 1000
+
+skinparam class{
+    BorderColor black
+    BackgroundColor #a3a3a3
+}
+skinparam ArrowColor black
+
+
+class Character{
+    -GameDataRef _data;
+    -sf::Sprite sprite;
+    -sf::Vector2f position;
+    -sf::Texture texture;
+    -sf::Texture texture_flip;
+    -sf::Texture run_right1;
+    -sf::Texture run_right2;
+    -sf::Texture run_left1;
+    -sf::Texture run_left2;
+    -bool flip = false;
+    -sf::Clock animationClock;
+    -int animationRun = 0;
+    -bool air_texture = false;
+
+    +sf::Vector2f velocity = {0,0};
+    +float speed = 400.0f;
+    +float jump_speed = 600.0f;
+    +float slow_down = 0.0f, slow_down_ground = 40.0f, slow_down_air = 5.0f;
+    +float speed_up = 0.0f, speed_up_ground = 40.0f, speed_up_air = 30.0f;
+    +int max_jump =1, jump = 0;
+    +bool jump_done = false, on_ground = false;
+
+
+    -void flipTexture();
+
+    +Character(GameDataRef data);
+    +void update();
+    +void setTexture(6 Textures);
+    +void setPosition(const sf::Vector2f& position_);
+    +void setPosition(const float& x, const float& y);
+    +sf::Vector2f getPosition();
+    +void draw(sf::RenderWindow& renderWindow);
+    +void move(sf::Vector2f movement);
+    +void move(const float& x, const float& y);
+    +sf::Vector2f nextPosition(sf::Vector2f movement);
+    +sf::Sprite nextSprite(sf::Vector2f movement);
+    +sf::Sprite& getSprite();
+    +bool objectCollisionAndFalling(const sf::Sprite &object, const float& dt);
+    +void updateVelocity(const float& dt);
+    +void respawn(sf::Vector2f spawn);
+    +void characterKeyboardInput();
+}
+
+class TemplateLevel{
+    +float gravity = 1500; //25.0f;
+    +sf::Vector2f start = {100,-200};
+
+    -GameDataRef _data;
+    -sf::Sprite _background;
+    -sf::View CameraPosition;
+    -float cameraX, cameraY = 0;
+    -Platform platforms = {_data};
+    -sf::Sprite flag;
+    -sf::Clock clockFinish;
+    -bool finished = false;
+    -Character character;
+    -sf::Sprite pauseButton;
+    -sf::Clock levelTime;
+    -sf::Text levelTimeText;
+    -float tijd = 0;
+    -int levelNumber = 0;
+
+
+    +TemplateLevel(GameDataRef data);
+    +void Init() override;
+    +void HandleInput() override;
+    +void Update(float dt) override;
+    +void Draw(float dt) override;
+    +void Pause() override;
+    +void Resume() override;
+    +void restart();
+
+    -void characterEdgeOfScreen(const Character& character_, const float& dt);
+}
+
+class GameData <<struct>>{
+        +StateMachine machine;
+        +sf::RenderWindow renderWindow;
+        +AssetManager assets;
+        +InputManager input;
+        +SoundManager sound;
+}
+
+abstract class State{
+    +virtual void Init()=0;
+    +virtual void HandleInput()=0;
+    +virtual void Update(float dt)=0;
+    +virtual void Draw(float dt)=0;
+    +virtual void Pause(){}
+    +virtual void Resume(){}
+}
+
+class StateMachine{
+    +void AddState(StateRef newState, bool IsReplacing = true);
+    +void RemoveState();
+    +void ProcessStateChanges();
+    +StateRef& GetActiveState();
+    +int state_size();
+    +void clean_states();
+
+
+    -std::stack<StateRef> _states;
+    -StateRef _newState;
+    -bool _isRemoving;
+    -bool _isAdding;
+    -bool _isReplacing;
+}
+
+class Game{
+    -const float dt = 1.0f / FPS; //60 fps
+    -const float dt60 = 1.0f / 60; //60 fps
+    -sf::Clock _clock;
+
+
+    +Game(unsigned int width, unsigned int height, std::string title);
+
+    -GameDataRef _data = std::make_shared<GameData>();
+    -void run();
+}
+
+class Platform{
+    +Platform(GameDataRef data);
+    +void addPlatform(sf::Texture& texture, const sf::Vector2f& position);
+    +std::vector<sf::Sprite>& getPlatforms();
+    +void draw();
+
+    -GameDataRef _data;
+    -std::vector<sf::Sprite> platformSprites;
+}
+
+class InputManager{
+    +bool IsSpriteClicked(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow &renderWindow);
+    +sf::Vector2i GetMousePosition(sf::RenderWindow& renderWindow);
+}
+
+class AssetManager{
+    -std::map<std::string, sf::Texture> _textures;
+    -std::map<std::string, sf::Font> _font;
+
+    +void LoadTexture(std::string name, std::string fileName);
+    +sf::Texture& GetTexture(std::string name);
+
+    +void LoadFont(std::string name, std::string fileName);
+    +sf::Font& GetFont(std::string name);
+}
+
+class FinishState{
+    +FinishState(GameDataRef data, const float& tijd, const int& levelNumber);
+    +void Init();
+    +void HandleInput();
+    +void Update(float dt) {}
+    +void Draw(float dt);
+
+    -GameDataRef _data;
+    -float tijd;
+    -sf::Text tijdText;
+    -float _bestTime;
+    -sf::Text bestTimeText;
+    -sf::View InitView;
+    -sf::Sprite _background;
+    -sf::Sprite _play_next_level;
+    -sf::Sprite _quit;
+    -sf::Sprite _menu;
+    -int lastLevel = 0;
+}
+
+class MainMenuState{
+    +MainMenuState(GameDataRef data);
+    +void Init();
+    +void HandleInput();
+    +void Update(float dt);
+    +void Draw(float dt);
+
+
+    -GameDataRef _data;
+    -sf::Texture _backgroundTexture;
+    -sf::Sprite _background;
+    -sf::Sprite _title;
+    -sf::Sprite _play_button;
+    -sf::Sprite _quit_button;
+    -sf::Sprite muteSprite;
+    -bool mute = false;
+    -bool mouse = false;
+}
+
+class PauseState{
+    +PauseState(GameDataRef data);
+    +void Init();
+    +void HandleInput();
+    +void Update(float dt) {}
+    +void Draw(float dt);
+
+    -GameDataRef _data;
+    -sf::View InitView;
+    -sf::Sprite _background;
+    -sf::Sprite _paused;
+    -sf::Sprite _resume;
+    -sf::Sprite _quit;
+    -sf::Sprite _menu;
+}
+
+class SoundManager{
+    +sf::Sound _jumpSound;
+    +sf::Sound _deathSound;
+    +sf::Sound _coinSound;
+    +sf::Sound _clickSound;
+    +sf::Sound _winSound;
+    +sf::Music BackGroundMusic;
+
+    -sf::SoundBuffer _jumpSoundBuffer;
+    -sf::SoundBuffer _deathSoundBuffer;
+    -sf::SoundBuffer _coinSoundBuffer;
+    -sf::SoundBuffer _clickSoundBuffer;
+    -sf::SoundBuffer _winSoundBuffer;
+
+
+    +SoundManager();
+    +void setVolume();
+    +void mute();
+
+    -void CheckSoundLoading();
+    -void SetSoundBuffers();
+}
+
+class SplashScreen{
+    -GameDataRef _data;
+    -sf::Clock _clock;
+    -sf::Texture _backgroundTexture;
+    -sf::Sprite _background;
+
+
+    +SplashState(GameDataRef data);
+    +void Init();
+    +void HandleInput();
+    +void Update(float dt);
+    +void Draw(float dt);
+}
+
+GameData --> Game
+GameData --> PauseState
+GameData --> Character
+GameData --> FinishState
+GameData --> TemplateLevel
+GameData --> MainMenuState
+GameData --> Platform
+
+
+@enduml

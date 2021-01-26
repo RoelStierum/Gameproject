@@ -7,9 +7,6 @@ namespace engine{
 
     class AssetManager{
     public:
-        AssetManager(){}
-        ~AssetManager(){}
-
         void LoadTexture(std::string name, std::string fileName);
         sf::Texture& GetTexture(std::string name);
 
