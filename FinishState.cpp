@@ -17,7 +17,7 @@ namespace engine{
 
 	void FinishState::Init() {
 	    //Make file name
-	    std::string file = "Audio/Highscore";
+	    std::string file = HIGHSCORE_FILENAME;
         file += std::to_string(lastLevel);
         file += ".txt";
 

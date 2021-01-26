@@ -49,7 +49,7 @@ class TestLevel{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 }
 
 class State{
@@ -66,7 +66,7 @@ class State{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 
@@ -84,7 +84,7 @@ class Game{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 
@@ -102,7 +102,7 @@ class Platform{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 
@@ -120,7 +120,7 @@ class StateMachine{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 
@@ -138,7 +138,7 @@ class InputManager{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 
@@ -156,7 +156,7 @@ class AssetManager{
 -float cameraX, cameraY = 0;
 -Platform platforms = {_data};
 -Character character;
--void characterEndgeOfScreen(const Character& character_, const float& dt);
+-void characterEdgeOfScreen(const Character& character_, const float& dt);
 
 }
 

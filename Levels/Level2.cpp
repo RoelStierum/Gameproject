@@ -252,7 +252,7 @@ namespace engine{
             character.speed_up = character.speed_up_ground;
         }
 
-        characterEndgeOfScreen(character, dt);
+        characterEdgeOfScreen(character, dt);
 
         character.updateVelocity(dt);
 
@@ -318,7 +318,7 @@ namespace engine{
         tijd = 0;
     }
 
-    void Level2::characterEndgeOfScreen(const Character &character_, const float& dt) {
+    void Level2::characterEdgeOfScreen(const Character &character_, const float& dt) {
         //links
         if(character.nextPosition(character.velocity * dt).x < _background.getPosition().x){
             character.velocity.x = 0;

@@ -23,7 +23,7 @@ namespace engine{
 
         //game highscore files
         for(int i = 1; i <= LEVEL_AMOUNT; i++){
-            std::string file = "Audio/Highscore";
+            std::string file = HIGHSCORE_FILENAME;
             file += std::to_string(i);
             file += ".txt";
             std::ifstream readFile(file);

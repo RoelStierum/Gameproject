@@ -57,7 +57,7 @@ namespace engine{
 
         int levelNumber = 2;
 
-        void characterEndgeOfScreen(const Character& character_, const float& dt);
+        void characterEdgeOfScreen(const Character& character_, const float& dt);
 
     };
 
