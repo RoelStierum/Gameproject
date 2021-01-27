@@ -238,7 +238,7 @@ namespace engine{
 	    //powerUp Collision with character
 	    if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
             doubleJumpTimeEnable = true;
-	        _data->sound._coinSound.play();
+	        _data->sound._powerupSound.play();
 	        character.max_jump = 2;
 	        powerUp.setPosition(powerUp.getPosition().x, 1000);
             doubleJumpEnableText = true;
@@ -248,8 +248,8 @@ namespace engine{
 
 	    //Finish
 		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
-            //_data->sound.BackGroundMusic.stop();
-		    _data->sound._winSound.play();
+        //_data->sound.BackGroundMusic.stop();
+		    _data->sound._flagSound.play();
 		    clockFinish.restart();
 		    finished=true;
             tijd += levelTime.getElapsedTime().asSeconds();
@@ -415,7 +415,7 @@ namespace engine{
 	    tijd += levelTime.getElapsedTime().asSeconds();
 	    doubleJumpTijd += doubleJumpTime.getElapsedTime().asSeconds();
         _data->sound.BackGroundMusic.pause();
-        _data->sound._clickSound.play();
+        _data->sound._clickButtonSound.play();
     }
 
 }

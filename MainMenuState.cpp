@@ -92,15 +92,15 @@ namespace engine{
 			}
 
             if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
-                _data->sound._clickSound.play();
+                _data->sound._clickButtonSound.play();
 				_data->machine.AddState( StateRef( new TestLevel(_data)), true);
             }
 			if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
-                _data->sound._clickSound.play();
+                _data->sound._clickButtonSound.play();
 				_data->renderWindow.close();
 			}
             if(_data->input.IsSpriteClicked(_instructions_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
-                _data->sound._clickSound.play();
+                _data->sound._clickButtonSound.play();
                 _data->machine.AddState(StateRef(new ControlState(_data)), true);
 
             }
@@ -108,12 +108,12 @@ namespace engine{
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) &&
                 _data->renderWindow.hasFocus()){
-            _data->sound._clickSound.play();
+            _data->sound._clickButtonSound.play();
 			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) &&
            _data->renderWindow.hasFocus()){
-            _data->sound._clickSound.play();
+            _data->sound._clickButtonSound.play();
             _data->machine.AddState( StateRef( new Level2(_data)), true);
         }
 

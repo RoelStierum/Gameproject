@@ -213,16 +213,16 @@ class PauseState{
 class SoundManager{
     +sf::Sound _jumpSound;
     +sf::Sound _deathSound;
-    +sf::Sound _coinSound;
-    +sf::Sound _clickSound;
-    +sf::Sound _winSound;
+    +sf::Sound _powerupSound;
+    +sf::Sound _clickButtonSound;
+    +sf::Sound _flagSound;
     +sf::Music BackGroundMusic;
 
     -sf::SoundBuffer _jumpSoundBuffer;
     -sf::SoundBuffer _deathSoundBuffer;
-    -sf::SoundBuffer _coinSoundBuffer;
-    -sf::SoundBuffer _clickSoundBuffer;
-    -sf::SoundBuffer _winSoundBuffer;
+    -sf::SoundBuffer _powerupSoundBuffer;
+    -sf::SoundBuffer _clickButtonSoundBuffer;
+    -sf::SoundBuffer _flagSoundBuffer;
 
 
     +SoundManager();

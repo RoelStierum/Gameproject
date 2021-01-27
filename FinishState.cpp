@@ -158,21 +158,21 @@ namespace engine{
 		//Check for press play_next button
         if(_data->input.IsSpriteClicked(_play_next_level, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
             if(lastLevel == 1){
-                _data->sound._clickSound.play();
+                _data->sound._clickButtonSound.play();
                 _data->machine.AddState(StateRef(new Level2(_data)), true);
             }
         }
 
         //Check for press menu button
         if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
-            _data->sound._clickSound.play();
+            _data->sound._clickButtonSound.play();
             _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
             _data->machine.clean_states();
         }
 
         //Check for press quit button
 		if(_data->input.IsSpriteClicked(_quit, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
-            _data->sound._clickSound.play();
+            _data->sound._clickButtonSound.play();
 			_data->renderWindow.close();
 		}
 	}
