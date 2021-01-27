@@ -46,14 +46,14 @@
 #define MUSIC_FILEPATH "Audio/music.ogg"
 #define MUSIC_VOLUME 20
 
-//TestLevel
-#define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
+//Levels
+#define LEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PLATFORM_GRASS_FILEPATH "Images/game_platform.png"
 #define PLATFORM_GREY_FILEPATH "Images/platform_red.png"
 #define PLATFORM_GREY_VERTICAL_FILEPATH "Images/platform_vertical.png"
 #define FORCEFIELD_VERTICAL_FILEPATH "Images/forcefield.png"
-#define FINISH_TIME 1.5f
+#define FINISH_FLAG_WAIT 1.5f
 #define DOUBLE_JUMP_TIME 10
 
 //Character
@@ -66,7 +66,7 @@
 
 //PauseState
 #define PAUSE_BACKGROUND_FILEPATH "Images/game_background.png"
-#define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
+#define PAUSE_PAUSED_TITLE_FILEPATH "Images/paused_title.png"
 #define PAUSE_RESUME_BUTTON_FILEPATH "Images/resume_button.png"
 #define PAUSE_RESUME_BUTTON_HOVER_FILEPATH "Images/resume_button_hover.png"
 #define PAUSE_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"

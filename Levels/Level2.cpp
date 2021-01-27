@@ -33,7 +33,7 @@ namespace engine{
 
 
 		//Background Initializer
-        _data->assets.LoadTexture("Level2 Background", TESTLEVEL_BACKGROUND_FILEPATH);
+        _data->assets.LoadTexture("Level2 Background", LEVEL_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("Level2 Background"));
         //_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
@@ -210,7 +210,7 @@ namespace engine{
         }
 
         //If clockFinish is done go to finish state
-        if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
+        if(clockFinish.getElapsedTime().asSeconds() >= FINISH_FLAG_WAIT && finished){
             _data->machine.AddState( StateRef ( new FinishState(_data, tijd, levelNumber)), true);
         }
 

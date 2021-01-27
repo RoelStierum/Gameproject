@@ -18,7 +18,7 @@ namespace engine{
 		_data->renderWindow.setView(InitView);
 
 		//pauze titel initializer
-		_data->assets.LoadTexture("PauseState Paused", PAUSE_PAUSED_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("PauseState Paused", PAUSE_PAUSED_TITLE_FILEPATH);
 		_paused.setTexture(_data->assets.GetTexture("PauseState Paused"));
 		_paused.setPosition(SCREEN_WIDTH/2 - _paused.getGlobalBounds().width/2, 0);
 
