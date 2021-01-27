@@ -2,6 +2,7 @@
 
 namespace engine{
 
+    //AddState function for adding a state to the StateMachine.
     void StateMachine::AddState(StateRef newState, bool IsReplacing) {
         _isAdding=true;
         _isReplacing = IsReplacing;
@@ -9,10 +10,12 @@ namespace engine{
         _newState = std::move(newState);
     }
 
+    //RemoveState function for removing the top state on ProcessStateChanges.
     void StateMachine::RemoveState() {
         _isRemoving = true;
     }
 
+    //ProcessStateChanges function for updating the StateMachine.
     void StateMachine::ProcessStateChanges() {
         if(_isRemoving && !_states.empty()){
             _states.pop();
@@ -40,14 +43,12 @@ namespace engine{
         }
     }
 
+    //GetActiveState function for returning the top state.
     StateRef& StateMachine::GetActiveState() {
         return _states.top();
     }
 
-    int StateMachine::state_size() {
-        return _states.size();
-    }
-
+    //clean_states function for cleaning the stateMachine to only the top state.
     void StateMachine::clean_states() {
         if(!_states.empty()){
             StateRef ns = std::move(_states.top());

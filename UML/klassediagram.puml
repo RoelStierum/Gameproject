@@ -106,7 +106,6 @@ class StateMachine{
     +void RemoveState();
     +void ProcessStateChanges();
     +StateRef& GetActiveState();
-    +int state_size();
     +void clean_states();
 
 
