@@ -134,10 +134,11 @@ namespace engine{
         //Character keyboard input
         if(!finished){
             character.characterKeyboardInput();
-        }else{
-        	character.velocity = {0,0};
         }
-
+        //Make character not move when finished.
+        else{
+            character.velocity = {0,0};
+        }
         //Window events
         sf::Event event;
 
