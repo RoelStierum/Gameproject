@@ -23,9 +23,10 @@ namespace engine{
 
         sf::Sprite _background;
         sf::Sprite _instructions;
-        sf::Sprite _menu;
+        sf::Sprite _back;
 
         bool _hoverBack = false;
+        bool mouseCheck = true;
 
     };
 
