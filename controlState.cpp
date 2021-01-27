@@ -7,6 +7,8 @@
 
 namespace engine{
 
+
+
     ControlState::ControlState(GameDataRef data):
             _data(data)
     {}
@@ -18,30 +20,33 @@ namespace engine{
 
         _data->assets.LoadTexture("instructions", INSTRUCTIONS);
         _instructions.setTexture(_data->assets.GetTexture("instructions"));
-        _instructions.setPosition(SCREEN_WIDTH/256, _instructions.getGlobalBounds().height/32);
+        _instructions.setPosition(SCREEN_WIDTH/256, _instructions.getGlobalBounds().height - 380);
 
         _data->assets.LoadTexture("BackButton", BACK_BUTTON);
         _data->assets.LoadTexture("BackButtonHover", BACK_BUTTON_HOVER);
-        _menu.setTexture(_data->assets.GetTexture("BackButton"));
-        _menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
+        _back.setTexture(_data->assets.GetTexture("BackButton"));
+        _back.setPosition(SCREEN_WIDTH/2 - _back.getGlobalBounds().width/2, 500);
     }
 
     void ControlState::HandleInput() {
         sf::Event event;
 
-		if(_data->input.HoverOverButton(_menu, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverBack){
+		if(_data->input.HoverOverButton(_back, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverBack){
 			_hoverBack = true;
-			_menu.setTexture(_data->assets.GetTexture("BackButtonHover"));
+			_back.setTexture(_data->assets.GetTexture("BackButtonHover"));
 		}
-		else if(!_data->input.HoverOverButton(_menu, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverBack){
+		else if(!_data->input.HoverOverButton(_back, _data->renderWindow) && _data->renderWindow.hasFocus() &&_hoverBack){
 			_hoverBack = false;
-			_menu.setTexture(_data->assets.GetTexture("BackButton"));
+			_back.setTexture(_data->assets.GetTexture("BackButton"));
 		}
 
-        if(_data->input.IsSpriteClicked(_menu, sf::Mouse::Left, _data->renderWindow)){
+        if(_data->input.IsSpriteClicked(_back, sf::Mouse::Left, _data->renderWindow)&&_data->renderWindow.hasFocus() && !mouseCheck){
             _data->sound._clickSound.play();
             _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
             _data->machine.clean_states();
+        }
+        if(mouseCheck && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        mouseCheck = false;
         }
 
         while(_data->renderWindow.pollEvent(event)){
@@ -62,7 +67,7 @@ namespace engine{
         _data->renderWindow.clear();
         _data->renderWindow.draw(_background);
         _data->renderWindow.draw(_instructions);
-        _data->renderWindow.draw(_menu);
+        _data->renderWindow.draw(_back);
         _data->renderWindow.display();
     }
 }
