@@ -1,5 +1,5 @@
 
-#include "controlState.hpp"
+#include "InstructionState.hpp"
 #include "MainMenuState.hpp"
 #include "DEFINITIONS.hpp"
 
@@ -7,17 +7,15 @@
 
 namespace engine{
 
-
-
-    ControlState::ControlState(GameDataRef data):
+    InstructionState::InstructionState(GameDataRef data):
             _data(data)
     {}
 
     // init function for loading the images
-    void ControlState::Init() {
+    void InstructionState::Init() {
         //background image
-        _data->assets.LoadTexture("ControlState Background", MAIN_MENU_BACKGROUND_FILEPATH);
-        _background.setTexture(_data->assets.GetTexture("ControlState Background"));
+        _data->assets.LoadTexture("InstructionState Background", MAIN_MENU_BACKGROUND_FILEPATH);
+        _background.setTexture(_data->assets.GetTexture("InstructionState Background"));
         _background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
         //instructions image
         _data->assets.LoadTexture("instructions", INSTRUCTIONS);
@@ -31,7 +29,7 @@ namespace engine{
     }
 
     //function for handling mouse inputs in the menu, also provides the hover functionality
-    void ControlState::HandleInput() {
+    void InstructionState::HandleInput() {
         sf::Event event;
 
 		if(_data->input.HoverOverButton(_back, _data->renderWindow) && _data->renderWindow.hasFocus() &&!_hoverBack){
@@ -61,14 +59,14 @@ namespace engine{
     }
 
     //function which ables to use the esc key to exit
-    void ControlState::Update(float dt) {
+    void InstructionState::Update(float dt) {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
             _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
         }
     }
 
     //draw function for drawing the images.
-    void ControlState::Draw(float dt) {
+    void InstructionState::Draw(float dt) {
         _data->renderWindow.clear();
         _data->renderWindow.draw(_background);
         _data->renderWindow.draw(_instructions);

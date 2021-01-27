@@ -6,12 +6,12 @@
 #include "Game.hpp"
 
 namespace engine{
-    ///@brief ControlState Class
+    ///@brief InstructionState Class
     ///@details Class to display the instructions to play the game
-    class ControlState: public State{
+    class InstructionState: public State{
     public:
 
-        ControlState(GameDataRef data);
+        InstructionState(GameDataRef data);
         ///@brief Initialisation function.
         ///@details Initialisation function for the loading the data assets from the images.
         void Init();

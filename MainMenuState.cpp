@@ -1,5 +1,5 @@
 #include "MainMenuState.hpp"
-#include "controlState.hpp"
+#include "InstructionState.hpp"
 #include "Levels/TestLevel.hpp"
 #include "Levels/Level2.hpp"
 #include "DEFINITIONS.hpp"
@@ -119,7 +119,7 @@ namespace engine{
 		//Check for press instructions button
 		if(_data->input.IsSpriteClicked(_instructions_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
 			_data->sound._clickButtonSound.play();
-			_data->machine.AddState(StateRef(new ControlState(_data)), true);
+			_data->machine.AddState(StateRef(new InstructionState(_data)), true);
 
 		}
 
