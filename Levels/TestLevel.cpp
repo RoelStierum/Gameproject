@@ -58,7 +58,7 @@ namespace engine{
         //Platform Textures Initializer
 		_data->assets.LoadTexture("HorizontalGrassPlatform", PLATFORM_GRASS_FILEPATH);
 		_data->assets.LoadTexture("HorizontalGreyPlatform", PLATFORM_GREY_FILEPATH);
-        _data->assets.LoadTexture("HorizontalGrassPlatformVertical", PLATFORM_GREY_VERTICAL_FILEPATH);
+        _data->assets.LoadTexture("VerticalGreyPlatform", PLATFORM_GREY_VERTICAL_FILEPATH);
 
         //Platforms Initializer
 		platforms.addPlatform( //starting
@@ -68,7 +68,7 @@ namespace engine{
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{250,400}
         );platforms.addPlatform( //1st wall
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{600,300}
         );platforms.addPlatform( //left platform
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
@@ -95,10 +95,10 @@ namespace engine{
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{4200,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{4400,300}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{4600,200}
 		);platforms.addPlatform(
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
@@ -113,37 +113,37 @@ namespace engine{
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{5530,410}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{5800,500}
 		);platforms.addPlatform(
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{5930,320}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{6350,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{6650,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{6850,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{7050,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{7250,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{7450,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{7650,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{7850,400}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{8050,400}
 		);platforms.addPlatform(
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
@@ -155,16 +155,16 @@ namespace engine{
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{8650,600}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{9080,550}
 		);platforms.addPlatform(
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{9350,450}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{9700,380}
 		);platforms.addPlatform(
-				_data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+				_data->assets.GetTexture("VerticalGreyPlatform"),
 				sf::Vector2f{10050,380}
 		);
 

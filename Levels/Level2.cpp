@@ -19,16 +19,29 @@ namespace engine{
             _data->sound.BackGroundMusic.play();
         }
 
-        //levelTimeText Initializer
+		//LowGravityText Initializer
+		_data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
+		LowGravityText.setFont(_data->assets.GetFont("RussoOneFont"));
+		LowGravityText.setString("Low Gravity enabled for 10 seconds!");
+		LowGravityText.setFillColor(sf::Color::Black);
+		LowGravityText.setPosition(4300 -LowGravityText.getGlobalBounds().width/2, 400);
+
+		//LowGravityTimerText Initializer
+		LowGravityTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
+		LowGravityTimeText.setString("Blank");
+		LowGravityTimeText.setFillColor(sf::Color::Black);
+
+		//levelTimeText Initializer
         _data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
         levelTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
         levelTimeText.setString("Blank");
         levelTimeText.setFillColor(sf::Color::Black);
 
+
         //flag Initializer
         _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(3800,400-flag.getGlobalBounds().height);
+        flag.setPosition(5900,500-flag.getGlobalBounds().height);
 		//flag.setPosition(400,400); //Debug flag placement
 
 
@@ -45,8 +58,8 @@ namespace engine{
         //Platform Textures Initializer
         _data->assets.LoadTexture("HorizontalGrassPlatform", PLATFORM_GRASS_FILEPATH);
         _data->assets.LoadTexture("HorizontalGreyPlatform", PLATFORM_GREY_FILEPATH);
-        _data->assets.LoadTexture("HorizontalGrassPlatformVertical", PLATFORM_GREY_VERTICAL_FILEPATH);
-        _data->assets.LoadTexture("RedForceFieldVertical", FORCEFIELD_VERTICAL_FILEPATH);
+        _data->assets.LoadTexture("VerticalGreyPlatform", PLATFORM_GREY_VERTICAL_FILEPATH);
+        _data->assets.LoadTexture("VerticalRedForceField", FORCEFIELD_VERTICAL_FILEPATH);
 
         //Platforms Initializer
         platforms.addPlatform( //starting
@@ -65,13 +78,13 @@ namespace engine{
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{1100,300}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("RedForceFieldVertical"),
+                _data->assets.GetTexture("VerticalRedForceField"),
                 sf::Vector2f{1500,0}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("RedForceFieldVertical"),
+                _data->assets.GetTexture("VerticalRedForceField"),
                 sf::Vector2f{1500,200}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("RedForceFieldVertical"),
+                _data->assets.GetTexture("VerticalRedForceField"),
                 sf::Vector2f{1500,440}
         );platforms.addPlatform( //wall pre jump
                 _data->assets.GetTexture("HorizontalGrassPlatform"),
@@ -80,19 +93,19 @@ namespace engine{
                 _data->assets.GetTexture("HorizontalGrassPlatform"),
                 sf::Vector2f{1500,710}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{1800,605}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{2050,520}
         );platforms.addPlatform( //wall before
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{2300,440}
         );
 
 
         platforms.addPlatform( //wall before
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{2660,120}
         );platforms.addPlatform( //wall pre jump
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
@@ -101,17 +114,33 @@ namespace engine{
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{3000,360}
         );platforms.addPlatform( //wall
-                _data->assets.GetTexture("HorizontalGrassPlatformVertical"),
+                _data->assets.GetTexture("VerticalGreyPlatform"),
                 sf::Vector2f{3100,200}
         );
 
 
-        platforms.addPlatform( //end
+        platforms.addPlatform( //
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{3700,400}
-        );
+        );platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{4200,500}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{5000,500}
+		);
+		platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{5800,500}
+		);
 
-        //Character Initializer
+		//powerUp Initializer
+		_data->assets.LoadTexture("powerUp", LOW_GRAVITY_FILEPATH);
+		powerUp.setTexture(_data->assets.GetTexture("powerUp"));
+		powerUp.setPosition(4300,490 - powerUp.getGlobalBounds().height);
+
+
+		//Character Initializer
         _data->assets.LoadTexture("Character", CHARACTER_FILEPATH);
         _data->assets.LoadTexture("Character Flip", CHARACTER_FLIP_FILEPATH);
         _data->assets.LoadTexture("Character right1", CHARACTER_RUN_RIGHT_FILEPATH);
@@ -199,7 +228,34 @@ namespace engine{
             }
         }
 
-        //Finish
+		//powerUp Collision with character
+		if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
+			LowGravityTimeEnable = true;
+			_data->sound._powerupSound.play();
+			gravity = 700;
+			powerUp.setPosition(powerUp.getPosition().x, 1000);
+			LowGravityEnableText = true;
+			LowGravityTimeTextEnable = true;
+			LowGravityTime.restart();
+		}
+
+		//If LowGravityTimer is done remove double jump, the timer and the text
+		if(LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd >= DOUBLE_JUMP_TIME && LowGravityTimeEnable){
+			gravity = 1500;
+			LowGravityTimeTextEnable = false;
+			LowGravityEnableText = false;
+			LowGravityTimeEnable= false;
+		}
+
+		//If LowGravityTimeTextEnable is true: update the timer
+		if(LowGravityTimeTextEnable){
+			std::string s = std::to_string(DOUBLE_JUMP_TIME - (LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd));
+			s = s.substr(0,s.size()-5);
+			LowGravityTimeText.setString(s);
+			LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2 - LowGravityTimeText.getGlobalBounds().width/2,10);
+		}
+
+		//Finish
         if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
             _data->sound.BackGroundMusic.stop();
             _data->sound._flagSound.play();
@@ -288,9 +344,20 @@ namespace engine{
 
         //Draw platforms
         platforms.draw();
+		//Draw powerUp
+		_data->renderWindow.draw(powerUp);
 
         //Draw pauseButton
         _data->renderWindow.draw(pauseButton);
+
+		//Draw LowGravityText
+		if(LowGravityEnableText){
+			_data->renderWindow.draw(LowGravityText);
+		}
+		//Draw LowGravityTimeText
+		if(LowGravityTimeTextEnable){
+			_data->renderWindow.draw(LowGravityTimeText);
+		}
 
         //Draw levelTimeText
         _data->renderWindow.draw(levelTimeText);
@@ -306,12 +373,17 @@ namespace engine{
 
     //Function for restarting the level
     void Level2::restart(){
+    	gravity = 1500;
+		LowGravityEnableText = false;
+		LowGravityTimeTextEnable = false;
         character.respawn(start);
-        levelTime.restart();
+		powerUp.setPosition(4300,490 - powerUp.getGlobalBounds().height);
+		levelTime.restart();
         move = 0;
         platforms.getPlatforms()[1].setPosition(moving_platform_start);
         tijd = 0;
-    }
+		LowGravityTijd = 0;
+	}
 
     //Check if character is on the edges of the screen and stop the velocity
     void Level2::characterEdgeOfScreen(const Character &character_, const float& dt) {
@@ -329,12 +401,14 @@ namespace engine{
     void Level2::Resume() {
         _data->sound.BackGroundMusic.play();
         levelTime.restart();
-    }
+		LowGravityTime.restart();
+	}
 
     //Run on pause of state
     void Level2::Pause() {
         tijd += levelTime.getElapsedTime().asSeconds();
-        _data->sound.BackGroundMusic.pause();
+		LowGravityTijd += LowGravityTime.getElapsedTime().asSeconds();
+		_data->sound.BackGroundMusic.pause();
         _data->sound._clickButtonSound.play();
     }
 

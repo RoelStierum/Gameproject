@@ -33,7 +33,7 @@ namespace engine{
     private:
         GameDataRef _data;
 
-        sf::Sprite _background;
+		sf::Sprite _background;
         sf::View CameraPosition;
         float cameraX, cameraY = 0;
 
@@ -50,7 +50,17 @@ namespace engine{
 
         sf::Sprite pauseButton;
 
-        //tijd van de het level
+		sf::Sprite powerUp;
+		sf::Text LowGravityText;
+		bool LowGravityEnableText = false;
+		sf::Text LowGravityTimeText;
+		bool LowGravityTimeTextEnable = false;
+		sf::Clock LowGravityTime;
+		float LowGravityTijd = 0;
+		bool LowGravityTimeEnable = false;
+
+
+		//tijd van de het level
         sf::Clock levelTime;
         sf::Text levelTimeText;
         float tijd = 0;

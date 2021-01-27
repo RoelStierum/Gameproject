@@ -47,7 +47,7 @@ namespace engine{
         //Platform Textures Initializer
         _data->assets.LoadTexture("HorizontalGrassPlatform", PLATFORM_GRASS_FILEPATH);
         _data->assets.LoadTexture("HorizontalGreyPlatform", PLATFORM_GREY_FILEPATH);
-        _data->assets.LoadTexture("HorizontalGrassPlatformVertical", PLATFORM_GREY_VERTICAL_FILEPATH);
+        _data->assets.LoadTexture("VerticalGreyPlatform", PLATFORM_GREY_VERTICAL_FILEPATH);
 
         //Platforms Initializer
         platforms.addPlatform( //starting
