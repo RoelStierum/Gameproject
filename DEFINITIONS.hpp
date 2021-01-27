@@ -30,7 +30,7 @@
 #define BACK_BUTTON "Images/back_button.png"
 #define BACK_BUTTON_HOVER "Images/back_button_hover.png"
 
-//Sound
+//Sound effects
 #define JUMP_SOUND_FILEPATH "Audio/jump.wav"
 #define JUMP_SOUND_VOLUME 10
 #define CLICK_SOUND_FILEPATH "Audio/click.wav"

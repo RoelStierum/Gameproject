@@ -209,7 +209,7 @@ namespace engine{
         ///Finish
         if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
             _data->sound.BackGroundMusic.stop();
-            _data->sound._winSound.play();
+            _data->sound._flagSound.play();
             clockFinish.restart();
             finished=true;
             tijd += levelTime.getElapsedTime().asSeconds();
@@ -339,7 +339,7 @@ namespace engine{
     void Level2::Pause() {
         tijd += levelTime.getElapsedTime().asSeconds();
         _data->sound.BackGroundMusic.pause();
-        _data->sound._clickSound.play();
+        _data->sound._clickButtonSound.play();
     }
 
 }
