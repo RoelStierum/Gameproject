@@ -4,22 +4,20 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-#define FPS 60.0f
 //The game's update and handle input refresh rate are locked at 60 fps
+#define FPS 60.0f
 
 //Splash state with background
 #define SPLASH_STATE_SHOW_TIME 2.0f
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
+#define SPLASH_SCREEN_BACKGROUND_FILEPATH "Images/game_splash_screen_spacex.png"
 
 //Main Menu
 #define MAIN_MENU_BACKGROUND_FILEPATH "Images/game_background2.png"
 #define MAIN_MENU_TITLE_FILEPATH "Images/game_title_white.png"
-#define MAIN_MENU_BUTTON_FILEPATH "Images/game_play_button.png"
-#define MAIN_MENU_BUTTON_HOVER_FILEPATH "Images/game_play_button_hover.png"
+#define MAIN_MENU_PLAY_BUTTON_FILEPATH "Images/game_play_button.png"
+#define MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH "Images/game_play_button_hover.png"
 #define MAIN_MENU_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 #define MAIN_MENU_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
-
-
 #define MUTE_FILEPATH "Images/soundMute.png"
 #define UNMUTE_FILEPATH "Images/soundUnMute.png"
 
@@ -46,14 +44,17 @@
 #define MUSIC_FILEPATH "Audio/music.ogg"
 #define MUSIC_VOLUME 20
 
-//TestLevel
-#define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
+//Levels
+#define LEVEL_AMOUNT 2
+#define LEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PLATFORM_GRASS_FILEPATH "Images/game_platform.png"
 #define PLATFORM_GREY_FILEPATH "Images/platform_red.png"
 #define PLATFORM_GREY_VERTICAL_FILEPATH "Images/platform_vertical.png"
 #define FORCEFIELD_VERTICAL_FILEPATH "Images/forcefield.png"
-#define FINISH_TIME 1.5f
+#define DOUBLEJUMP_FILEPATH "Images/doublejump.png"
+#define TESTLEVEL_FLAG_FILEPATH "Images/vlag.png"
+#define FINISH_FLAG_WAIT 1.5f
 #define DOUBLE_JUMP_TIME 10
 
 //Character
@@ -66,34 +67,24 @@
 
 //PauseState
 #define PAUSE_BACKGROUND_FILEPATH "Images/game_background.png"
-#define PAUSE_PAUSED_BUTTON_FILEPATH "Images/game_paused_button.png"
+#define PAUSE_PAUSED_TITLE_FILEPATH "Images/paused_title.png"
 #define PAUSE_RESUME_BUTTON_FILEPATH "Images/resume_button.png"
 #define PAUSE_RESUME_BUTTON_HOVER_FILEPATH "Images/resume_button_hover.png"
-#define PAUSE_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
-#define PAUSE_MAIN_MENU_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
+#define PAUSE_MAIN_MENU_PLAY_BUTTON_FILEPATH "Images/main_menu_button.png"
+#define PAUSE_MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
 #define PAUSE_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 #define PAUSE_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
 
 //FinishState
-#define BACKGROUND_FINISH_FILEPATH "Images/wallpaperfinish.jpg"
-#define END_NEXT_LEVEL_BUTTON_FILEPATH "Images/next_level_button.png"
-#define END_NEXT_LEVEL_BUTTON_HOVER_FILEPATH "Images/next_level_button_hover.png"
-#define FINISH_MAIN_MENU_BUTTON_FILEPATH "Images/main_menu_button.png"
-#define FINISH_MAIN_MENU_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
+#define FINISH_BACKGROUND_FILEPATH "Images/wallpaperfinish.jpg"
+#define FINISH_NEXT_LEVEL_BUTTON_FILEPATH "Images/next_level_button.png"
+#define FINISH_NEXT_LEVEL_BUTTON_HOVER_FILEPATH "Images/next_level_button_hover.png"
+#define FINISH_MAIN_MENU_PLAY_BUTTON_FILEPATH "Images/main_menu_button.png"
+#define FINISH_MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH "Images/main_menu_button_hover.png"
 #define FINISH_QUIT_BUTTON_FILEPATH "Images/game_quit_button.png"
 #define FINISH_QUIT_BUTTON_HOVER_FILEPATH "Images/game_quit_button_hover.png"
+#define HIGHSCORE_FILENAME "Highscore/Highscore"
 
-
-//Objects
-#define DOUBLEJUMP_FILEPATH "Images/doublejump.png"
-
-//Font
-#define FONT_FILEPATH "Audio/RussoOne-Regular.ttf"
-
-//Flag
-#define TESTLEVEL_FLAG_FILEPATH "Images/vlag.png"
-
-#define LEVEL_AMOUNT 2
-#define HIGHSCORE_FILENAME "Audio/Highscore";
-
+//Fonts
+#define FONT_FILEPATH "Fonts/RussoOne-Regular.ttf"
 
