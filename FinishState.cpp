@@ -155,6 +155,7 @@ namespace engine{
 			_menu.setTexture(_data->assets.GetTexture("FinishStateMainMenuButton"));
 		}
 
+
 		//Check for press play_next button
         if(_data->input.IsSpriteClicked(_play_next_level, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
             if(lastLevel == 1){

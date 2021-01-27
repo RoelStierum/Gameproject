@@ -6,20 +6,31 @@
 
 namespace engine{
 
-    class MainMenuState: public State{
+	///@brief MainMenuState Class.
+	///@details State that will be switched to when the splash state timer is over or the player clicks the main menu button.
+	class MainMenuState: public State{
     public:
+		///@brief Constructor for the MainMenuState class.
+		///@param data , gets the game data.
         MainMenuState(GameDataRef data);
 
-        void Init();
+		///@brief Init() function.
+		///@details Function that runs on the initialization of the class.
+		void Init();
 
-        void HandleInput();
-        void Update(float dt);
+		///@brief HandleInput() function.
+		///@details Function that handles all the button clicks.
+		void HandleInput();
+
+        void Update(float dt){}
+
+		///@brief Draw(float dt) function.
+		///@details Draws all the objects.
         void Draw(float dt);
 
     private:
         GameDataRef _data;
 
-        sf::Texture _backgroundTexture;
         sf::Sprite _background;
 
         sf::Sprite _title;
