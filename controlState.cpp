@@ -41,8 +41,7 @@ namespace engine{
 		}
 
         if(_data->input.IsSpriteClicked(_back, sf::Mouse::Left, _data->renderWindow)&&_data->renderWindow.hasFocus() && !mouseCheck){
-            _data->sound._clickSound.play();
-
+            _data->sound._clickButtonSound.play();
             _data->machine.AddState( StateRef( new MainMenuState(_data)), true);
             _data->machine.clean_states();
         }
