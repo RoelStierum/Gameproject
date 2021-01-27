@@ -2,6 +2,7 @@
 
 namespace engine{
 
+    //LoadTexture function for loading the texture into the memory map
     void AssetManager::LoadTexture(std::string name, std::string fileName) {
         sf::Texture tex;
 
@@ -10,10 +11,12 @@ namespace engine{
         }
     }
 
+    //GetTexture function for returning the texture from the memory map
     sf::Texture& AssetManager::GetTexture(std::string name) {
         return _textures.at(name);
     }
 
+    //LoadFont function for loading the font into the memory map
     void AssetManager::LoadFont(std::string name, std::string fileName) {
         sf::Font font;
 
@@ -22,6 +25,7 @@ namespace engine{
         }
     }
 
+    //GetFont function for returning the font from the memory map
     sf::Font& AssetManager::GetFont(std::string name) {
         return _font.at(name);
     }
