@@ -18,11 +18,13 @@ namespace engine{
 		height = sprite.getGlobalBounds().height;
 	}*/
 
+	//Constructor of the Character class
 	Character::Character(GameDataRef data):
 			_data(data),
 			position(0,0)
 	{}
 
+	//flipTexture funtion for flipping the texture
 	void Character::flipTexture() {
 		if(flip){
 			sprite.setTexture(texture);
@@ -32,9 +34,12 @@ namespace engine{
 		flip = !flip;
 	}
 
+	//update function for animating the character based on the velocity
 	void Character::update() {
-	    if(animationClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
+	    //animationRun loops for the 3 textures of the animation
+	    //animationRun = 0 - > 1 - > 2 - > 0
 
+	    if(animationClock.getElapsedTime().asSeconds() > 0.15 && on_ground){
             if(velocity.x == 0){
                 if(flip){
                     sprite.setTexture(texture_flip);
@@ -94,6 +99,7 @@ namespace engine{
 	    }
 	}
 
+	//setTexture function for setting the member variables
 	void Character::setTexture(
 	        sf::Texture &texture_,
 	        sf::Texture &texture_flip_,
@@ -111,25 +117,30 @@ namespace engine{
 		sprite.setTexture(texture);
 	}
 
+	//setPosition function for setting the position of the character with a sf::Vector2f.
 	void Character::setPosition(const sf::Vector2f &position_) {
 		position = position_;
 		sprite.setPosition(position);
 	}
 
+    //setPosition function for setting the position of the character with 2 floats.
 	void Character::setPosition(const float &x, const float &y) {
 		position.x = x;
 		position.y = y;
 		sprite.setPosition(position);
 	}
 
+	//getPosition function for return the position as a sf::Vector2f.
 	sf::Vector2f Character::getPosition(){
 		return position;
 	}
 
+	//draw function for drawwing the member sprite in the given RenderWindow.
 	void Character::draw(sf::RenderWindow& renderWindow) {
 		renderWindow.draw(sprite);
 	}
 
+	//move function for moving the character relative to the position with a sf::Vector2f.
 	void Character::move(sf::Vector2f movement) {
 		position += movement;
 		if(movement.x < 0 && !flip){
@@ -140,16 +151,19 @@ namespace engine{
 		sprite.setPosition(position);
 	}
 
+    //move function for moving the character relative to the position with 2 floats.
 	void Character::move(const float &x, const float &y) {
 		position.x += x;
 		position.y += y;
 		sprite.setPosition(position);
 	}
 
+	//nextPosition function for returning a sf::Vector2f of the future position. (Used for collision)
 	sf::Vector2f Character::nextPosition(sf::Vector2f movement) {
 		return position + movement;
 	}
 
+	//nextSprite function for returning a sf::Sprite with the future position. (Used for collision)
 	sf::Sprite Character::nextSprite(sf::Vector2f movement) {
 		sf::Sprite temp;
 		temp.setTextureRect(sprite.getTextureRect());
@@ -157,10 +171,12 @@ namespace engine{
 		return temp;
 	}
 
+	//getSprite function for returning the member sprite
 	sf::Sprite& Character::getSprite() {
 		return sprite;
 	}
-	
+
+	//objectCollisionAndFalling function for return a bool if the character is colliding with the object.
 	bool Character::objectCollisionAndFalling(const sf::Sprite &object, const float& dt) {
 		//Als de volgende move van de player in het object zit
 
@@ -195,11 +211,9 @@ namespace engine{
             }
         }
 		return tmp;
-
-
-		//delete temp;
 	}
-	
+
+	//updateVelocity function for updating the movement based on the vector and delta time.
 	void Character::updateVelocity(const float &dt) {
 		//Velocity update
 		if(velocity != sf::Vector2f{0,0}){
@@ -207,12 +221,14 @@ namespace engine{
 		}
 	}
 
+	//respawn function for resetting the character
 	void Character::respawn(sf::Vector2f spawn) {
 	    max_jump = 1;
 		setPosition(spawn);
 		velocity.x = 0;
 	}
 
+    //characterKeyboardInput function for updating the velocity based on keyboard inputs
     void Character::characterKeyboardInput() {
         //A of left-arrow voor naar links gaan
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){

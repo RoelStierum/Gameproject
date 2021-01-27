@@ -199,6 +199,7 @@ namespace engine{
 		if(!finished){
 		    character.characterKeyboardInput();
 		}
+		//Make character not move when finished.
 		else{
 		    character.velocity = sf::Vector2f(0,0);
 		}
