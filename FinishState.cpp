@@ -69,6 +69,11 @@ namespace engine{
 		}
 		readFile.close();
 
+		//Dont draw if the previous best time is the default number on creation
+		if(_bestTime == 10000000000.0){
+            previousBestText = false;
+		}
+
 		//Write file
 		if (tijd < _bestTime) {
 		    
@@ -181,7 +186,9 @@ namespace engine{
 		}
 		_data->renderWindow.draw(_menu);
 		_data->renderWindow.draw(tijdText);
-		_data->renderWindow.draw(bestTimeText);
+		if(previousBestText){
+            _data->renderWindow.draw(bestTimeText);
+        }
 		_data->renderWindow.display();
 	}
 }

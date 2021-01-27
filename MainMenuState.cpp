@@ -13,6 +13,7 @@ namespace engine{
     {}
 
     void MainMenuState::Init() {
+        _data->sound.BackGroundMusic.stop();
 
         _data->assets.LoadTexture("MainMenuState Background", MAIN_MENU_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("MainMenuState Background"));

@@ -49,10 +49,10 @@
 //TestLevel
 #define TESTLEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
-#define TESTLEVEL_PLATFORM_FILEPATH "Images/game_platform.png"
-#define TESTLEVEL_PLATFORM2_FILEPATH "Images/platform_red.png"
-#define TESTLEVEL_PLATFORM_VERTICAL_FILEPATH "Images/platform_vertical.png"
-#define LEVEL2_FORCEFIELD_FILEPATH "Images/forcefield.png"
+#define PLATFORM_GRASS_FILEPATH "Images/game_platform.png"
+#define PLATFORM_GREY_FILEPATH "Images/platform_red.png"
+#define PLATFORM_GREY_VERTICAL_FILEPATH "Images/platform_vertical.png"
+#define FORCEFIELD_VERTICAL_FILEPATH "Images/forcefield.png"
 #define FINISH_TIME 1.5f
 #define DOUBLE_JUMP_TIME 10
 
