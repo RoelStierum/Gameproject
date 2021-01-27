@@ -11,7 +11,7 @@ namespace engine{
     {}
 
     void SplashState::Init() {
-        _data->assets.LoadTexture("SplashState Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
+        _data->assets.LoadTexture("SplashState Background", SPLASH_SCREEN_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("SplashState Background"));
         _background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
     }

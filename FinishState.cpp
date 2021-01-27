@@ -18,7 +18,7 @@ namespace engine{
 	//Run on initialization of state
 	void FinishState::Init() {
         //background Initializer
-		_data->assets.LoadTexture("FinishState Background", BACKGROUND_FINISH_FILEPATH);
+		_data->assets.LoadTexture("FinishState Background", FINISH_BACKGROUND_FILEPATH);
 		_background.setTexture(_data->assets.GetTexture("FinishState Background"));
 		_background.setScale(SCREEN_WIDTH / _background.getGlobalBounds().width,
 							 SCREEN_HEIGHT / _background.getGlobalBounds().height);
@@ -27,14 +27,14 @@ namespace engine{
 		_data->renderWindow.setView(InitView);
 
         //play_next button Initializer
-		_data->assets.LoadTexture("FinishStateNextLevelButton", END_NEXT_LEVEL_BUTTON_FILEPATH);
-		_data->assets.LoadTexture("FinishStateNextLevelButtonHover", END_NEXT_LEVEL_BUTTON_HOVER_FILEPATH);
+		_data->assets.LoadTexture("FinishStateNextLevelButton", FINISH_NEXT_LEVEL_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("FinishStateNextLevelButtonHover", FINISH_NEXT_LEVEL_BUTTON_HOVER_FILEPATH);
 		_play_next_level.setTexture(_data->assets.GetTexture("FinishStateNextLevelButton"));
 		_play_next_level.setPosition(SCREEN_WIDTH / 2 - _play_next_level.getGlobalBounds().width / 2, 200);
 
         //menu button Initializer
-		_data->assets.LoadTexture("FinishStateMainMenuButton", FINISH_MAIN_MENU_BUTTON_FILEPATH);
-		_data->assets.LoadTexture("FinishStateMainMenuButtonHover", FINISH_MAIN_MENU_BUTTON_HOVER_FILEPATH);
+		_data->assets.LoadTexture("FinishStateMainMenuButton", FINISH_MAIN_MENU_PLAY_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("FinishStateMainMenuButtonHover", FINISH_MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("FinishStateMainMenuButton"));
 		_menu.setPosition(SCREEN_WIDTH / 2 - _menu.getGlobalBounds().width / 2, 350);
 

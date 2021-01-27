@@ -24,8 +24,8 @@ namespace engine{
         //_title.setScale(2,2);
         _title.setPosition(SCREEN_WIDTH/2 - _title.getGlobalBounds().width/2, _title.getGlobalBounds().height/2);
 
-        _data->assets.LoadTexture("MainMenuPlayButton", MAIN_MENU_BUTTON_FILEPATH);
-		_data->assets.LoadTexture("MainMenuPlayButtonHover", MAIN_MENU_BUTTON_HOVER_FILEPATH);
+        _data->assets.LoadTexture("MainMenuPlayButton", MAIN_MENU_PLAY_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("MainMenuPlayButtonHover", MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH);
         _play_button.setTexture(_data->assets.GetTexture("MainMenuPlayButton"));
         _play_button.setPosition(SCREEN_WIDTH/2 + 100, _play_button.getGlobalBounds().height*2.5);
 

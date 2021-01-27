@@ -36,8 +36,8 @@ namespace engine{
 
 		//menu button Initializer
 
-		_data->assets.LoadTexture("PauseStateMainMenuButton", PAUSE_MAIN_MENU_BUTTON_FILEPATH);
-		_data->assets.LoadTexture("PauseStateMainMenuButtonHover", PAUSE_MAIN_MENU_BUTTON_HOVER_FILEPATH);
+		_data->assets.LoadTexture("PauseStateMainMenuButton", PAUSE_MAIN_MENU_PLAY_BUTTON_FILEPATH);
+		_data->assets.LoadTexture("PauseStateMainMenuButtonHover", PAUSE_MAIN_MENU_PLAY_BUTTON_HOVER_FILEPATH);
 		_menu.setTexture(_data->assets.GetTexture("PauseStateMainMenuButton"));
 		_menu.setPosition(SCREEN_WIDTH/2 - _menu.getGlobalBounds().width/2, 500);
 	}
