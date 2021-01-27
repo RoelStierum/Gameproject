@@ -39,6 +39,8 @@ namespace engine{
 		bool _hoverQuit = false;
 		bool _hoverMainMenu = false;
 
+		bool previousBestText = true;
+
 		int lastLevel = 0;
 	};
 
