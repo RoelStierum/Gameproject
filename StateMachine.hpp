@@ -7,7 +7,8 @@
 
 namespace engine{
 
-    //Type define of the StateRef type.
+    ///@brief StateRef type
+    ///@details Type define of the StateRef type.
     typedef std::unique_ptr<State> StateRef;
 
     class StateMachine{

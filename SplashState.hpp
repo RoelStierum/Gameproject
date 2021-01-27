@@ -6,6 +6,8 @@
 
 namespace engine{
 
+    ///@brief SplashState class.
+    ///@details This class shows the background image for x seconds.
     class SplashState: public State{
     public:
         ///@brief SplashState class constructor.

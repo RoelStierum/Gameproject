@@ -5,6 +5,7 @@
 
 namespace engine{
 
+    //Constructor of the Game class
     Game::Game(unsigned int width, unsigned int height, std::string title){
         _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
         _data->machine.AddState(StateRef(new SplashState(_data)));
@@ -37,6 +38,7 @@ namespace engine{
         run();
     }
 
+    //While loop for running the states
     void Game::run() {
         float newTime, frameTime, interpolation;
 
