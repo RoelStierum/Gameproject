@@ -15,7 +15,7 @@ namespace engine{
 			tijd(tijd),
             lastLevel(levelNumber)
 	{}
-
+	//Run on initialization of state
 	void FinishState::Init() {
         //background Initializer
 		_data->assets.LoadTexture("FinishState Background", BACKGROUND_FINISH_FILEPATH);
