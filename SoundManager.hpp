@@ -9,6 +9,14 @@ namespace engine {
 	///@details Class to manage all the sound effects and background music in the game.
 	class SoundManager {
 	public:
+		///@brief Constructor for the Soundmanager class.
+		///@details This constructor runs some necessary functions.
+		///@details CheckSoundLoading() runs to check if the all the sounds are loaded correctly.
+		///@details SetSoundBuffers() runs so that all the sounds are loaded by default.
+		///@details setVolume() runs so that the volume of the sounds and music is optimal.
+		///@details BackGroundMusic.setLoop(true) is done so that the backgroundmusic loops.
+		SoundManager();
+
 		///@brief Sound effect for when the player jumps.
         sf::Sound _jumpSound;
 		///@brief Sound effect for when the player falls off a platform and dies.
@@ -21,14 +29,6 @@ namespace engine {
         sf::Sound _flagSound;
 		///@brief Background music for the game.
         sf::Music BackGroundMusic;
-
-		///@brief Constructor for the Soundmanager class.
-		///@details This constructor runs some necessary functions.
-		///@details CheckSoundLoading() runs to check if the all the sounds are loaded correctly.
-		///@details SetSoundBuffers() runs so that all the sounds are loaded by default.
-		///@details setVolume() runs so that the volume of the sounds and music is optimal.
-		///@details BackGroundMusic.setLoop(true) is done so that the backgroundmusic loops.
-		SoundManager();
 
 		///@brief setVolume() function.
 		///@details Function to be able to adjust the volume of the sound effects and music.
