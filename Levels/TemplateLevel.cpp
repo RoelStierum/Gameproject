@@ -12,97 +12,96 @@ namespace engine{
             character(data)
     {}
 
+    //Run on initialization of state
     void TemplateLevel::Init() {
-        character.max_jump = 1000;
+        //State the background music if not playing
+        if(_data->sound.BackGroundMusic.getPlayingOffset().asSeconds() <= 0){
+            _data->sound.BackGroundMusic.play();
+        }
 
-        ///START MUSIC
-        _data->sound.BackGroundMusic.play();
-
-        ///levelTimeTextEnable
+        //levelTimeText Initializer
         _data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
         levelTimeText.setFont(_data->assets.GetFont("RussoOneFont"));
         levelTimeText.setString("Blank");
         levelTimeText.setFillColor(sf::Color::Black);
 
 
-        ///flag
+        //flag Initializer
         _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(8060,290);
-        //flag.setPosition(400,400); //Debug flag placement
+        flag.setPosition(500,290);
 
 
-        ///Background Initializer
+        //Background Initializer
         _data->assets.LoadTexture("TemplateLevel Background", TESTLEVEL_BACKGROUND_FILEPATH);
         _background.setTexture(_data->assets.GetTexture("TemplateLevel Background"));
         //_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
 
 
-        ///Pause button
+        //pauseButton Initializer
         _data->assets.LoadTexture("Pause Button", PAUSE_BUTTON_FILEPATH);
         pauseButton.setTexture(_data->assets.GetTexture("Pause Button"));
         pauseButton.setPosition(SCREEN_WIDTH-16-pauseButton.getGlobalBounds().width,16);
 
 
-        ///Platforms Texture Initializer
-        _data->assets.LoadTexture("TemplateLevel Platform", TESTLEVEL_PLATFORM_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Platform 2", TESTLEVEL_PLATFORM2_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Platform Vertical", TESTLEVEL_PLATFORM_VERTICAL_FILEPATH);
+        //Platform Textures Initializer
+        _data->assets.LoadTexture("HorizontalGrassPlatform", PLATFORM_GRASS_FILEPATH);
+        _data->assets.LoadTexture("HorizontalGreyPlatform", PLATFORM_GREY_FILEPATH);
+        _data->assets.LoadTexture("HorizontalGrassPlatformVertical", PLATFORM_GREY_VERTICAL_FILEPATH);
 
-        ///Platforms Initializer
+        //Platforms Initializer
         platforms.addPlatform( //starting
-                _data->assets.GetTexture("TemplateLevel Platform 2"),
+                _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{50,400}
         );
 
-        ///Character Initializer
-        _data->assets.LoadTexture("TemplateLevel Character", CHARACTER_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Character Flip", CHARACTER_FLIP_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Character right1", CHARACTER_RUN_RIGHT_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Character right2", CHARACTER_RUN_RIGHT2_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Character left1", CHARACTER_RUN_LEFT_FILEPATH);
-        _data->assets.LoadTexture("TemplateLevel Character left2", CHARACTER_RUN_LEFT2_FILEPATH);
+        //Character Initializer
+        _data->assets.LoadTexture("Character", CHARACTER_FILEPATH);
+        _data->assets.LoadTexture("Character Flip", CHARACTER_FLIP_FILEPATH);
+        _data->assets.LoadTexture("Character right1", CHARACTER_RUN_RIGHT_FILEPATH);
+        _data->assets.LoadTexture("Character right2", CHARACTER_RUN_RIGHT2_FILEPATH);
+        _data->assets.LoadTexture("Character left1", CHARACTER_RUN_LEFT_FILEPATH);
+        _data->assets.LoadTexture("Character left2", CHARACTER_RUN_LEFT2_FILEPATH);
         character.setPosition(sf::Vector2f {start});
         character.setTexture(
-                _data->assets.GetTexture("TemplateLevel Character"),
-                _data->assets.GetTexture("TemplateLevel Character Flip"),
-                _data->assets.GetTexture("TemplateLevel Character right1"),
-                _data->assets.GetTexture("TemplateLevel Character right2"),
-                _data->assets.GetTexture("TemplateLevel Character left1"),
-                _data->assets.GetTexture("TemplateLevel Character left2")
+                _data->assets.GetTexture("Character"),
+                _data->assets.GetTexture("Character Flip"),
+                _data->assets.GetTexture("Character right1"),
+                _data->assets.GetTexture("Character right2"),
+                _data->assets.GetTexture("Character left1"),
+                _data->assets.GetTexture("Character left2")
         );
         character.velocity.y = 600;
     }
 
     void TemplateLevel::HandleInput() {
-        ///Character keyboard input
+        //Character keyboard input
         if(!finished){
             character.characterKeyboardInput();
         }
-        else{
-            character.velocity = sf::Vector2f(0,0);
-        }
 
-        ///Window events
+        //Window events
         sf::Event event;
 
         while(_data->renderWindow.pollEvent(event)){
+
+            //Check for windows x button
             if(sf::Event::Closed == event.type){
                 _data->renderWindow.close();
             }
+
+            //Check for lost focus of window
             if(sf::Event::LostFocus == event.type){
                 _data->machine.AddState( StateRef ( new PauseState(_data)), false);
             }
         }
 
-        ///Keypress for pause
-        //Pause State
+        //Keypress for pause
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
             _data->machine.AddState( StateRef ( new PauseState(_data)), false);
         }
 
-        ///Button press for pause
-        //Check mouse click on position button
+        //Button press for pause and check mouse click on position button
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             sf::Vector2i m = sf::Mouse::getPosition(_data->renderWindow);
             sf::IntRect intRect = {SCREEN_WIDTH - 16 - 64,16,64,64};
@@ -113,7 +112,7 @@ namespace engine{
     }
 
     void TemplateLevel::Update(float dt) {
-        ///Finish
+        //Finish
         if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
             _data->sound.BackGroundMusic.stop();
             _data->sound._flagSound.play();
@@ -126,14 +125,12 @@ namespace engine{
             std::cout << tijd << std::endl;
         }
 
-
+        //If clockFinish is done go to finish state
         if(clockFinish.getElapsedTime().asSeconds() >= FINISH_TIME && finished){
-
             _data->machine.AddState( StateRef ( new FinishState(_data, tijd, levelNumber)), true);
-
         }
 
-        ///levelTimeText
+        //If the game is not finished: update the timer
         if(!finished){
             std::string s = std::to_string(levelTime.getElapsedTime().asSeconds() + tijd);
             s = s.substr(0,s.size()-4);
@@ -141,10 +138,10 @@ namespace engine{
             levelTimeText.setPosition(SCREEN_WIDTH-100-levelTimeText.getGlobalBounds().width,20);
         }
 
-        ///Character
+        //Character update
         character.update();
 
-        ///Collision
+        //Collision with platforms and if not make the character fall with the gravity
         bool collision = false;
         for(sf::Sprite platform : platforms.getPlatforms()){
             if(character.objectCollisionAndFalling(platform, dt)){
@@ -161,32 +158,34 @@ namespace engine{
             character.speed_up = character.speed_up_ground;
         }
 
+        //Check if character is on the edges of the screen and stop the velocity
         characterEdgeOfScreen(character, dt);
 
+        //Update the character position based on the velocity
         character.updateVelocity(dt);
 
 
-        ///CAMERA VIEW
-        //View
+        //CAMERA VIEW
         cameraX = -(SCREEN_WIDTH/2) + character.getPosition().x;
 
-        //links camera stoppen
+        //Stop the camera from scrolling to the left of the background
         if(cameraX < 0){
             cameraX = 0;
         }
-            //rechts camera stoppen
+        //Stop the camera from scrolling to the right of the background
         else if(cameraX > (_background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH))){
             cameraX = _background.getPosition().x + _background.getGlobalBounds().width - (SCREEN_WIDTH);
         }
 
+        //Set the camera position
         CameraPosition.reset(sf::FloatRect(cameraX, cameraY,  SCREEN_WIDTH, SCREEN_HEIGHT));
 
-        ///Pause button location
+        //Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
-        ///leveltime text set position
+        //levelTimeText set position
         levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
 
-        ///player under screen / respawn
+        //player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){
             _data->sound._deathSound.play();
             restart();
@@ -197,50 +196,53 @@ namespace engine{
         _data->renderWindow.setView(CameraPosition);
         _data->renderWindow.clear();
 
-        //background
+        //Draw background
         _data->renderWindow.draw(_background);
 
-        //platforms
+        //Draw platforms
         platforms.draw();
 
-        //pause
+        //Draw pauseButton
         _data->renderWindow.draw(pauseButton);
 
+        //Draw levelTimeText
         _data->renderWindow.draw(levelTimeText);
 
-
-
-        //flag
+        //Draw flag
         _data->renderWindow.draw(flag);
 
-        //character
+        //Draw character
         character.draw(_data->renderWindow);
 
         _data->renderWindow.display();
     }
 
+    //Function for restarting the level
     void TemplateLevel::restart(){
         character.respawn(start);
         levelTime.restart();
         tijd = 0;
     }
 
+    //Check if character is on the edges of the screen and stop the velocity
     void TemplateLevel::characterEdgeOfScreen(const Character &character_, const float& dt) {
-        //links
+        //left
         if(character.nextPosition(character.velocity * dt).x < _background.getPosition().x){
             character.velocity.x = 0;
         }
-        //rechts
+        //right
         if(character.nextPosition(character.velocity * dt).x + character.getSprite().getGlobalBounds().width > _background.getPosition().x + _background.getGlobalBounds().width){
             character.velocity.x = 0;
         }
     }
 
+    //Run on resume of state
     void TemplateLevel::Resume() {
         _data->sound.BackGroundMusic.play();
         levelTime.restart();
     }
 
+    //Run on pause of state
     void TemplateLevel::Pause() {
         tijd += levelTime.getElapsedTime().asSeconds();
         _data->sound.BackGroundMusic.pause();
