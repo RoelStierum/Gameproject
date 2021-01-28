@@ -42,7 +42,7 @@ namespace engine{
 		Character character;
 
         sf::Sprite pauseButton;
-		sf::Sprite powerUp;
+		sf::Sprite doubleJump;
 		sf::Text doubleJumpText;
 		bool doubleJumpEnableText = false;
         sf::Text doubleJumpTimeText;

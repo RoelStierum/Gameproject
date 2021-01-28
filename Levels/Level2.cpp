@@ -22,7 +22,7 @@ namespace engine{
 		//LowGravityText Initializer
 		_data->assets.LoadFont("RussoOneFont", FONT_FILEPATH);
 		LowGravityText.setFont(_data->assets.GetFont("RussoOneFont"));
-		LowGravityText.setString("Low Gravity enabled for 10 seconds!");
+		LowGravityText.setString("Low Gravity enabled for 11 seconds!");
 		LowGravityText.setFillColor(sf::Color::Black);
 		LowGravityText.setPosition(4300 -LowGravityText.getGlobalBounds().width/2, 400);
 
@@ -194,10 +194,10 @@ namespace engine{
 
 
 
-		//powerUp Initializer
-		_data->assets.LoadTexture("powerUp", LOW_GRAVITY_FILEPATH);
-		powerUp.setTexture(_data->assets.GetTexture("powerUp"));
-		powerUp.setPosition(4300,490 - powerUp.getGlobalBounds().height);
+		//lowGravity Initializer
+		_data->assets.LoadTexture("lowGravity", LOW_GRAVITY_FILEPATH);
+		lowGravity.setTexture(_data->assets.GetTexture("lowGravity"));
+		lowGravity.setPosition(4300,490 - lowGravity.getGlobalBounds().height);
 
 
 		//Character Initializer
@@ -288,17 +288,15 @@ namespace engine{
             }
         }
 
-		//powerUp Collision with character
-		if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
+		//lowGravity Collision with character
+		if(character.getSprite().getGlobalBounds().intersects(lowGravity.getGlobalBounds())){
+			LowGravityTijd = 0;
 			LowGravityTimeEnable = true;
 			_data->sound._powerupSound.play();
-			std::cout << "sound played";
 			gravity = 700;
-			std::cout << "gravity set";
-			powerUp.setPosition(powerUp.getPosition().x, 1000);
+			lowGravity.setPosition(lowGravity.getPosition().x, 1000);
 			LowGravityEnableText = true;
 			LowGravityTimeTextEnable = true;
-			std::cout << "text and time set";
 			LowGravityTime.restart();
 		}
 
@@ -312,7 +310,6 @@ namespace engine{
 			std::string s = std::to_string(tijd);
 			s = s.substr(0,s.size()-4);
 			levelTimeText.setString(s);
-			//std::cout << tijd << std::endl;
 		}
 
 		//If clockFinish is done go to finish state
@@ -413,8 +410,8 @@ namespace engine{
         //Draw platforms
         platforms.draw();
 
-		//Draw powerUp
-		_data->renderWindow.draw(powerUp);
+		//Draw lowGravity
+		_data->renderWindow.draw(lowGravity);
 
         //Draw pauseButton
         _data->renderWindow.draw(pauseButton);
@@ -446,7 +443,7 @@ namespace engine{
 		LowGravityEnableText = false;
 		LowGravityTimeTextEnable = false;
         character.respawn(start);
-		powerUp.setPosition(4300,490 - powerUp.getGlobalBounds().height);
+		lowGravity.setPosition(4300,490 - lowGravity.getGlobalBounds().height);
 		levelTime.restart();
         move = 0;
         platforms.getPlatforms()[1].setPosition(moving_platform_start);
@@ -480,5 +477,4 @@ namespace engine{
 		_data->sound.BackGroundMusic.pause();
         _data->sound._clickButtonSound.play();
     }
-
 }

@@ -79,10 +79,10 @@ namespace engine{
         );platforms.addPlatform( //long jump
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{1300,400}
-        );platforms.addPlatform( //with powerUp
+        );platforms.addPlatform( //with doubleJump
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{1800,600}
-        );platforms.addPlatform( //above powerUp
+        );platforms.addPlatform( //above doubleJump
                 _data->assets.GetTexture("HorizontalGreyPlatform"),
                 sf::Vector2f{1800,200}
         );platforms.addPlatform( // dubble jump
@@ -169,10 +169,10 @@ namespace engine{
 		);
 
 
-        //powerUp Initializer
-        _data->assets.LoadTexture("powerUp", DOUBLEJUMP_FILEPATH);
-        powerUp.setTexture(_data->assets.GetTexture("powerUp"));
-        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
+        //doubleJump Initializer
+        _data->assets.LoadTexture("doubleJump", DOUBLEJUMP_FILEPATH);
+        doubleJump.setTexture(_data->assets.GetTexture("doubleJump"));
+        doubleJump.setPosition(1900,590 - doubleJump.getGlobalBounds().height);
 
 
         //Character Initializer
@@ -236,12 +236,13 @@ namespace engine{
 	}
 
 	void Level1::Update(float dt) {
-	    //powerUp Collision with character
-	    if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
-            doubleJumpTimeEnable = true;
+	    //doubleJump Collision with character
+	    if(character.getSprite().getGlobalBounds().intersects(doubleJump.getGlobalBounds())){
+			doubleJumpTijd = 0;
+			doubleJumpTimeEnable = true;
 	        _data->sound._powerupSound.play();
 	        character.max_jump = 2;
-	        powerUp.setPosition(powerUp.getPosition().x, 1000);
+	        doubleJump.setPosition(doubleJump.getPosition().x, 1000);
             doubleJumpEnableText = true;
             doubleJumpTimeTextEnable = true;
 			doubleJumpTime.restart();
@@ -354,8 +355,8 @@ namespace engine{
         //Draw platforms
 		platforms.draw();
 
-		//Draw powerUp
-		_data->renderWindow.draw(powerUp);
+		//Draw doubleJump
+		_data->renderWindow.draw(doubleJump);
 
         //Draw pauseButton
 		_data->renderWindow.draw(pauseButton);
@@ -386,7 +387,7 @@ namespace engine{
 	    doubleJumpEnableText = false;
         doubleJumpTimeTextEnable = false;
         character.respawn(start);
-        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
+        doubleJump.setPosition(1900,590 - doubleJump.getGlobalBounds().height);
         levelTime.restart();
         tijd = 0;
         doubleJumpTijd = 0;

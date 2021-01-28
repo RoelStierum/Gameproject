@@ -50,7 +50,7 @@ namespace engine{
 
         sf::Sprite pauseButton;
 
-		sf::Sprite powerUp;
+		sf::Sprite lowGravity;
 		sf::Text LowGravityText;
 		bool LowGravityEnableText = false;
 		sf::Text LowGravityTimeText;

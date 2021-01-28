@@ -57,7 +57,7 @@
 #define LEVEL_FLAG_FILEPATH "Images/vlag.png"
 #define FINISH_FLAG_WAIT 1.5f
 #define DOUBLE_JUMP_TIME 10
-#define LOW_GRAVITY_TIME 10
+#define LOW_GRAVITY_TIME 11
 
 //Character
 #define CHARACTER_FILEPATH "Images/Character.png"
