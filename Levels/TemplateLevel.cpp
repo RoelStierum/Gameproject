@@ -187,7 +187,7 @@ namespace engine{
         //Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
         //levelTimeText set position
-        levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        levelTimeText.setPosition(cameraX + 0, 16);
 
         //player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){

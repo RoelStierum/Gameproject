@@ -325,10 +325,10 @@ namespace engine{
         //Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
         //leveltime text set position
-        levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        levelTimeText.setPosition(cameraX + 16, 16);
         //LowGravityTimeText text set position
         if(LowGravityEnableText){
-            LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2-LowGravityTimeText.getGlobalBounds().width/2,10);
+            LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2-32,10);
         }
 
         //player under screen / respawn
