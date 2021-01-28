@@ -41,7 +41,7 @@ namespace engine{
         //flag Initializer
         _data->assets.LoadTexture("flag", LEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
-        flag.setPosition(5900,500-flag.getGlobalBounds().height);
+        flag.setPosition(7900,500-flag.getGlobalBounds().height);
 		//flag.setPosition(400,400); //Debug flag placement
 
 
@@ -128,11 +128,62 @@ namespace engine{
 		);platforms.addPlatform( //
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{5000,500}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{5800,400}
+		);
+
+		platforms.addPlatform( //ceiling
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{6100,-40}
+		);
+		platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6200,200}
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6200,400}
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6200,600}
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6200,800}
+		);
+
+		platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6300,-200}
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6300,0}
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{6300,200}
+		);
+
+		platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{6345,630}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{6900,460}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{6450,275}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{6900,160}
 		);
 		platforms.addPlatform( //
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
-				sf::Vector2f{5800,500}
+				sf::Vector2f{7400,400}
+		);platforms.addPlatform( //
+				_data->assets.GetTexture("HorizontalGreyPlatform"),
+				sf::Vector2f{7800,500}
 		);
+
+
 
 		//powerUp Initializer
 		_data->assets.LoadTexture("powerUp", LOW_GRAVITY_FILEPATH);
@@ -325,10 +376,10 @@ namespace engine{
         //Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
         //leveltime text set position
-        levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        levelTimeText.setPosition(cameraX + 16, 16);
         //LowGravityTimeText text set position
         if(LowGravityEnableText){
-            LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2-LowGravityTimeText.getGlobalBounds().width/2,10);
+            LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2-32,10);
         }
 
         //player under screen / respawn

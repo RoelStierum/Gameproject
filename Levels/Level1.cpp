@@ -333,9 +333,9 @@ namespace engine{
 		//Pause button location
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
         //leveltime text set position
-        levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        levelTimeText.setPosition(cameraX + 16, 16);
         //Double jump timer set position
-        doubleJumpTimeText.setPosition(cameraX + SCREEN_WIDTH-640-doubleJumpTimeText.getGlobalBounds().width,16);
+        doubleJumpTimeText.setPosition(cameraX + SCREEN_WIDTH/2-32,16);
 
         //player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){

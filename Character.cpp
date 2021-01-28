@@ -26,11 +26,19 @@ namespace engine{
 
 	//flipTexture funtion for flipping the texture
 	void Character::flipTexture() {
-		if(flip){
-			sprite.setTexture(texture);
-		}else{
-			sprite.setTexture(texture_flip);
-		}
+	    if(on_ground) {
+            if (flip) {
+                sprite.setTexture(texture);
+            } else {
+                sprite.setTexture(texture_flip);
+            }
+        }else{
+            if (flip) {
+                sprite.setTexture(run_right1);
+            } else {
+                sprite.setTexture(run_left1);
+            }
+	    }
 		flip = !flip;
 	}
 

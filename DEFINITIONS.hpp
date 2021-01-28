@@ -49,7 +49,7 @@
 #define LEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PLATFORM_GRASS_FILEPATH "Images/game_platform.png"
-#define PLATFORM_GREY_FILEPATH "Images/platform_red.png"
+#define PLATFORM_GREY_FILEPATH "Images/platform_horizontal.png"
 #define PLATFORM_GREY_VERTICAL_FILEPATH "Images/platform_vertical.png"
 #define FORCEFIELD_VERTICAL_FILEPATH "Images/forcefield.png"
 #define DOUBLEJUMP_FILEPATH "Images/doublejump.png"
