@@ -1,6 +1,6 @@
 #include "MainMenuState.hpp"
 #include "InstructionState.hpp"
-#include "Levels/TestLevel.hpp"
+#include "Levels/Level1.hpp"
 #include "Levels/Level2.hpp"
 #include "DEFINITIONS.hpp"
 
@@ -107,7 +107,7 @@ namespace engine{
 		//Check for press play button
 		if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()&& !mouseCheck){
 			_data->sound._clickButtonSound.play();
-			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
+			_data->machine.AddState( StateRef( new Level1(_data)), true);
 		}
 
 		//Check for press quit button
@@ -128,7 +128,7 @@ namespace engine{
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1) &&
                 _data->renderWindow.hasFocus()){
             _data->sound._clickButtonSound.play();
-			_data->machine.AddState( StateRef( new TestLevel(_data)), true);
+			_data->machine.AddState( StateRef( new Level1(_data)), true);
         }
 		//Check for keypress "2" key
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2) &&
