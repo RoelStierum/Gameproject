@@ -172,7 +172,7 @@ namespace engine{
         //powerUp Initializer
         _data->assets.LoadTexture("powerUp", DOUBLEJUMP_FILEPATH);
         powerUp.setTexture(_data->assets.GetTexture("powerUp"));
-        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
+        powerUp.setPosition(1850,590 - powerUp.getGlobalBounds().height);
 
 
         //Character Initializer
@@ -386,7 +386,7 @@ namespace engine{
 	    doubleJumpEnableText = false;
         doubleJumpTimeTextEnable = false;
         character.respawn(start);
-        powerUp.setPosition(1900,590 - powerUp.getGlobalBounds().height);
+        powerUp.setPosition(1850,590 - powerUp.getGlobalBounds().height);
         levelTime.restart();
         tijd = 0;
         doubleJumpTijd = 0;
