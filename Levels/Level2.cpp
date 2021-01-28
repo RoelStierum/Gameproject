@@ -252,7 +252,6 @@ namespace engine{
 			std::string s = std::to_string(DOUBLE_JUMP_TIME - (LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd));
 			s = s.substr(0,s.size()-5);
 			LowGravityTimeText.setString(s);
-			LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2 - LowGravityTimeText.getGlobalBounds().width/2,10);
 		}
 
 		//Finish
@@ -327,6 +326,10 @@ namespace engine{
         pauseButton.setPosition(cameraX + SCREEN_WIDTH - 16 - pauseButton.getGlobalBounds().width,16);
         //leveltime text set position
         levelTimeText.setPosition(cameraX + SCREEN_WIDTH-1200-levelTimeText.getGlobalBounds().width,16);
+        //LowGravityTimeText text set position
+        if(LowGravityEnableText){
+            LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2-LowGravityTimeText.getGlobalBounds().width/2,10);
+        }
 
         //player under screen / respawn
         if (character.getPosition().y > SCREEN_HEIGHT + 100){

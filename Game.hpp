@@ -34,7 +34,8 @@ namespace engine{
         ///@param width The width of the render window
         ///@param height The height of the render window
         ///@param title The title of the render window
-        Game(unsigned int width, unsigned int height, std::string title);
+        ///@param fullscreen Make the game fullscreen
+        Game(unsigned int width, unsigned int height, std::string title, const bool& fullscreen);
 
     private:
         const float dt = 1.0f / FPS; //draw dt is variable

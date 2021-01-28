@@ -6,8 +6,12 @@
 namespace engine{
 
     //Constructor of the Game class
-    Game::Game(unsigned int width, unsigned int height, std::string title){
-        _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
+    Game::Game(unsigned int width, unsigned int height, std::string title, const bool& fullscreen){
+        if(fullscreen){
+            _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar | sf::Style::Fullscreen);
+        }else{
+            _data->renderWindow.create(sf::VideoMode{width,height}, title, sf::Style::Close | sf::Style::Titlebar);
+        }
         _data->machine.AddState(StateRef(new SplashState(_data)));
 
         _data->renderWindow.setFramerateLimit(FPS);
