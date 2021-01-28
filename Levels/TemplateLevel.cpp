@@ -27,7 +27,7 @@ namespace engine{
 
 
         //flag Initializer
-        _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
+        _data->assets.LoadTexture("flag", LEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(500,290);
 

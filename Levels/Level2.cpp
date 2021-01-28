@@ -39,7 +39,7 @@ namespace engine{
 
 
         //flag Initializer
-        _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
+        _data->assets.LoadTexture("flag", LEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(5900,500-flag.getGlobalBounds().height);
 		//flag.setPosition(400,400); //Debug flag placement

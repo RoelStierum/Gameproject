@@ -1,4 +1,4 @@
-#include "TestLevel.hpp"
+#include "Level1.hpp"
 #include "../PauseState.hpp"
 #include "../FinishState.hpp"
 
@@ -6,14 +6,14 @@
 
 namespace engine{
 
-	//Constructor for TestLevel
-	TestLevel::TestLevel(GameDataRef data):
+	//Constructor for Level1
+	Level1::Level1(GameDataRef data):
 			_data(data),
 			character(data)
 	{}
 
     //Run on initialization of state
-    void TestLevel::Init() {
+    void Level1::Init() {
         //State the background music if not playing
 	    _data->sound.BackGroundMusic.play();
 
@@ -36,15 +36,15 @@ namespace engine{
 
 
 	    //flagInitializer
-	    _data->assets.LoadTexture("flag", TESTLEVEL_FLAG_FILEPATH);
+	    _data->assets.LoadTexture("flag", LEVEL_FLAG_FILEPATH);
         flag.setTexture(_data->assets.GetTexture("flag"));
         flag.setPosition(10060,270);
         //flag.setPosition(400,400); //Debug flag placement
 
 
         //pauseButton Initializer
-		_data->assets.LoadTexture("TestLevel Background", LEVEL_BACKGROUND_FILEPATH);
-		_background.setTexture(_data->assets.GetTexture("TestLevel Background"));
+		_data->assets.LoadTexture("Level1 Background", LEVEL_BACKGROUND_FILEPATH);
+		_background.setTexture(_data->assets.GetTexture("Level1 Background"));
 		//_background.setScale(SCREEN_WIDTH/_background.getGlobalBounds().width,SCREEN_HEIGHT/_background.getGlobalBounds().height);
         //_background.setPosition(0,2);
 
@@ -194,7 +194,7 @@ namespace engine{
 	    character.velocity.y = 600;
 	}
 
-	void TestLevel::HandleInput() {
+	void Level1::HandleInput() {
 	    //Character keyboard input
 		if(!finished){
 		    character.characterKeyboardInput();
@@ -235,7 +235,7 @@ namespace engine{
 		}
 	}
 
-	void TestLevel::Update(float dt) {
+	void Level1::Update(float dt) {
 	    //powerUp Collision with character
 	    if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
             doubleJumpTimeEnable = true;
@@ -344,7 +344,7 @@ namespace engine{
         }
 	}
 
-    void TestLevel::Draw(float dt) {
+    void Level1::Draw(float dt) {
 		_data->renderWindow.setView(CameraPosition);
 		_data->renderWindow.clear();
 
@@ -382,7 +382,7 @@ namespace engine{
 	}
 
     //Function for restarting the level
-    void TestLevel::restart(){
+    void Level1::restart(){
 	    doubleJumpEnableText = false;
         doubleJumpTimeTextEnable = false;
         character.respawn(start);
@@ -393,7 +393,7 @@ namespace engine{
 	}
 
     //Check if character is on the edges of the screen and stop the velocity
-    void TestLevel::characterEdgeOfScreen(const Character &character_, const float& dt) {
+    void Level1::characterEdgeOfScreen(const Character &character_, const float& dt) {
 		//left
 		if(character.nextPosition(character.velocity * dt).x < _background.getPosition().x){
 			character.velocity.x = 0;
@@ -405,14 +405,14 @@ namespace engine{
 	}
 
     //Run on resume of state
-    void TestLevel::Resume() {
+    void Level1::Resume() {
         _data->sound.BackGroundMusic.play();
         levelTime.restart();
         doubleJumpTime.restart();
     }
 
     //Run on pause of state
-    void TestLevel::Pause() {
+    void Level1::Pause() {
 	    tijd += levelTime.getElapsedTime().asSeconds();
 	    doubleJumpTijd += doubleJumpTime.getElapsedTime().asSeconds();
         _data->sound.BackGroundMusic.pause();

@@ -1,7 +1,7 @@
 #include "FinishState.hpp"
 #include "DEFINITIONS.hpp"
 #include "MainMenuState.hpp"
-#include "Levels/TestLevel.hpp"
+#include "Levels/Level1.hpp"
 #include "Levels/Level2.hpp"
 
 #include <fstream>

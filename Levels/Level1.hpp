@@ -11,13 +11,13 @@
 
 namespace engine{
 
-	class TestLevel: public State{
+	class Level1: public State{
 	public:
 		float gravity = 1500; //25.0f;
 
 		sf::Vector2f start = {100,-200};
 
-		TestLevel(GameDataRef data);
+		Level1(GameDataRef data);
 
 		void Init() override;
 

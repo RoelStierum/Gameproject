@@ -54,7 +54,7 @@
 #define FORCEFIELD_VERTICAL_FILEPATH "Images/forcefield.png"
 #define DOUBLEJUMP_FILEPATH "Images/doublejump.png"
 #define LOW_GRAVITY_FILEPATH "Images/low_gravity.png"
-#define TESTLEVEL_FLAG_FILEPATH "Images/vlag.png"
+#define LEVEL_FLAG_FILEPATH "Images/vlag.png"
 #define FINISH_FLAG_WAIT 1.5f
 #define DOUBLE_JUMP_TIME 10
 
