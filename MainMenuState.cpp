@@ -105,19 +105,19 @@ namespace engine{
 
 
 		//Check for press play button
-		if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
+		if(_data->input.IsSpriteClicked(_play_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()&& !mouseCheck){
 			_data->sound._clickButtonSound.play();
 			_data->machine.AddState( StateRef( new Level1(_data)), true);
 		}
 
 		//Check for press quit button
-		if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()){
+		if(_data->input.IsSpriteClicked(_quit_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()&& !mouseCheck){
 			_data->sound._clickButtonSound.play();
 			_data->renderWindow.close();
 		}
 
 		//Check for press instructions button
-		if(_data->input.IsSpriteClicked(_instructions_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus()) {
+		if(_data->input.IsSpriteClicked(_instructions_button, sf::Mouse::Left, _data->renderWindow) && _data->renderWindow.hasFocus() && !mouseCheck) {
 			_data->sound._clickButtonSound.play();
 			_data->machine.AddState(StateRef(new InstructionState(_data)), true);
 
@@ -151,8 +151,8 @@ namespace engine{
                     mute = true;
                 }
             }
-        }if(mouse && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-            mouse = false;
+        }if(mouseCheck && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            mouseCheck = false;
         }
     }
 
