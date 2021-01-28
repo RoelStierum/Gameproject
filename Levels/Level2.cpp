@@ -168,7 +168,16 @@ namespace engine{
 		);platforms.addPlatform( //
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{6900,460}
-		);platforms.addPlatform( //
+		);platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{7100,160}
+		);
+		platforms.addPlatform( //wall
+				_data->assets.GetTexture("VerticalGreyPlatform"),
+				sf::Vector2f{7100,300}
+		);
+
+		platforms.addPlatform( //
 				_data->assets.GetTexture("HorizontalGreyPlatform"),
 				sf::Vector2f{6450,275}
 		);platforms.addPlatform( //
@@ -283,15 +292,36 @@ namespace engine{
 		if(character.getSprite().getGlobalBounds().intersects(powerUp.getGlobalBounds())){
 			LowGravityTimeEnable = true;
 			_data->sound._powerupSound.play();
+			std::cout << "sound played";
 			gravity = 700;
+			std::cout << "gravity set";
 			powerUp.setPosition(powerUp.getPosition().x, 1000);
 			LowGravityEnableText = true;
 			LowGravityTimeTextEnable = true;
+			std::cout << "text and time set";
 			LowGravityTime.restart();
 		}
 
-		//If LowGravityTimer is done remove double jump, the timer and the text
-		if(LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd >= DOUBLE_JUMP_TIME && LowGravityTimeEnable){
+		//Finish
+		if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
+			//_data->sound.BackGroundMusic.stop();
+			_data->sound._flagSound.play();
+			clockFinish.restart();
+			finished=true;
+			tijd += levelTime.getElapsedTime().asSeconds();
+			std::string s = std::to_string(tijd);
+			s = s.substr(0,s.size()-4);
+			levelTimeText.setString(s);
+			//std::cout << tijd << std::endl;
+		}
+
+		//If clockFinish is done go to finish state
+		if(clockFinish.getElapsedTime().asSeconds() >= FINISH_FLAG_WAIT && finished){
+			_data->machine.AddState( StateRef ( new FinishState(_data, tijd, levelNumber)), true);
+		}
+
+		//If LowGravityTimer is done remove low gravity, the timer and the text
+		if(LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd >= LOW_GRAVITY_TIME && LowGravityTimeEnable){
 			gravity = 1500;
 			LowGravityTimeTextEnable = false;
 			LowGravityEnableText = false;
@@ -300,28 +330,12 @@ namespace engine{
 
 		//If LowGravityTimeTextEnable is true: update the timer
 		if(LowGravityTimeTextEnable){
-			std::string s = std::to_string(DOUBLE_JUMP_TIME - (LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd));
+			std::string s = std::to_string(LOW_GRAVITY_TIME - (LowGravityTime.getElapsedTime().asSeconds() + LowGravityTijd));
 			s = s.substr(0,s.size()-5);
 			LowGravityTimeText.setString(s);
+			LowGravityTimeText.setPosition(cameraX + SCREEN_WIDTH/2 - LowGravityTimeText.getGlobalBounds().width/2,10);
+
 		}
-
-		//Finish
-        if(character.getSprite().getGlobalBounds().intersects(flag.getGlobalBounds()) && !finished){
-            _data->sound.BackGroundMusic.stop();
-            _data->sound._flagSound.play();
-            clockFinish.restart();
-            finished=true;
-            tijd += levelTime.getElapsedTime().asSeconds();
-            std::string s = std::to_string(tijd);
-            s = s.substr(0,s.size()-4);
-            levelTimeText.setString(s);
-            std::cout << tijd << std::endl;
-        }
-
-        //If clockFinish is done go to finish state
-        if(clockFinish.getElapsedTime().asSeconds() >= FINISH_FLAG_WAIT && finished){
-            _data->machine.AddState( StateRef ( new FinishState(_data, tijd, levelNumber)), true);
-        }
 
         //If the game is not finished: update the timer
         if(!finished){
@@ -398,6 +412,7 @@ namespace engine{
 
         //Draw platforms
         platforms.draw();
+
 		//Draw powerUp
 		_data->renderWindow.draw(powerUp);
 
@@ -427,7 +442,7 @@ namespace engine{
 
     //Function for restarting the level
     void Level2::restart(){
-    	gravity = 1500;
+    	gravity = 1500;//moet dit hier of beter in respawn van character.cpp
 		LowGravityEnableText = false;
 		LowGravityTimeTextEnable = false;
         character.respawn(start);
