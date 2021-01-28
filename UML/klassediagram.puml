@@ -122,7 +122,7 @@ class Game{
     -sf::Clock _clock;
 
 
-    +Game(unsigned int width, unsigned int height, std::string title);
+    +Game(unsigned int width, unsigned int height, std::string title, const bool& fullscreen);
 
     -GameDataRef _data = std::make_shared<GameData>();
     -void run();
@@ -232,7 +232,7 @@ class SoundManager{
     -void SetSoundBuffers();
 }
 
-class SplashScreen{
+class SplashState{
     -GameDataRef _data;
     -sf::Clock _clock;
     -sf::Texture _backgroundTexture;
@@ -248,11 +248,28 @@ class SplashScreen{
 
 GameData --> Game
 GameData --> PauseState
-GameData --> Character
-GameData --> FinishState
-GameData --> TemplateLevel
-GameData --> MainMenuState
-GameData --> Platform
+GameData ---> Character
+GameData -> FinishState
+GameData -> TemplateLevel
+GameData -> MainMenuState
+GameData -> Platform
+GameData --> SplashState
 
+TemplateLevel <-- Character
+TemplateLevel <-- Platform
+TemplateLevel <-- FinishState
+
+Game <-- StateMachine
+Game <--- InputManager
+Game <--- AssetManager
+Game <--- SoundManager
+
+State -> TemplateLevel
+State -> FinishState
+State -> InputManager
+State -> MainMenuState
+State -> PauseState
+State -> SplashState
+State -> StateMachine
 
 @enduml
