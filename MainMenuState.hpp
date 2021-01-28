@@ -46,6 +46,7 @@ namespace engine{
 		bool _hoverPlay = false;
 		bool _hoverQuit = false;
 		bool _hoverInstructions = false;
+        bool mouseCheck = true;
     };
 
 }
