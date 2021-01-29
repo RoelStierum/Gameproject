@@ -350,7 +350,7 @@ namespace engine{
 
         for(int i = 0; i < platforms.getPlatforms().size(); i++){
             if(i == 4 || i == 5 || i == 6){
-                if(character.objectCollisionAndFalling(platforms.getPlatforms()[i], dt)){
+                if(character.getSprite().getGlobalBounds().intersects(platforms.getPlatforms()[i].getGlobalBounds())){
                     std::cout << "hit\n";
                     restart();
                     return;
