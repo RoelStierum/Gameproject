@@ -196,15 +196,18 @@ namespace engine{
             if (getPosition().x > object.getPosition().x + object.getGlobalBounds().width
                 && getPosition().y + sprite.getGlobalBounds().height - 1 >= object.getPosition().y) {
                 velocity.x = 0;
+                tmp = true;
             }
                 //links
             else if (getPosition().x + sprite.getGlobalBounds().width < object.getPosition().x
                      && getPosition().y + sprite.getGlobalBounds().height - 1 >= object.getPosition().y) {
                 velocity.x = 0;
+                tmp = true;
             }
                 //onderkant
             else if (getPosition().y > object.getPosition().y + object.getGlobalBounds().height) {
                 velocity.y = 0;
+                tmp = true;
 
             }
                 //bovenkant

@@ -85,7 +85,7 @@ namespace engine{
                 sf::Vector2f{1500,200}
         );platforms.addPlatform( //wall before
                 _data->assets.GetTexture("VerticalRedForceField"),
-                sf::Vector2f{1500,440}
+                sf::Vector2f{1500,400}
         );platforms.addPlatform( //wall pre jump
                 _data->assets.GetTexture("HorizontalGrassPlatform"),
                 sf::Vector2f{1300,710}
@@ -347,9 +347,18 @@ namespace engine{
 
         //Collision with platforms and if not make the character fall with the gravity
         bool collision = false;
-        for(sf::Sprite platform : platforms.getPlatforms()){
-            if(character.objectCollisionAndFalling(platform, dt)){
-                collision = true;
+
+        for(int i = 0; i < platforms.getPlatforms().size(); i++){
+            if(i == 4 || i == 5 || i == 6){
+                if(character.objectCollisionAndFalling(platforms.getPlatforms()[i], dt)){
+                    std::cout << "hit\n";
+                    restart();
+                    return;
+                }
+            }else{
+                if(character.objectCollisionAndFalling(platforms.getPlatforms()[i], dt)){
+                    collision = true;
+                }
             }
         }
         if(!collision){
