@@ -41,7 +41,6 @@ namespace engine{
 
 		sf::Sprite muteSprite;
 		bool mute = false;
-        bool mouse = false;
 
 		bool _hoverPlay = false;
 		bool _hoverQuit = false;

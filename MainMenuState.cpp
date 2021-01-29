@@ -145,9 +145,9 @@ namespace engine{
 		}
 
 		//change mute or unmute image if clicked
-        if(not mouse && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        if(!mouseCheck && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             if(muteSprite.getGlobalBounds().contains(sf::Vector2f{sf::Mouse::getPosition(_data->renderWindow)})){
-                mouse = true;
+                mouseCheck = true;
                 if(mute){
                     muteSprite.setTexture(_data->assets.GetTexture("Unmute"));
                     _data->sound.setVolume();
@@ -158,7 +158,9 @@ namespace engine{
                     mute = true;
                 }
             }
-        }if(mouseCheck && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        }
+
+        if(mouseCheck && not sf::Mouse::isButtonPressed(sf::Mouse::Left)){
             mouseCheck = false;
         }
     }
