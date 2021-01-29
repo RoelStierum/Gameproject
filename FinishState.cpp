@@ -3,6 +3,7 @@
 #include "MainMenuState.hpp"
 #include "Levels/Level1.hpp"
 #include "Levels/Level2.hpp"
+#include "Levels/Level3.hpp"
 
 #include <fstream>
 
@@ -161,7 +162,10 @@ namespace engine{
             if(lastLevel == 1){
                 _data->sound._clickButtonSound.play();
                 _data->machine.AddState(StateRef(new Level2(_data)), true);
-            }
+            }else if(lastLevel == 2){
+				_data->sound._clickButtonSound.play();
+				_data->machine.AddState(StateRef(new Level3(_data)), true);
+			}
         }
 
         //Check for press menu button

@@ -448,7 +448,7 @@ namespace engine{
 
     //Function for restarting the level
     void Level2::restart(){
-    	gravity = 1500;//moet dit hier of beter in respawn van character.cpp
+    	gravity = 1500;
 		LowGravityEnableText = false;
 		LowGravityTimeTextEnable = false;
         character.respawn(start);

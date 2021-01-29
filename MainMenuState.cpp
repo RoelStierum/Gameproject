@@ -2,6 +2,7 @@
 #include "InstructionState.hpp"
 #include "Levels/Level1.hpp"
 #include "Levels/Level2.hpp"
+#include "Levels/Level3.hpp"
 #include "DEFINITIONS.hpp"
 
 #include <iostream>
@@ -136,6 +137,12 @@ namespace engine{
             _data->sound._clickButtonSound.play();
             _data->machine.AddState( StateRef( new Level2(_data)), true);
         }
+		//Check for keypress "3" key
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num3) &&
+		   _data->renderWindow.hasFocus()){
+			_data->sound._clickButtonSound.play();
+			_data->machine.AddState( StateRef( new Level3(_data)), true);
+		}
 
 		//change mute or unmute image if clicked
         if(not mouse && sf::Mouse::isButtonPressed(sf::Mouse::Left)){

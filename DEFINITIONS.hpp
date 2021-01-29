@@ -45,7 +45,7 @@
 #define MUSIC_VOLUME 20
 
 //Levels
-#define LEVEL_AMOUNT 2
+#define LEVEL_AMOUNT 3
 #define LEVEL_BACKGROUND_FILEPATH "Images/game_background_long.png"
 #define PAUSE_BUTTON_FILEPATH "Images/pause.png"
 #define PLATFORM_GRASS_FILEPATH "Images/game_platform.png"
